@@ -5,11 +5,11 @@
 <<set $questionOption = [
     "Your boat is too heavy to participate in a bawra race",
     "You have the right of way",
-    "You have to maneuver aroudnd the other boat",
+    "You have to maneuver around the other boat",
     "Other boats must maneuver around you", 
     "You have dropped anchor and cannot more"
 ]>>
-<<questionMacro "That means:" $questionOption "You have to maneuver aroudnd the other boat">>
+<<questionMacro "That means:" $questionOption "You have to maneuver around the other boat">>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. Burdened vessels are the give-way vessels.</h3>

@@ -10,7 +10,7 @@ The following actions should be taken by the crew, in order:
 <<setupQuestion "5" $actionsList $actionsOrder>>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Don't mess up unocking at a bawra race!</h3>
+    <h3>Not quite. Don't mess up undocking at a bawra race!</h3>
     <p>Corny will get you. Here's the correct order:</p>
     <ol>
         <li>Put a person on the dock at the bow with the bow line. </li>
