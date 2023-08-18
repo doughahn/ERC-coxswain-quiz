@@ -1,0 +1,31 @@
+:: Safety_11 [Safety]
+
+<h2>You are the Cox. You want to use the sling method on someone overboard on your left side.</h2>
+
+<<set $questionOption = [
+        "Starboard 2 and 3 seats pull on the sling, Port 2 and 3 seats grab the person",
+        "Port 2 and 3 seats pull on the sling, Starboard 2 and 3 seats grab the person",
+        "Port 1 and 4 seats pull on the sling, Port 2 and 3 seats grab the person",
+        "Starboard 1 and 4 seats pull on the sling, Port 2 and 3 seats grab the person"
+    ]
+>>
+
+<<questionMacro "That means:" $questionOption "Starboard 2 and 3 seats pull on the sling, Port 2 and 3 seats grab the person">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Sling with Care…</h3>
+    <p>First, the person is on the port side. This means port needs to grab them and Starboard needs to pull.</p> 
+    <P>Fashion a sling from a docking line around the person's chest, under the armpits. The far side middle rowers pull the sling while the nearside middle rowers grab a hold of the POB (person overboard) directly. Together the four rowers pull the POB aboard.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

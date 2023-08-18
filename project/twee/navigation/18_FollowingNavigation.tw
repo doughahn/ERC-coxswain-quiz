@@ -1,0 +1,29 @@
+:: Navigation_18 [Navigation]
+
+<h2>It's a following sea!</h2>
+
+<<set $questionOption = [
+    "Ride the waves",
+    "Row at a slight angle",
+    "Row parallel to the waves",
+    "Do power for the rush",
+    "Turn so as not to capsize"
+]>>
+<<questionMacro "That means" $questionOption "Row at a slight angle">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect!</h3>
+    <p>Row at a slight angle in following seas, keeping the sweep buried and being prepared to straighten out to prevent a large wave from pushing you broadside.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

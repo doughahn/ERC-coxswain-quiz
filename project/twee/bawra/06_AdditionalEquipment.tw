@@ -1,0 +1,143 @@
+:: bawra_06 [bawra]
+
+<h2>Select the 5 pieces of additonal equipment required by BAWRA:</h2>
+
+<div id="droppables">
+    <div class="droppable" data-label="1" id="slot1"></div>
+    <div class="droppable" data-label="2" id="slot2"></div>
+    <div class="droppable" data-label="3" id="slot3"></div>
+    <div class="droppable" data-label="4" id="slot4"></div>
+    <div class="droppable" data-label="5" id="slot5"></div>
+</div>
+
+<div id="draggables">
+    <div class="draggable" id="item1" draggable="true">First Aid Kit</div>
+    <div class="draggable" id="item2" draggable="true">PFDs for each person</div>
+    <div class="draggable" id="item3" draggable="true">1 Type IV PFD</div>
+    <div class="draggable" id="item4" draggable="true">VHF Radio</div>
+    <div class="draggable" id="item5" draggable="true">Tow line</div>
+    <div class="draggable" id="item6" draggable="true">Navigation lights</div>
+    <div class="draggable" id="item7" draggable="true">Bridle</div>
+    <div class="draggable" id="item8" draggable="true">Sound signaling device</div>
+</div> 
+
+
+<button id="submitOrder" disabled>Submit</button>
+
+<div class="correctFeedback hidden"><h3>Correct!</h3></div>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! BAWRA covers things that aren't in maritime law for these boats:</h3>
+
+    <ol>
+        <li>First aid kit </li>
+        <li>Tow line & bridle </li>
+        <li>Sound signaling device</li>
+        <li>VHF radio</li>
+    </ol>
+
+    <p>Maritime law requires:</p>
+    <ol>
+        <li>Wearable Type I, II, III or V PFD's for each person</li>
+        <li>One throwable Type IV PFD </li>
+        <li>Distress signal devices. (Day and night – whistle, horn, light, flare, etc. for restricted visibility.)</li>
+    </ol>
+
+</div>
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+<<script>>
+$(document).ready(function() {
+    $(".draggable").on("dragstart", function(event) {
+        event.originalEvent.dataTransfer.setData("text", event.target.id);
+    });
+
+    $(".droppable").on("dragover", function(event) {
+        event.preventDefault();
+    });
+
+    $(".droppable").on("drop", function(event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(data));
+        checkIfAllSlotsFilled();
+    });
+
+    function checkIfAllSlotsFilled() {
+        if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
+            $("button#submitOrder").removeAttr("disabled");
+        } else {
+            $("button#submitOrder").attr("disabled", "disabled");
+        }
+    }
+
+    $("button#submitOrder").click(function() {
+        // Disable the draggables
+        $(".draggable").attr("draggable", false).off('dragstart');
+        $(".draggable").addClass("disabled");
+
+    // Get the list of items in the slots
+    var itemsInSlots = [
+        document.getElementById("slot1").firstChild.id,
+        document.getElementById("slot2").firstChild.id,
+        document.getElementById("slot3").firstChild.id,
+        document.getElementById("slot4").firstChild.id,
+        document.getElementById("slot5").firstChild.id
+    ];
+
+        var correctItems = ["item1", "item5", "item7", "item8", "item4"]; 
+
+       var isCorrect = itemsInSlots.every(function(item) {
+        return correctItems.includes(item);
+    }) && (new Set(itemsInSlots).size === correctItems.length); // This second condition checks for uniqueness, ensuring each item is only used once.
+
+        if (isCorrect) {
+            $(".correctFeedback").text("Correct!").removeClass("hidden");
+            // Optionally hide the submit button
+            $("button#submitOrder").addClass("hidden");
+        } else {
+            $(".incorrectFeedback").removeClass("hidden");
+            // Deduct score and optionally hide the submit button
+            State.variables.score -= 1; // Deduct a point for wrong attempt
+            $("button#submitOrder").addClass("hidden");
+        }
+        // Show the next button/div
+        $(".nextButton").removeClass("hidden");
+    });
+
+    checkIfAllSlotsFilled(); // Initial check
+
+    $("#resetOrder").click(function() {
+        resetOrder();
+    });
+
+    function resetOrder() {
+        // Move all draggable items back to their original container
+        $(".draggable").appendTo("#draggables");
+
+        // Enable the draggables again
+        $(".draggable").attr("draggable", true).on("dragstart", function(event) {
+            event.originalEvent.dataTransfer.setData("text", event.target.id);
+        });
+        $(".draggable").removeClass("disabled");
+
+        // Hide feedback and the next button/div
+        $(".feedback").addClass("hidden");
+        $(".nextButton").addClass("hidden");
+
+        // Disable the submit button again until all slots are filled
+        $("button#submitOrder").attr("disabled", "disabled");
+    }
+});
+
+<</script>>

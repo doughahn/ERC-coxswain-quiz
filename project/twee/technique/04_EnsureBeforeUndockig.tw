@@ -1,0 +1,28 @@
+:: Technique_04 [Technique]
+
+<h2>You need to ensure something before undocking.</h2>
+
+<<set $questionOption = [
+    "All rowers are ready",
+    "The wind is favorable",
+    "You have your stroke watch",
+    "All rowers are wearing PFDs"
+]>>
+<<questionMacro "What is it?" $questionOption "All rowers are ready">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Everyone should be ready</h3>
+    <p>Make sure everyone is alert and ready to go before pushing off.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

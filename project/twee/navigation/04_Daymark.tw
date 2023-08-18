@@ -1,0 +1,28 @@
+:: Navigation_04 [Navigation]
+
+<h2>You see a daymarker.</h2>
+
+<<set $questionOption = [
+    "No lighted parts",
+    "A pointer or sign",
+    "Fixed structure",
+    "All of the above"
+]>>
+<<questionMacro "It may feature:" $questionOption "All of the above">>
+
+<div class="incorrectFeedback hidden">
+    <h3>A daymarker is just a fancy-pants term for somethingn visible in the daytime.</h3>
+    <p>An unlighted fixed structure with a pointer, sign or "daymarker." It's a navigational aid for sailors and pilots, distinctively marked to maximize its visibility in daylight.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

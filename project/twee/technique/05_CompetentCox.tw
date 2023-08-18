@@ -1,0 +1,29 @@
+:: Technique_05 [Technique]
+
+<h2>One of these is a requirement for a good cox.</h2>
+
+<<set $questionOption = [
+    "Command in a loud clear voice",
+    "Yell at the rowers a lot",
+    "Be a competent rower",
+    "Motivate their crew to be their best",
+    "Be certified by BAWRA"
+]>>
+<<questionMacro "Which is it?" $questionOption "Command in a loud clear voice">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You must be heard</h3>
+    <p>Many of the options are good, but only one is actually required: you must be undesrstood.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

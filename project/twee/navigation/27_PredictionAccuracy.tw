@@ -1,0 +1,29 @@
+:: Navigation_27 [Navigation]
+
+<h2>Tides predictions in coastal waters…</h2>
+
+<<set $questionOption = [
+    "Only astronomical predictions",
+    "Totally accurate and based on science",
+    "All you need to know to be safe",
+    "All of the above"
+]>>
+<<questionMacro "Are" $questionOption "Only astronomical predictions">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Actual condisions trump whatever's in a book, smarty pants.</h3>
+    <p>The actual tides along a coastline can be influenced by other factors such as weather and wind patterns, an area's topography or river runoff. There are some places where tide predictions won't necessarily be representative of what you're actually going to see on the water.</p>
+    <p><a href="https://www.rei.com/learn/expert-advice/how-to-read-a-tide-table.html">REI</a></p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

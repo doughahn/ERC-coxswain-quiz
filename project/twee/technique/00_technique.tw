@@ -1,0 +1,11 @@
+:: Technique_Intro 
+
+<h2>Technique Quiz</h2>
+
+<p>The basics on how to handle the boat and plan ahead. Nothing will replace being out there, but it doesn't hurt to practice.</p>
+
+<div class="sectionLink" id="techniqueQuiz">
+<<link "Technique">>
+    <<goto $selectedTechnique.pop()>>
+<</link>>
+</div>

@@ -1,0 +1,29 @@
+:: Road_19 [RoadRules]
+
+<h2>Youre in a crossing situation.</h2>
+
+<<set $questionOption = [
+    "Keep clear of vessels on your port bow",
+    "Blow your horn with 2 sharp blasts and and maintain your heading",
+    "Hold water to stay clear of the vessel",
+    "Keep clear of vessels on your starboard bow"
+]>>
+<<questionMacro "You must:" $questionOption "Keep clear of vessels on your starboard bow">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Keep clear of vessels on starboard</h3>
+    <p>The vessel which has the other on its starboard side must keep out of the way. In this case the give way vessel should sound one short blast and alter course to starboard thus leaving the stand on vessel to port.</p>
+    <img src="assets/slide-crossing.png" alt="crossing situation">
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,27 @@
+:: bawra_10 [bawra]
+
+<h2>You are throwing a line to the tow boat.</h2>
+
+<<set $questionOption = [
+    "20 feet to the tow stern",
+    "30 feet to the tow stern",
+    "10 feet to the tow stern",
+    "Close enough to hit in one try"
+]>>
+<<questionMacro "According nto Bawra, where should you be?" $questionOption "20 feet to the tow's stern">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! BAWRA recommends 20 feet to the tow's stern.</h3>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

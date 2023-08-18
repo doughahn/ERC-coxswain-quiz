@@ -1,0 +1,30 @@
+:: Safety_20 [Safety]
+
+<h2>The motorized tow boat got you to your destination. They toss their end of the line.</h2>
+
+
+<<set $questionOption = [
+    "Quickly pull the line back", 
+    "Give them the all-clear (5 short blasts)",
+    "Give them the line-clear (2 long blasts)",
+    "Say thank you", 
+    "Untie your bowline"
+]>>
+<<questionMacro "What should you do next?" $questionOption "Quickly pull the line back">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Don't foul their propellor!</h3>
+    <p>Pull the line back fast, or it may get tangled in their props and cause all sorts of problems.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

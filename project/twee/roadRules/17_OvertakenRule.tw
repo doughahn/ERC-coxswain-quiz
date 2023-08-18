@@ -1,0 +1,29 @@
+:: Road_17 [RoadRules]
+
+<h2>You are overtaking another vessel.</h2>
+
+<<set $questionOption = [
+    "Pass to port",
+    "Pass to starboard",
+    "Hold your course",
+    "Stay clear of them"
+]>>
+<<questionMacro "You must:" $questionOption "Stay clear of them">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Stay clear</h3>
+    <p>It does not matter which side you pass, just stay clear so it's safe. </p>
+    <img src="assets/SlideOvertakingRG.png" alt="Overtaking">
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

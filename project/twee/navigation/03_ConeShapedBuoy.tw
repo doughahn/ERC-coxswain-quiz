@@ -1,0 +1,28 @@
+:: Navigation_03 [Navigation]
+
+<h2>You're entering a harbor from open water. There's a red cone-shaped bouy with the number “2” on it.</h2>
+
+<<set $questionOption = [
+    "Keep it to your left",
+    "Keep it to your right",
+    "Make sure you are traveling that MPH",
+    "Avoid this controlled area"
+]>>
+<<questionMacro "What do you do?" $questionOption "Keep it to your right">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Red right returning.</h3>
+    <p> Remember the phrase "red right returning," and keep the red markers to your right when returning from open water or traveling upstream. </p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

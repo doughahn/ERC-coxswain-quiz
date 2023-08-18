@@ -1,0 +1,28 @@
+:: Technique_08 [Technique]
+
+<h2>Rowers Trail Oars.</h2>
+
+<<set $questionOption = [
+    "Toward the cox",
+    "Away from the cox",
+    "Trail in the wayer",
+    "Either way along the gunnels"
+]>>
+<<questionMacro "The blades go:" $questionOption "Command in a loud clear voice">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You gotta get skinny right!</h3>
+    <p>This command is given when passing an obstruction or another boat. The oars are dragged alongside of the boat with the tips of the blades opposite the motion of the boat (at your cox).</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

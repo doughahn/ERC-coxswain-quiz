@@ -1,0 +1,27 @@
+:: conclusion
+
+<<if $score is 25>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale.svg">
+<h3>Kick ass coxin'!</h3>
+
+<<elseif $score gt 22 and $score lt 25>>
+<h2>Score: <<print $score>>/25 — not half bad!</h2>
+<img src="assets/ERC_whale_scared.svg">
+<h3>Ain't half bad.</h3>
+
+<<elseif $score gt 19 and $score lt 23>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_more_scared.svg">
+<h3>Is that nervous laughter you hear?</h3>
+
+<<elseif $score gt 14 and $score lt 20>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_more_more_scared.svg">
+<h3>The crew's left you at the dock!</h3>
+
+<<elseif $score lt 15>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_dead.svg">
+<h3>Abandon ship!</h3>
+<</if>>

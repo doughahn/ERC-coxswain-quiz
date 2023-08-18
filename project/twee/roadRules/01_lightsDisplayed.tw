@@ -1,0 +1,29 @@
+:: Road_01 [RoadRules]
+
+<h2>When should navigaton lights be displayed?</h2>
+
+<<set $questionOption = [
+    "At night, and when docking at all times of day",
+    "Between sunset and sunrise and at times of restricted visibility",
+    "At night and in the fog",
+    "Between sunset and sunrise and in the rain",
+    "At all times, especially Giants night games"
+]>>
+<<questionMacro "Shine em…" $questionOption "Between sunset and sunrise and at times of restricted visibility">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Whenever needed.</h3>
+    <p>Show them between sunset and sunrise and at times of restricted visibility… which could mean rain, Karl the fog, or any other situations.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

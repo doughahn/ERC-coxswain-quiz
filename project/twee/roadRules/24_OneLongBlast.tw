@@ -1,0 +1,28 @@
+:: Road_24 [RoadRules]
+
+<h2>You hear one long blast.</h2>
+
+<<set $questionOption = [
+    "A boat is in distress",
+    "The stand-on vessel must give way",
+    "The give-way vessel must stand on",
+    "A boat is in restricted visibility"
+]>>
+<<questionMacro "This means:" $questionOption "A boat is in restricted visibility">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Someone can't see.</h3>
+    <p>A long blast indicates a vessel is in restricted visibility.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

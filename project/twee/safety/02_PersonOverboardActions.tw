@@ -1,0 +1,108 @@
+:: Safety_02 [Safety]
+
+<h2>You're practicing for the Alcatraz race when the bowhook is washed overboard!</h2>
+<p class="orderingHeader">The following actions should be taken by the crew, in order:</p>
+<p class="note"><i>Drag and drop the items into the correct order.</i></p>
+
+
+<<setupQuestion "7" "Reach or Throw or Row,Alarm man overboard!,Stop,Administer First aid,Spot,Recover Amidships,Mark" "item2,item3,item5,item7,item1,item6,item4">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Oh no! You lost your person overboard!</h3>
+    <p>Here's the correct order… may the next sea dog be less salty:</p>
+    <ol>
+        <li><strong>ALARM:</strong> Sound the alarm so everyone understands what is happening. and gets into assigned positions (you covered that beforehand, right?)</li>
+        <li><strong>STOP:</strong> Cox or 2nd-In-Charge stops the boat (at oars, weigh enough or hold water). You want to avoid drifting further away before taking action.</li>
+        <li><strong>SPOT:</strong> Spotter (bow hook or bow rower) ships his/her oar, maintains visual contact and points to the POB. A glance at the spotter is all the cox needs to track the POB.</li>
+        <li><strong>MARK:</strong> Spotter or cox throws a Type IV PFD to the POB. The PFD serves as a marker for the general area of the POB and may help the POB stay afloat.</li>
+        <li><strong>REACH, THROW, ROW:</strong> Row to position. Stop the boat about 10 feet from the POB and pass him/her an oar. Be aware, in rough water, throwing a line may be safer than an oar. Throw a throw bag, float line, tow line, etc. to the POB. Only put a swimmer in the water as a last resort, and they must go in with a PFD.</li>
+        <li><strong>RECOVER:</strong> Recover the POB amidships. The POB should be recovered amidships, not at the bow or stern. The POB should be recovered on the side of the boat opposite the cox. The cox should be able to see the POB at all times.</li>
+        <li>Administer first aid on the rescue vessel or ashore.</li>
+    </ol>
+</div>
+<div class="nextButton hidden">
+    <<if $selectedSafety.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedSafety.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Nav_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+<<script>>
+$(document).ready(function() {
+    $(".draggable").on("dragstart", function(event) {
+        event.originalEvent.dataTransfer.setData("text", event.target.id);
+    });
+
+    $(".droppable").on("dragover", function(event) {
+        event.preventDefault();
+    });
+
+    $(".droppable").on("drop", function(event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(data));
+        checkIfAllSlotsFilled();
+    });
+
+    function checkIfAllSlotsFilled() {
+        if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
+            $("button#submitOrder").removeAttr("disabled");
+        } else {
+            $("button#submitOrder").attr("disabled", "disabled");
+        }
+    }
+
+$("button#submitOrder").click(function() {
+    const correctOrder = State.variables.correctOrder; // get the order from a Twine variable
+
+    let isCorrect = true;
+    $(".droppable").each(function(index) {
+        if (this.firstChild.id !== correctOrder[index]) {
+            isCorrect = false;
+            return false; // exit the loop early
+        }
+    });
+
+    if (isCorrect) {
+        $(".correctFeedback").text("Correct order!").removeClass("hidden");
+        $("button#submitOrder").addClass("hidden");
+    } else {
+        $(".incorrectFeedback").removeClass("hidden");
+        State.variables.score -= 1; 
+        $("button#submitOrder").addClass("hidden");
+    }
+    $(".nextButton").removeClass("hidden");
+});
+
+
+    checkIfAllSlotsFilled(); // Initial check
+
+    $("#resetOrder").click(function() {
+        resetOrder();
+    });
+
+    function resetOrder() {
+        // Move all draggable items back to their original container
+        $(".draggable").appendTo("#draggables");
+
+        // Enable the draggables again
+        $(".draggable").attr("draggable", true).on("dragstart", function(event) {
+            event.originalEvent.dataTransfer.setData("text", event.target.id);
+        });
+        $(".draggable").removeClass("disabled");
+
+        // Hide feedback and the next button/div
+        $(".feedback").addClass("hidden");
+        $(".nextButton").addClass("hidden");
+
+        // Disable the submit button again until all slots are filled
+        $("button#submitOrder").attr("disabled", "disabled");
+    }
+});
+
+<</script>>

@@ -1,0 +1,32 @@
+:: Safety_05 [Safety]
+
+<h2>You are near a swimmer who needs rescue—it's time for heroism!</h2>
+
+<<set $questionOption = [
+        "In rough water", 
+        "As a last resort", 
+        "In calm water", 
+        "As a first attempt"
+    ]
+>>
+
+<<questionMacro "Pass them an oar:" $questionOption "In calm water">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Don't clobber them with John's beautifully varnished oars!</h3>
+    <p>Passing an oar is dangerous. Only pass them an oar in calm water.</p>
+
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>
+

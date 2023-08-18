@@ -1,0 +1,116 @@
+:: Navigation_23 [Navigation]
+
+<h2>Match the definitions:</h2>
+
+<div id="droppables">
+    <h3>Course</h3>
+    <div class="droppable" data-label="1" id="slot1"></div>
+    <h3>Heading</h3>
+    <div class="droppable" data-label="2" id="slot2"></div>
+    <h3>Bearing</h3>
+    <div class="droppable" data-label="3" id="slot3"></div>
+</div>
+
+<div id="draggables">
+    <div class="draggable" id="item1" draggable="true">The direction of an object</div>
+    <div class="draggable" id="item2" draggable="true">The direction you intend to take the boat</div>
+    <div class="draggable" id="item3" draggable="true">The direction in which the boat is pointed at any given time</div>
+
+</div> 
+
+
+<button id="submitOrder" disabled>Submit</button>
+
+<div class="correctFeedback hidden" id="correctFeedback"><h3>That's correct!</h3></div>
+
+<div class="incorrectFeedback hidden">
+    <h3>Don't do donuts!</h3>
+    <p>The <strong>course</strong> is the direction you intend to take the boat. A <strong>heading</strong> is the direction in which the boat is pointed at any given time. A <strong>bearing</strong> is the direction of an object, expressed either as a “true” bearing (by a compass or chart) or relative to the heading of the boat.</p>
+    <p>The course over the bottom (the track actually followed by the boat) can be very crooked due to wave action, current, wind and/or the cox. To help stay on course, you can line up two stationary objects to use as range markers.</p>
+</div>
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+<<script>>
+$(document).ready(function() {
+    $(".draggable").on("dragstart", function(event) {
+        event.originalEvent.dataTransfer.setData("text", event.target.id);
+    });
+
+    $(".droppable").on("dragover", function(event) {
+        event.preventDefault();
+    });
+
+    $(".droppable").on("drop", function(event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(data));
+        checkIfAllSlotsFilled();
+    });
+
+    function checkIfAllSlotsFilled() {
+        if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
+            $("button#submitOrder").removeAttr("disabled");
+        } else {
+            $("button#submitOrder").attr("disabled", "disabled");
+        }
+    }
+
+    $("button#submitOrder").click(function() {
+        // Disable the draggables
+        $(".draggable").attr("draggable", false).off('dragstart');
+        $(".draggable").addClass("disabled");
+
+        // Check the order
+        if (document.getElementById("slot1").firstChild.id === "item2" &&
+            document.getElementById("slot2").firstChild.id === "item3" &&
+            document.getElementById("slot3").firstChild.id === "item1") {
+
+            $("#correctFeedback").removeClass("hidden");  // Show the correct feedback
+            // Optionally hide the submit button
+            $("button#submitOrder").addClass("hidden");
+        } else {
+            $(".incorrectFeedback").removeClass("hidden");
+            // Deduct score and optionally hide the submit button
+            State.variables.score -= 1; // Deduct a point for wrong attempt
+            $("button#submitOrder").addClass("hidden");
+        }
+        // Show the next button/div
+        $(".nextButton").removeClass("hidden");
+    });
+
+    checkIfAllSlotsFilled(); // Initial check
+
+    $("#resetOrder").click(function() {
+        resetOrder();
+    });
+
+    function resetOrder() {
+        // Move all draggable items back to their original container
+        $(".draggable").appendTo("#draggables");
+
+        // Enable the draggables again
+        $(".draggable").attr("draggable", true).on("dragstart", function(event) {
+            event.originalEvent.dataTransfer.setData("text", event.target.id);
+        });
+        $(".draggable").removeClass("disabled");
+
+        // Hide feedback and the next button/div
+        $("#feedback").addClass("hidden");
+        $(".nextButton").addClass("hidden");
+
+        // Disable the submit button again until all slots are filled
+        $("button#submitOrder").attr("disabled", "disabled");
+    }
+});
+
+<</script>>

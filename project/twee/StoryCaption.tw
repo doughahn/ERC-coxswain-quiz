@@ -1,0 +1,8 @@
+:: StoryCaption
+
+/* Score: <<print $score>>/25 */
+
+<h6 class="score">Your Score</h6>
+<p class="score"><span class="fractop"><<print $score>></span><span class="fracbar">&frasl;</span><span class="fracbot">25</span></p>
+
+    

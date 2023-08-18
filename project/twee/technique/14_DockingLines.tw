@@ -1,0 +1,33 @@
+:: Technique_14 [Technique]
+
+<h2>You are about to go home from South Beach harbor.</h2>
+
+<img src="assets/noSpringLine.webp" alt="berthed boat">
+
+<<set $questionOption = [
+    "Bow spring",
+    "Stern spring",
+    "Bow line",
+    "Stern line",
+    "Line spring"
+]>>
+<<questionMacro "What did you forget?:" $questionOption "Bow spring">>
+
+<div class="incorrectFeedback hidden">
+    <h3>The bow spring</h3>
+    <p>The boat at South Beach comes in bow first; the bow spring runs fom the bow to the clear on the port side.</p>
+    
+    <img src="assets/laSirenaDocked.webp" alt="La Sirena berthed and tied up">
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

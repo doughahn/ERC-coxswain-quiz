@@ -1,0 +1,29 @@
+:: Technique_16 [Technique]
+
+<h2>You are approaching a harbor but cannot get a line of sight over the sea wall.</h2>
+
+<<set $questionOption = [
+    "Masts moving at a steady rate",
+    "People on the dock to ask",
+    "Triangle buoy",
+    "Diamond buoy",
+    "Red buoy (red reight treturning)"
+]>>
+<<questionMacro "Look for:" $questionOption "Masts moving at a steady rate">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Look for masts</h3>
+    <p>They may not be the only indicator (for example listen, too) but they are one clue about boat traffick. </p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,28 @@
+:: Technique_07 [Technique]
+
+<h2>Which of the following is a command?</h2>
+
+<<set $questionOption = [
+    "Feather Blades",
+    "Catch Blades",
+    "Sky Blades",
+    "Spoon Blades"
+]>>
+<<questionMacro "Which is it?" $questionOption "Feather Blades">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You can feather blades</h3>
+    <p>Feathering blades is spinning the pars so they aren't catching so much wind. Shell rowers do this on their strokes; in the whaleboat we do it at rest on windy days. </p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

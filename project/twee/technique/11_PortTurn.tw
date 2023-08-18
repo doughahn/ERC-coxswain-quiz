@@ -1,0 +1,28 @@
+:: Technique_11 [Technique]
+
+<h2>You want to execute a port turn.</h2>
+
+<<set $questionOption = [
+    "Port brings the boat around",
+    "Starboard brings the boat around",
+    "Even all and sweep the boat",
+    "Do a power 10"
+]>>
+<<questionMacro "That means:" $questionOption "Starboard brings the boat around">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Turning to port means turning left</h3>
+    <p>That means Starboard has to bring you around.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

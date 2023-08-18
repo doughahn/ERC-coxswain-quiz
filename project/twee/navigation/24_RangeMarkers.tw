@@ -1,0 +1,28 @@
+:: Navigation_24 [Navigation]
+
+<h2>You see two range markers.</h2>
+
+<<set $questionOption = [
+    "Numbered to designate distance between points",
+    "Numbered to designate distance between bridges",
+    "On shore to help you maintain course",
+    "Red (Red Right Returning)"
+]>>
+<<questionMacro "They are:" $questionOption "On shore to help you maintain course">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Range markers are stationary objects you line up.</h3>
+    <p>To help stay on course, you can line up two stationary objects to use as range markers. For example, a low building in front of a cell tower.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

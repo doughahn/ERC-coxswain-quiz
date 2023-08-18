@@ -1,0 +1,28 @@
+:: Road_08 [RoadRules]
+
+<h2>You see a 40' sailing vessel.</h2>
+
+<<set $questionOption = [
+    "Sidelights and stern light",
+    "Mast light, white sidelights, and stern light.", 
+    "Mast light, red and green sidelights and stern light.", 
+    "White mast light and white stern light"
+]>>
+<<questionMacro "Its navigation lights are:" $questionOption "Sidelights and stern light">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! </h3>
+    <p>Sailing vessels (under sail, sidelights and stern light. Sailing vessels less than 23 feet requires white light only. Under power—see power-driven vessels.)</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

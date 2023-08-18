@@ -1,0 +1,28 @@
+:: Safety_13 [Safety]
+
+<h2>MAYDAY-MAYDAY-MAYDAY</h2>
+
+<<set $questionOption = [
+    "Call back to let them know you received their message", 
+    "Call the coast guard while traveling toward the vessel", 
+    "Ignore it, whaleboats are too slow to help", 
+    "Remain silent and listen"]>>
+<<questionMacro "When you hear this on the radio, the first thing you should do is:" $questionOption "Remain silent and listen">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Don't clog the channels.</h3>
+    <p>MAYDAY is a request for immediate assistance. LISTEN! DO NOT TRANSMIT!! Determine if you're in a position to help. If not, maintain radio silence. "MAYDAY" identifies an imminent, life-threatening emergency.</p>
+    <p>However, if there is no response, take action. Try raising the distressed vessel over the radio. Gather more information, especially the position. Attempt to raise the Coast Guard while traveling toward the vessel. Sometimes the Coast Guard may not hear the distressed vessels transmissions, but can hear another vessel near the scene; therefore, call the Coast Guard again, just in case. If you raise them, give them the information you have and follow their instructions. If you cannot contact the Coast Guard, attempt to assist the other vessel to the best of your ability without placing yourself in danger.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,29 @@
+:: Road_14 [RoadRules]
+
+<h2>You're the give-way vessel.</h2>
+
+<<set $questionOption = [
+    "Hold course so the other vessel knows what you're doing",
+    "Give way and let the other boat pass",
+    "Change course to pass astern",
+    "Change course to avoid collision", 
+    "Maintain speed and course"
+]>>
+<<questionMacro "You must:" $questionOption "Change course to pass astern">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect!</h3>
+    <p>If you are the Give-Way vessel, you must act as if the "stand-on" vessel has the responsibility to keep going the way it is going. It is your responsibility to signal your intentions to the stand-on vessel, and it is your responsibility to maneuver your boat around the other in a safe manner.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

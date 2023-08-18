@@ -1,0 +1,29 @@
+:: Road_22 [RoadRules]
+
+<h2>You're steering the boat into the marina; there is a boat behind you. You hear 3 short blasts.</h2>
+
+<<set $questionOption = [
+    "Hold water and look around",
+    "Look for a vessel backing out of a slip",
+    "Give way to port",
+    "Give way to starboard",
+    "Stand on"
+]>>
+<<questionMacro "What should you do?" $questionOption "Look for a vessel backing out of a slip">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Someone's backing up.</h3>
+    <p>Three short blasts warns you that someone is backing up. Watch for that.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

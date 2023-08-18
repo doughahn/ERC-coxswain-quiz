@@ -1,0 +1,31 @@
+:: Technique_21 [Technique]
+
+<h2>You are using the following docking procedure at Embarcadero cove, using bow an stern lines to control the boat.</h2>
+
+<img src="assets/docking-embarcaderoCove.webp" alt="docking at Embarcadero Cove">
+
+<<set $questionOption = [
+    "High tide",
+    "Low tide",
+    "Slack tide",
+    "Impossible to tell"
+]>>
+<<questionMacro "What are the conditions?" $questionOption "Low tide">>
+
+<div class="incorrectFeedback hidden">
+    <h3>It's low tide</h3>
+    <p>The water is too lopw to turn the boat with the sweep, so you need to T-bone it then spin it in with a sterrn line. You likely want to bring it only on a regular mean high tide of at least 5'.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>
+

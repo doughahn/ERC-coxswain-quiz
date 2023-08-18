@@ -1,0 +1,28 @@
+:: Technique_18 [Technique]
+
+<h2>It's a steady drizzle.</h2>
+
+<<set $questionOption = [
+    "Tough it out; rowers are not made of sugar",
+    "Make sure everyone has rain gear",
+    "Call off the row",
+    "See how it is out on the water"
+]>>
+<<questionMacro "You should:" $questionOption "Call off the row">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Drinks at the bayview instead?</h3>
+    <p>Don't row in the rain.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

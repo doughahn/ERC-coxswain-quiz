@@ -1,0 +1,26 @@
+:: StoryTitle
+ERC Coxwains
+
+:: Start
+
+<h2>Put your knowledge to the test!</h2>
+
+<p>This quiz has over 100 questions. You'll be tested on random questions from 5 domains:</p>
+
+<ol class="toc">
+    <li>Safety</li>
+    <li>Navigation</li>
+    <li>Road Rules</li>
+    <li>BAWRA rules</li>
+    <li>Technique</li>
+</ol>
+
+<p>Click the box below to begin.</p>
+
+<div class="sectionLink" id="safetyQuiz">
+<<link "Safety">>
+    <<goto $selectedSafety.pop()>>
+<</link>> 
+</div>
+
+<p><i><strong>Just Remember:</strong> None of this replaces actually practicing in the boat, with a crew.</i></p> 

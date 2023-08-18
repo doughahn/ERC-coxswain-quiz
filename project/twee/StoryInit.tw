@@ -1,0 +1,18 @@
+:: StoryInit
+
+<<set $score = 25>>
+
+<<set $safetyQuestions = Story.lookup("tags", "Safety")>>
+<<set $selectedSafety to $safetyQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $bawraQuestions = Story.lookup("tags", "bawra")>>
+<<set $selectedBawra to $bawraQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $navigationQuestions = Story.lookup("tags", "Navigation")>>
+<<set $selectedNavigation to $navigationQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $roadRulesQuestions = Story.lookup("tags", "RoadRules")>>
+<<set $selectedRoadRules to $roadRulesQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $techniqueQuestions = Story.lookup("tags", "Technique")>>
+<<set $selectedTechnique to $techniqueQuestions.shuffle().slice(0,5).map(p => p.title)>>

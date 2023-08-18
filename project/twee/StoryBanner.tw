@@ -1,0 +1,39 @@
+:: StoryBanner
+
+
+/* <<if $score is 25>>
+<img src="assets/ERC_whale.svg">
+
+<<elseif $score gt 23 and $score lt 25>>
+
+<img src="assets/ERC_whale_scared.svg">
+
+<<elseif $score gt 22 and $score lt 24>>
+
+<img src="assets/ERC_whale_more_scared.svg">
+
+<<elseif $score gt 21 and $score lt 23>>
+
+<img src="assets/ERC_whale_more_more_scared.svg">
+
+<<elseif $score gt 20 and $score lt 22>>
+<img src="assets/ERC_whale_dead.svg">
+
+<</if>> */
+
+
+<<if $score is 25>>
+<img src="assets/ERC_whale.svg">
+
+<<elseif $score gt 22 and $score lt 25>>
+<img src="assets/ERC_whale_scared.svg">
+
+<<elseif $score gt 19 and $score lt 23>>
+<img src="assets/ERC_whale_more_scared.svg">
+
+<<elseif $score gt 14 and $score lt 20>>
+<img src="assets/ERC_whale_more_more_scared.svg">
+
+<<elseif $score lt 15>>
+<img src="assets/ERC_whale_dead.svg">
+<</if>>

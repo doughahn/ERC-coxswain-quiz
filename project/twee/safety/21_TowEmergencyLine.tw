@@ -1,0 +1,29 @@
+:: Safety_21 [Safety]
+
+<h2>The tow boat is pulling you into dangerous waters.</h2>
+
+
+<<set $questionOption = [
+    "Cut the line", 
+    "Ask the tow boat to stop",
+    "Turn the whaleboat away", 
+    "Back water"
+]>>
+<<questionMacro "You should" $questionOption "Cut the line">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Cut your losses</h3>
+    <p>Cut the line and get the boat under your own control.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

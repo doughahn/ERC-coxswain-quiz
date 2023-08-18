@@ -1,0 +1,28 @@
+:: Technique_02 [Technique]
+
+<h2>What's a the purpose of a bow line?</h2>
+
+<<set $questionOption = [
+    "Keep wind that's blowing parallel to the dock from pushing your boat away from its secured position",
+    "Keep wind that's blowing across to the dock from pushing your boat away from its secured position",
+    "Keep the fenders pushed up snug against the dock",
+    "Keep the boat from hitting the dock"
+]>>
+<<questionMacro "It's to:" $questionOption "Keep wind that's blowing across to the dock from pushing your boat away from its secured position">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Bow lines protect against cross winds.</h3>
+    <p>It keeps wind that's blowing across to the dock from pushing your boat away from its secured position</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

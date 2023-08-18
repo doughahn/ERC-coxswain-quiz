@@ -1,0 +1,29 @@
+:: Technique_13 [Technique]
+
+<h2>You are getting ready to bring her in.</h2>
+
+<<set $questionOption = [
+    "Designate a spotter",
+    "Put fenders out",
+    "Prepare spring and bow lines",
+    "Carefully check conditions",
+    "Watch and listen for boat traffic"
+]>>
+<<questionMacro "What's something you don't need to do?:" $questionOption "Designate a spotter">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You don't need a spotter</h3>
+    <p>You may have someone assisting you, but they may be performing duties other than or in addition to spotting.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

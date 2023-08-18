@@ -1,0 +1,28 @@
+:: Technique_12 [Technique]
+
+<h2>You are approaching a dock.</h2>
+
+<<set $questionOption = [
+    "At a T angle",
+    "At a 45 degree angle",
+    "As fast as you're willing to hit it",
+    "With plenty of way"
+]>>
+<<questionMacro "The boat is moving:" $questionOption "As fast as you're willing to hit it">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Slow is good, but not too slow</h3>
+    <p>You approach as fast as you're willing to hit it; normally someone can fend but accidents may happen.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

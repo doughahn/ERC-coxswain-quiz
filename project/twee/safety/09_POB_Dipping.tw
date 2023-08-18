@@ -1,0 +1,32 @@
+:: Safety_09 [Safety]
+
+<h2>You're about to dip a person who's overboard.</h2>
+
+<<set $questionOption = [
+        "Tell them to hold their breath",
+        "Tell them to hold on tight",
+        "Dip in an oar in the water",
+        "Ensure they are facing away",
+        "Tell them what you are doing"
+    ]
+>>
+
+<<questionMacro "What should you do?" $questionOption "Tell them what you are doing">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Give them a tip before you dip.</h3>
+    <p>They're probably scared. Tell them that you're about to do. "We're going to push you down then pull you out of the water."</p>
+
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

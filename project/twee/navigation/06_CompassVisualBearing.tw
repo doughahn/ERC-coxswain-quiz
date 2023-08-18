@@ -1,0 +1,102 @@
+:: Navigation_06 [Navigation]
+
+<h2>You need to take a visual bearing of the Bayview Boatclub.</h2>
+
+<p class="note"><i>Drag and drop the items into the correct order.</i></p>
+
+<<set $actionsList = "Rotate the azimuth ring so the orienting arrow lines up with the magnetic needle,Hold it level and point the direction of travel arrow toward your destination,Note the degree markings on the azimuth ring that line up with the direction-of-travel arrow">>
+<<set $actionsOrder = "item2,item3,item2">>
+
+<<setupQuestion "3" $actionsList $actionsOrder>>
+
+
+<div class="incorrectFeedback hidden">
+    <h3>You got lost!</h3>
+<iframe class="youtube-embed" src="https://www.youtube.com/embed/rZd0RfsC-9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+<<script>>
+$(document).ready(function() {
+    $(".draggable").on("dragstart", function(event) {
+        event.originalEvent.dataTransfer.setData("text", event.target.id);
+    });
+
+    $(".droppable").on("dragover", function(event) {
+        event.preventDefault();
+    });
+
+    $(".droppable").on("drop", function(event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(data));
+        checkIfAllSlotsFilled();
+    });
+
+    function checkIfAllSlotsFilled() {
+        if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
+            $("button#submitOrder").removeAttr("disabled");
+        } else {
+            $("button#submitOrder").attr("disabled", "disabled");
+        }
+    }
+
+    $("button#submitOrder").click(function() {
+        // Disable the draggables
+        $(".draggable").attr("draggable", false).off('dragstart');
+        $(".draggable").addClass("disabled");
+
+        // Check the order
+        if (document.getElementById("slot1").firstChild.id === "item3" &&
+            document.getElementById("slot2").firstChild.id === "item1" &&
+            document.getElementById("slot7").firstChild.id === "item2") {
+            $(".feedback").text("Correct order!").removeClass("hidden");
+            // Optionally hide the submit button
+            $("button#submitOrder").addClass("hidden");
+        } else {
+            $(".incorrectFeedback").removeClass("hidden");
+            // Deduct score and optionally hide the submit button
+            State.variables.score -= 1; // Deduct a point for wrong attempt
+            $("button#submitOrder").addClass("hidden");
+        }
+        // Show the next button/div
+        $(".nextButton").removeClass("hidden");
+    });
+
+    checkIfAllSlotsFilled(); // Initial check
+
+    $("#resetOrder").click(function() {
+        resetOrder();
+    });
+
+    function resetOrder() {
+        // Move all draggable items back to their original container
+        $(".draggable").appendTo("#draggables");
+
+        // Enable the draggables again
+        $(".draggable").attr("draggable", true).on("dragstart", function(event) {
+            event.originalEvent.dataTransfer.setData("text", event.target.id);
+        });
+        $(".draggable").removeClass("disabled");
+
+        // Hide feedback and the next button/div
+        $(".feedback").addClass("hidden");
+        $(".nextButton").addClass("hidden");
+
+        // Disable the submit button again until all slots are filled
+        $("button#submitOrder").attr("disabled", "disabled");
+    }
+});
+
+<</script>>

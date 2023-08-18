@@ -1,0 +1,1 @@
+"use strict";$(document).on(":passagedisplay",(function(n,s){return n===s}));

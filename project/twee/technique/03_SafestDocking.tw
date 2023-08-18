@@ -1,0 +1,28 @@
+:: Technique_03 [Technique]
+
+<h2>You want to use the safest method to dock and undock.</h2>
+
+<<set $questionOption = [
+    "I method",
+    "S method",
+    "A method",
+    "T method",
+]>>
+<<questionMacro "You use:" $questionOption "T method">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! T-Bone is sad.</h3>
+    <p>T method is safest.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,28 @@
+:: Road_16 [RoadRules]
+
+<h2>A whaleboat may have right of way over all others.</h2>
+
+<<set $questionOption = [
+    "When it is being overtaken",
+    "When it is the give-way vessel",
+    "At all times because rowing means the boat less maneuverable",
+    "When it must change course to avoid collision"
+]>>
+<<questionMacro "That occurs:" $questionOption "When it is being overtaken">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect!</h3>
+    <p>The only time the whaleboat has right of way is when it's being overtaken; e.g. when it is the stand-on vessel.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

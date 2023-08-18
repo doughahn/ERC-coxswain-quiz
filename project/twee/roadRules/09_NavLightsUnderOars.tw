@@ -1,0 +1,28 @@
+:: Road_09 [RoadRules]
+
+<h2>What are the navigation lights for a vessel under oars?</h2>
+
+<<set $questionOption = [
+    "Electric torch or lantern",
+    "Electric torch and white sidelights", 
+    "White bow light and white stern light", 
+    "Electric torch only"
+]>>
+<<questionMacro "Its navigation lights are:" $questionOption "Electric torch or lantern">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! </h3>
+    <p>Vessels under oars (electric torch/lantern showing white light or may use same lights as sailing vessels)</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

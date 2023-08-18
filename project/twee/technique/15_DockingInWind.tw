@@ -1,0 +1,30 @@
+:: Technique_15 [Technique]
+
+<h2>You are approaching the berth in a moderate head wind.</h2>
+
+<<set $questionOption = [
+    "With maximum way",
+    "With minimal way",
+    "Shorter and shallower than usual",
+    "Wider and deeper than usual",
+    "Straight on"
+]>>
+<<questionMacro "You should approach:" $questionOption "Wider and deeper than usual">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You are heading against the wind.</h3>
+    <p>So take it wider and deeper than usual (see below). Maximum way may be too fast. Minimum way may may just let the wind have its way with you. If you fo too short you mnight get blown into the boat next door on your starboard side, and likewise if you head in straight on.</p>
+    <img src="assets/bertingInWind.webp" alt="berthing in a head wind">
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,29 @@
+:: Road_15 [RoadRules]
+
+<h2>Your vessel is burdened.</h2>
+
+<<set $questionOption = [
+    "Your boat is too heavy to participate in a bawra race",
+    "You have the right of way",
+    "You have to maneuver aroudnd the other boat",
+    "Other boats must maneuver around you", 
+    "You have dropped anchor and cannot more"
+]>>
+<<questionMacro "That means:" $questionOption "You have to maneuver aroudnd the other boat">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Burdened vessels are the give-way vessels.</h3>
+    <p>If you are the Give-Way vessel trying to pass another vessel you are "burdened" with the responsibility to to signal your intentions to the stand-on vessel, and it is your responsibility/burden to maneuver your boat around the other in a safe manner.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

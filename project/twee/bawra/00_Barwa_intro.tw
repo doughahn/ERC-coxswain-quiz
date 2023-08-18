@@ -1,0 +1,11 @@
+:: bawra_Intro 
+
+<h2>BAWRA Quiz</h2>
+
+<p>Rules and best practices specified by by BAWRA. Click the box below to begin.</p>
+
+<div class="sectionLink" id="bawraQuiz">
+<<link "BAWRA">>
+    <<goto $selectedBawra.pop()>>
+<</link>>
+</div>

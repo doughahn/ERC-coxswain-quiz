@@ -1,0 +1,27 @@
+:: bawra_08 [bawra]
+
+<h2>BAWRA has a limit on how many whaleboats can be towed at once.</h2>
+
+<<set $questionOption = [
+    "1",
+    "2",
+    "3",
+    "4"
+]>>
+<<questionMacro "What is it?" $questionOption "3">>
+
+<div class="incorrectFeedback hidden">
+    <h3>It's 3.</h3>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

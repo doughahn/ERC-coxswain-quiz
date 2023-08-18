@@ -1,0 +1,103 @@
+:: Navigation_07 [Navigation]
+
+<h2>You need to take a visual bearing of the Bayview Boatclub.</h2>
+
+<p class="note"><i>Drag and drop the items into the correct order.</i></p>
+
+<<set $actionsList = "Look at the index line to read the bearing you've just captured.,Make sure the direction of travel arrow is pointing in the direction of travel.,Rotate the bezel until the orienting lines on the compass are aligned with the north-south grid lines.,Set your compass on the map so that the straight edge lines up between your position and destination.">>
+<<set $actionsOrder = "item4,item2,item3,item1">>
+
+<<setupQuestion "4" $actionsList $actionsOrder>>
+
+
+<div class="incorrectFeedback hidden">
+    <h3>You got lost!</h3>
+    <iframe class="youtube-embed" src="https://www.youtube.com/embed/rZd0RfsC-9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+<<script>>
+$(document).ready(function() {
+    $(".draggable").on("dragstart", function(event) {
+        event.originalEvent.dataTransfer.setData("text", event.target.id);
+    });
+
+    $(".droppable").on("dragover", function(event) {
+        event.preventDefault();
+    });
+
+    $(".droppable").on("drop", function(event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        event.target.appendChild(document.getElementById(data));
+        checkIfAllSlotsFilled();
+    });
+
+    function checkIfAllSlotsFilled() {
+        if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
+            $("button#submitOrder").removeAttr("disabled");
+        } else {
+            $("button#submitOrder").attr("disabled", "disabled");
+        }
+    }
+
+$("button#submitOrder").click(function() {
+    const correctOrder = State.variables.correctOrder; // get the order from a Twine variable
+
+    let isCorrect = true;
+    $(".droppable").each(function(index) {
+        if (this.firstChild.id !== correctOrder[index]) {
+            isCorrect = false;
+            return false; // exit the loop early
+        }
+    });
+
+    if (isCorrect) {
+        $(".correctFeedback").text("Correct order!").removeClass("hidden");
+        $("button#submitOrder").addClass("hidden");
+    } else {
+        $(".incorrectFeedback").removeClass("hidden");
+        State.variables.score -= 1; 
+        $("button#submitOrder").addClass("hidden");
+    }
+    $(".nextButton").removeClass("hidden");
+});
+
+
+    checkIfAllSlotsFilled(); // Initial check
+
+    $("#resetOrder").click(function() {
+        resetOrder();
+    });
+
+    function resetOrder() {
+        // Move all draggable items back to their original container
+        $(".draggable").appendTo("#draggables");
+
+        // Enable the draggables again
+        $(".draggable").attr("draggable", true).on("dragstart", function(event) {
+            event.originalEvent.dataTransfer.setData("text", event.target.id);
+        });
+        $(".draggable").removeClass("disabled");
+
+        // Hide feedback and the next button/div
+        $(".feedback").addClass("hidden");
+        $(".nextButton").addClass("hidden");
+
+        // Disable the submit button again until all slots are filled
+        $("button#submitOrder").attr("disabled", "disabled");
+    }
+});
+
+<</script>>

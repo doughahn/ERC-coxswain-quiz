@@ -1,0 +1,29 @@
+:: bawra_05 [bawra]
+
+<h2>You want to overtake your competitor in a bawra race.</h2>
+
+<<set $questionOption = [
+    "Yell at them so they know you're coming",
+    "Do a power 20 to pass as fast as possible",
+    "Have at least 10 feet space between oars",
+    "Cut in front of their bow as soon as you can",
+    "All of the above"
+]>>
+<<questionMacro "You must:" $questionOption "Have at least 10 feet space between oars">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Stay safe</h3>
+    <p>BAWRA requires at least 10' between oars. Also, clattering might mean a disqualification.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

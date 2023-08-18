@@ -1,0 +1,28 @@
+:: Technique_19 [Technique]
+
+<h2>You're taking the boat out later today.</h2>
+
+<<set $questionOption = [
+    "Check the tide tables",
+    "Think about the course",
+    "Check the weather forecast",
+    "All of the above"
+]>>
+<<questionMacro "You should:" $questionOption "All of the above">>
+
+<div class="incorrectFeedback hidden">
+    <h3>All of the above!</h3>
+    <p>Look at the weather, tides, and create a plan for the course. This may change later on or if conditions change, but it is a good starting point.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,28 @@
+:: Safety_15 [Safety]
+
+<h2>A motorboat off your stern gives two short blasts during a race. You need to turn to port to stay in the good currents and pass Iron Oars. </h2>
+
+<<set $questionOption = [
+    "Turn to port", 
+    "Give 5 short blows on your whistle", 
+    "Maintain your current heading", 
+    "Do a power 20 to get there quicker"
+]>>
+<<questionMacro "You should:" $questionOption "Maintain your current heading">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Safety is more impoirtant than winning… even against Iron Oars.</h3>
+    <p>Two short blasts means it will pass you on your port side (to its starboard). If you turn to port you may have a collision. As the stand-on vessel you must maintain your heading until the boat safely passes you.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

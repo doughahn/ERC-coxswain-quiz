@@ -1,0 +1,41 @@
+:: Safety_18 [Safety]
+
+<h2>Your boat has the following equipment.</h2>
+
+<ul>
+  <li>Wearable type V PFD for each person</li>
+  <li>Whistle</li>
+  <li>Flare</li>
+  <li>Navigation Lights</li>
+</ul>
+<hr>
+<<set $questionOption = [
+    "First aid kit", 
+    "A type IV PFD",
+    "Tow Line", 
+    "VHF Radio"
+]>>
+<<questionMacro "What piece of gear is missing, and required by maritime law?" $questionOption "A type IV PFD">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! You need a throwable PFD!</h3>
+    <p>Manually =powered boats need:</p>
+    <ol>
+        <li>Wearable Type I, II, III or V PFD's for each person</li>
+        <li>One throwable Type IV PFD </li>
+        <li>Distress signal devices. (Day and night—whistle, horn, light, flare, etc. for restricted visibility.)</li>
+    </ol>
+    <p>—<a href="https://www.parks.ca.gov/?page_id=28985">CA Parks; see "for boats 16 feet or longer" (whaleboats are 20' or so)</a></p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

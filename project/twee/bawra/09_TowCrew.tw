@@ -1,0 +1,28 @@
+:: bawra_09 [bawra]
+
+<h2>You are getting towed.</h2>
+
+<<set $questionOption = [
+    "Minimum 4 rowers, maximum 10 crew",
+    "Minimum 2 rowers, maximum 9 crew",
+    "Minimum 6 rowers, maximum 10 crew",
+    "Minimum 8 rowers, maximum 9 crew"
+]>>
+<<questionMacro "What's yor minimum and maximum crew?" $questionOption "Minimum 4 rowers, maximum 10 crew">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not too heavy, not too light</h3>
+    <p>Minimum 4 rowers, maximum 10 crew</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

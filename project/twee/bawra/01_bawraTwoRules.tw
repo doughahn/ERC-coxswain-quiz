@@ -1,0 +1,25 @@
+:: bawra_01 [bawra]
+
+<h2>BAWRA has two important rules.</h2>
+<<set $questionOption = [
+    "Safety and equality",
+    "Safety and hard work",
+    "Safety and community",
+    "Safety and fairness"
+]>>
+<<questionMacro "They are:" $questionOption "Safety and fairness">>
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect!</h3>
+    <p>Safety and fairness, in that order.</p>
+</div>
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

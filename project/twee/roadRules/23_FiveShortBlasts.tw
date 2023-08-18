@@ -1,0 +1,28 @@
+:: Road_23 [RoadRules]
+
+<h2>You're on the bay. A container vessel blasts at you five times.</h2>
+
+<<set $questionOption = [
+    "Give way",
+    "Stand down",
+    "You are in danger",
+    "Stand on"
+]>>
+<<questionMacro "This means:" $questionOption "You are in danger">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You're in trouble.</h3>
+    <p>Commonly five or more short blasts is known as the danger signal and is used when either vessel doubts whether sufficient action is being taken by the other vessel to avoid collision.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

@@ -1,0 +1,29 @@
+:: Road_21 [RoadRules]
+
+<h2>The boat behind you sounds two short blasts.</h2>
+
+<<set $questionOption = [
+    "To leave you on your starboard side",
+    "To leave you on its starboard side",
+    "To leave you on either side",
+    "To speed up and pass you on your starboard side",
+    "To speed up and pass you on your port side",
+]>>
+<<questionMacro "It intends:" $questionOption "To leave you on its starboard side">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! It's going to pass on its starboard</h3>
+    <p>This means it will be on <i>your</i> port.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

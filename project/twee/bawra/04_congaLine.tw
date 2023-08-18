@@ -1,0 +1,28 @@
+:: bawra_04 [bawra]
+
+<h2>It's a Conga Line Start.</h2>
+
+<<set $questionOption = [
+    "Row at minimum speed to the line in your lane and then go",
+    "Start from a stationary line in your lane and then go",
+    "Follow the start boat then turn toward the course for another kind of start",
+    "Start ahead of the others for an easier time"
+]>>
+<<questionMacro "That means:" $questionOption "Follow the start boat then turn toward the course for another kind of start">>
+
+<div class="incorrectFeedback hidden">
+    <h3>It's like a line dance only worse</h3>
+    <p>Follow the start boat then turn toward the course for another kind of start. This is often used when the conditions make things difficult.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

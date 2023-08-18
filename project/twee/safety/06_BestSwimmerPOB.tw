@@ -1,0 +1,32 @@
+:: Safety_06 [Safety]
+
+<h2>The bowhook told you he's a really strong swimmer.</h2>
+
+<<set $questionOption = [
+        "In calm water", 
+        "When the person is unconscious", 
+        "In rough water", 
+        "Only as a last resort"
+    ]
+>>
+
+<<questionMacro "When should you use them to swim to a person overboard?" $questionOption "Only as a last resort">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Now there's TWO people overboard!</h3>
+    <p>Only put more people in the water as a last resort. Typically this is only done if the POB is non-responsive, cannot save themself, and/or when assistance from the Coast Guard/others will not be in time. The rescuer must be wearing a PDF before going in, and if possible should be trained and certified in water rescue and lifesaving.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>
+
+

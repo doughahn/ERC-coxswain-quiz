@@ -1,0 +1,28 @@
+:: Road_13 [RoadRules]
+
+<h2>You're the stand-on vessel.</h2>
+
+<<set $questionOption = [
+    "Hold water to stop (stand) on course",
+    "Change course but not speed so the boat behind you can pass", 
+    "Speed up and stay on course to avoid a collision", 
+    "Maintain speed and course"
+]>>
+<<questionMacro "You must:" $questionOption "Maintain speed and course">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Incorrect! Stand-on means keep on doing what you're doing.</h3>
+    <p>If you are the Stand-On vessel, it is your responsibility to acknowledge the intended actions of the give-way vessel. You must also maintain your current course and speed until the give-way vessel passes, or you enter a dangerous situation.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>
