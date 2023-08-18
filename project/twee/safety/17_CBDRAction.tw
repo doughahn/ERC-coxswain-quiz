@@ -1,6 +1,6 @@
 :: Safety_17 [Safety]
 
-<h2>You're in a CBDR situation.</h2>
+<h2>You're in a CBDR situation.</h2> 
 
 <<set $questionOption = [
     "Maintain course and maintain speed", 
@@ -12,7 +12,7 @@
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. Get out of the way!</h3>
-    <p>The thing on the horizon getting bigger and not changing its bearing is coming at you. Change our course.</p>
+    <p>CBDR is just a fancy way of sayinig "Constant Beearing, Decreasing Range." In other words, the scary ship on the horizon is getting bigger but not moving. It is coming right at you. Change our course.</p> 
 </div>
 
 <div class="nextButton hidden">
