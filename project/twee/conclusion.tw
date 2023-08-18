@@ -6,7 +6,7 @@
 <h3>Kick ass coxin'!</h3>
 
 <<elseif $score gt 22 and $score lt 25>>
-<h2>Score: <<print $score>>/25 — not half bad!</h2>
+<h2>Score: <<print $score>>/25</h2>
 <img src="assets/ERC_whale_scared.svg">
 <h3>Ain't half bad.</h3>
 

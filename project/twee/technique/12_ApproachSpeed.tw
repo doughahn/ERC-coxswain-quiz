@@ -1,6 +1,6 @@
 :: Technique_12 [Technique]
 
-<h2>You are approaching a dock.</h2>
+<h2>Your boat is approaching a dock.</h2>
 
 <<set $questionOption = [
     "At a T angle",

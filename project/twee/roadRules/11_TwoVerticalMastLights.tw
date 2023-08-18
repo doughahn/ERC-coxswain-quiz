@@ -8,7 +8,7 @@
     "A power-driven vessel towing another vessel,  with a length of tow (stern to stern) under 200 meters, that is towing with another tow boat", 
     "A power-driven vessel towing another vessel,  with a length of tow (stern to stern) over300 meters, that is towing with another two tow boats"
 ]>>
-<<questionMacro "Is is:" $questionOption "A power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters">>
+<<questionMacro "It is:" $questionOption "A power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters">>
 
 <div class="incorrectFeedback hidden">
     <h3>Be aware of tows on the open water!</h3>

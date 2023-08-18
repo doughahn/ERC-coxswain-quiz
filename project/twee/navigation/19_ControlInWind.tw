@@ -7,7 +7,7 @@
     "Head for more sheltered water",
     "Hold water until the wind shifts",
     "Head away from the wind",
-    "Call the coast guard for assistance help"
+    "Call the coast guard for help"
 ]>>
 <<questionMacro "You must" $questionOption "Head for more sheltered water">>
 
