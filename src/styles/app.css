@@ -69,8 +69,10 @@ h2 {
     margin-bottom:1.5rem;
 }
 
-@media (min-width: 60rem) {
-    font-size: 3rem;
+@media screen and (min-width: 60rem) {
+    h2 {
+        font-size: 3rem;
+    }
 }
 
 label {
@@ -79,8 +81,10 @@ label {
     font-size: 1rem;
 }
 
-@media (min-width: 60rem) {
-    font-size: 1.5rem;
+@media screen and (min-width: 60rem) {
+    label {
+        font-size: 1.5rem;
+    }
 }
 
 #draggables {
@@ -245,8 +249,11 @@ legend,
     color:black;
 }
 
-@media (min-width: 60rem) {
-    font-size: 1.33rem;
+@media screen and (min-width: 60rem) {
+    legend,
+    .orderingHeader {
+        font-size: 1.33rem;
+    }
 }
 
 
@@ -257,8 +264,10 @@ fieldset label {
     font-size: 1rem;
 }
 
-@media (min-width: 60rem) {
-    font-size: 1.33rem;
+@media screen and (min-width: 60rem) {
+    fieldset label {
+        font-size: 1.33rem;
+    }
 }
 
 /* Hiding the default radio button */
@@ -320,7 +329,7 @@ h6 {
     margin-bottom:-1rem;
 }
 
-@media (min-width: 60rem) {
+@media screen and (min-width: 60rem) {
     h6 {
         font-size: 1.98rem; 
     }
@@ -416,7 +425,7 @@ p.score {
 
 }
 
-@media (min-width: 60rem) {
+@media screen and (min-width: 60rem) {
     .passage ul {
         font-size: 1.33rem; 
     }
@@ -467,7 +476,7 @@ input[type="text"]:focus {
     vertical-align: middle;
 }
 
-@media (min-width: 60rem) {
+@media screen and (min-width: 60rem) {
     .sectionLink .link-internal {
         font-size: 5.33rem;
     }

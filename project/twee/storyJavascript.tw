@@ -111,3 +111,4 @@ Macro.add('setupQuestion', {
 });
 
 
+$(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");
