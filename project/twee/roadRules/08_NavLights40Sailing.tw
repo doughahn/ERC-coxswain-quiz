@@ -8,7 +8,7 @@
     "Mast light, red and green sidelights and stern light.", 
     "White mast light and white stern light"
 ]>>
-<<questionMacro "Its navigation lights are:" $questionOption "Sidelights and stern light">>
+<<questionMacro "Its navigation lights are:" $questionOption "Mast light, red and green sidelights and stern lightt">>
 
 <div class="incorrectFeedback hidden">
     <h3>Incorrect! </h3>

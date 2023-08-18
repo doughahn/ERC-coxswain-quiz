@@ -26,7 +26,7 @@
         <<goto $selectedTechnique.pop()>>
     <</link>>
 <<else>>
-    <<link "Next Chapter">>
+    <<link "Conclusion">>
         <<goto "conclusion">>
     <</link>>
 <</if>>

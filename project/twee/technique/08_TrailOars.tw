@@ -8,7 +8,7 @@
     "Trail in the wayer",
     "Either way along the gunnels"
 ]>>
-<<questionMacro "The blades go:" $questionOption "Command in a loud clear voice">>
+<<questionMacro "The blades go:" $questionOption "Toward the cox">>
 
 <div class="incorrectFeedback hidden">
     <h3>You gotta get skinny right!</h3>
@@ -21,7 +21,7 @@
         <<goto $selectedTechnique.pop()>>
     <</link>>
 <<else>>
-    <<link "Next Chapter">>
+    <<link "Conclusion">>
         <<goto "conclusion">>
     <</link>>
 <</if>>
