@@ -11,7 +11,7 @@
 <<questionMacro "What do you do?" $questionOption "Keep it to your right">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Red right returning.</h3>
+    <h3>Not quite. Red right returning.</h3>
     <p> Remember the phrase "red right returning," and keep the red markers to your right when returning from open water or traveling upstream. </p>
 </div>
 

@@ -11,7 +11,7 @@
 <<questionMacro "That occurs:" $questionOption "When it is being overtaken">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>The only time the whaleboat has right of way is when it's being overtaken; e.g. when it is the stand-on vessel.</p>
 </div>
 

@@ -12,7 +12,7 @@
 <<questionMacro "You should:" $questionOption "Keep a safe distance">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Hazards ahead!</h3>
+    <h3>Not quite. Hazards ahead!</h3>
     <p>Diamonds warn of hazards such as rocks, shoals, or turbulent waters. Always proceed with caution and keep a safe distance. Never assume that every hazard will be marked by a buoy.</p>
 </div>
 

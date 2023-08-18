@@ -11,7 +11,7 @@
 <<questionMacro "Which is it?" $questionOption "Back Oars">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! So many oars</h3>
+    <h3>Not quite. So many oars</h3>
     <p>No such thing as back oars.</p>
     <ul>
         <li><strong>Toss oars/up oars:</strong> Oars are lifted straight up, handles on the floorboards, blades in the air.  Given from "oars" or when oars are in the boat.</li>

@@ -11,7 +11,7 @@
 <<questionMacro "You should" $questionOption "Navigate between them">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Nuns and cans are markers.</h3>
+    <h3>Not quite. Nuns and cans are markers.</h3>
     <p>A harbor or marina entrance or a dredged channel may be marked to indicate the deeper, safer channel. When going upstream or into a harbor from open water, the right side of the channel is marked by red "nun" shaped buoys or day beacons with even numbers and the left side is marked by green "can" shaped buoys or day beacons with odd numbers. "Red right returning" is an old saying reminding sailors to keep the red buyos on the starboard (right) when coming to harbor from the open sea.</p>
     <img src="assets/channelMarkers.webp" alt="channel markers" />
 </div>

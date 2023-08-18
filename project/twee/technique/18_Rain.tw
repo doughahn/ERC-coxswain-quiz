@@ -11,7 +11,7 @@
 <<questionMacro "You should:" $questionOption "Call off the row">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Drinks at the bayview instead?</h3>
+    <h3>Not quite. Drinks at the bayview instead?</h3>
     <p>Don't row in the rain.</p>
 </div>
 

@@ -6,7 +6,7 @@
 <<questionMacro "What should you NOT do right away?" $questionOption "Administer first aid">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Get your priorities in order!</h3>
+    <h3>Not quite. Get your priorities in order!</h3>
     <p>In the unlikely event the boat is swamped or capsized:</p>
     <ol>
         <li>Distribute PFDs</li>

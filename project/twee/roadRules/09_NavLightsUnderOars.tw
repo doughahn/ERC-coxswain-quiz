@@ -11,7 +11,7 @@
 <<questionMacro "Its navigation lights are:" $questionOption "Electric torch or lantern">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! </h3>
+    <h3>Not quite. </h3>
     <p>Vessels under oars (electric torch/lantern showing white light or may use same lights as sailing vessels)</p>
 </div>
 

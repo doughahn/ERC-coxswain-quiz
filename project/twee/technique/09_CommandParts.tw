@@ -12,7 +12,7 @@
 <<questionMacro "They are:" $questionOption "Designator, Preparatory, Execution">>
 
 <div class="incorrectFeedback hidden">
-    <h3>It's those fancy words.</h3>
+    <h3>Not quite. It's those fancy words.</h3>
     <ol>
         <li><strong>Designator:</strong> The "who" part of the command tells the rowers who must respond to the command.</li>
         <li><strong>Preparatory:</strong> The "get ready" part of the command alerts the rowers to action. It is optional and usually used to give rowers time to change position.</li>

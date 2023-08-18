@@ -12,7 +12,7 @@
 <<questionMacro "You should:" $questionOption "Keep away">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Keep out!</h3>
+    <h3>Not quite. Keep out!</h3>
     <p>Crossed diamonds indicate areas where pleasure craft are prohibited such as dams and spillways. They are dangerous spots… keep out!</p>
 </div>
 

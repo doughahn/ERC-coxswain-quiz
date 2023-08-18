@@ -12,7 +12,7 @@
 <<questionMacro "What's something you don't need to do?:" $questionOption "Designate a spotter">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You don't need a spotter</h3>
+    <h3>Not quite. You don't need a spotter</h3>
     <p>You may have someone assisting you, but they may be performing duties other than or in addition to spotting.</p>
 </div>
 

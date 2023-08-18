@@ -12,7 +12,7 @@
 <<questionMacro "It intends:" $questionOption "To leave you on its port side">>
 
 <div class="incorrectFeedback hidden">
-    <h3>It's going to pass on its port</h3>
+    <h3>Not quite. It's going to pass on its port</h3>
     <p>This means <i>your</i> starboard.</p>
 </div>
 

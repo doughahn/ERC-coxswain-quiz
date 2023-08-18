@@ -11,7 +11,7 @@
 <<questionMacro "Its navigation lights are:" $questionOption "Sidelights and stern light">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! </h3>
+    <h3>Not quite. </h3>
     <p>Sailing vessels under sail and over 23 feet require sidelights and stern light. </p>
 </div>
 

@@ -11,7 +11,7 @@
 <<questionMacro "You are on bearing" $questionOption "180\º">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>180º is south.</p>
 </div>
 

@@ -11,7 +11,7 @@
 <<questionMacro "This is dangerous because:" $questionOption "If it continues, vessels will collide">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Constant Beearing, Decreasing Range is a fancy way of saying "Incoming Collision"</h3>
+    <h3>Not quite. Constant Beearing, Decreasing Range is a fancy way of saying "Incoming Collision"</h3>
     <p>The thing on the horizon getting bigger and not changing its bearing is coming at you. Change your course.</p>
 </div>
 

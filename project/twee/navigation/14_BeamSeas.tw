@@ -12,7 +12,7 @@
 <<questionMacro "Waves are" $questionOption "Waves are at a right angle to the course">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Beam seas run at a 90º angle to the vessel.</h3>
+    <h3>Not quite. Beam seas run at a 90º angle to the vessel.</h3>
     <img src="assets/beamSeas.webp" alt="beam seas">
 </div>
 

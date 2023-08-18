@@ -11,7 +11,7 @@
 <<questionMacro "You should:" $questionOption "Maintain your current heading">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Safety is more impoirtant than winning… even against Iron Oars.</h3>
+    <h3>Not quite. Safety is more impoirtant than winning… even against Iron Oars.</h3>
     <p>Two short blasts means it will pass you on your port side (to its starboard). If you turn to port you may have a collision. As the stand-on vessel you must maintain your heading until the boat safely passes you.</p>
 </div>
 

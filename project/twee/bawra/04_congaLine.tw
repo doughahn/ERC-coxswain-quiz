@@ -11,7 +11,7 @@
 <<questionMacro "That means:" $questionOption "Follow the start boat then turn toward the course for another kind of start">>
 
 <div class="incorrectFeedback hidden">
-    <h3>It's like a line dance only worse</h3>
+    <h3>Not quite. It's like a line dance only worse</h3>
     <p>Follow the start boat then turn toward the course for another kind of start. This is often used when the conditions make things difficult.</p>
 </div>
 

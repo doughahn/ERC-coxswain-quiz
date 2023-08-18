@@ -11,7 +11,7 @@
 <<questionMacro "That means:" $questionOption "Row at minimum speed to the line in your lane and then go">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Steerageway means minimum speed to control the boat</h3>
+    <h3>Not quite. Steerageway means minimum speed to control the boat</h3>
     <p>So you row row at minimum speed to the line in your lane and then go.</p>
 </div>
 

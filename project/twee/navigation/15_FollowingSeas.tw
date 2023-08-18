@@ -11,7 +11,7 @@
 <<questionMacro "That means" $questionOption "Waves are approaching from stern to bow">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Following seas come from behind.</h3>
+    <h3>Not quite. Following seas come from behind.</h3>
     <img src="assets/followingSea.webp" alt="following seas">
 </div>
 

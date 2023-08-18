@@ -11,7 +11,7 @@
 <<questionMacro "You must:" $questionOption "Maintain speed and course">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Stand-on means keep on doing what you're doing.</h3>
+    <h3>Not quite. Stand-on means keep on doing what you're doing.</h3>
     <p>If you are the Stand-On vessel, it is your responsibility to acknowledge the intended actions of the give-way vessel. You must also maintain your current course and speed until the give-way vessel passes, or you enter a dangerous situation.</p>
 </div>
 

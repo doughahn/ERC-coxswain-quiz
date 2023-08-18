@@ -11,7 +11,7 @@
 <<questionMacro "What's yor minimum and maximum crew?" $questionOption "Minimum 4 rowers, maximum 10 crew">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not too heavy, not too light</h3>
+    <h3>Not quite. Not too heavy, not too light</h3>
     <p>Minimum 4 rowers, maximum 10 crew</p>
 </div>
 

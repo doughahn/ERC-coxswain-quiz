@@ -11,7 +11,7 @@
 <<questionMacro "When's the best time to go?" $questionOption "Saturday at 6:47">>
 
 <div class="incorrectFeedback hidden">
-    <h3>That southpaw struck you out!</h3>
+    <h3>Not quite. That southpaw struck you out!</h3>
     <p>Saturday is both the latest time and lowest tide, at .5' below the daily lower tide average.</p>
 </div>
 

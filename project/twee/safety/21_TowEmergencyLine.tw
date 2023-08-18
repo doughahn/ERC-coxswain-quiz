@@ -12,7 +12,7 @@
 <<questionMacro "You should" $questionOption "Cut the line">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Cut your losses</h3>
+    <h3>Not quite. Cut your losses</h3>
     <p>Cut the line and get the boat under your own control.</p>
 </div>
 

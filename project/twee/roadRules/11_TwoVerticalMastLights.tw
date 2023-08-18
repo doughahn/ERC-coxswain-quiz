@@ -11,7 +11,7 @@
 <<questionMacro "It is:" $questionOption "A power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Be aware of tows on the open water!</h3>
+    <h3>Not quite. Be aware of tows on the open water!</h3>
     <p>Two of these lights means a power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters.</p>
 </div>
 

@@ -12,7 +12,7 @@
 <<questionMacro "What's something you do NOT need to have a happy time?" $questionOption "A saddle">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You're getting a ride, but you're not saddling up</h3>
+    <h3>Not quite. You're getting a ride, but you're not saddling up</h3>
     <p>To make sure you have a happy tow, you need four things:</P>
     <ol>
         <li>A tow line</li>

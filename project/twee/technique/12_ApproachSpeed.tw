@@ -11,7 +11,7 @@
 <<questionMacro "The boat is moving:" $questionOption "As fast as you're willing to hit it">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Slow is good, but not too slow</h3>
+    <h3>Not quite. Slow is good, but not too slow</h3>
     <p>You approach as fast as you're willing to hit it; normally someone can fend but accidents may happen.</p>
 </div>
 

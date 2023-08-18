@@ -11,7 +11,7 @@
 <<questionMacro "That means:" $questionOption "Starboard brings the boat around">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Turning to port means turning left</h3>
+    <h3>Not quite. Turning to port means turning left</h3>
     <p>That means Starboard has to bring you around.</p>
 </div>
 

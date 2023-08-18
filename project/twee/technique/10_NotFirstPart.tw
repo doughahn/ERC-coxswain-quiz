@@ -11,7 +11,7 @@
 <<questionMacro "You expect that:" $questionOption "All rowers are to execute the command">>
 
 <div class="incorrectFeedback hidden">
-    <h3>The first part of a command is optional</h3>
+    <h3>Not quite. The first part of a command is optional</h3>
     <p>When there is no designator, rowers assume the command applies to everyone. For example when the cox says "trail oars" everyone better do it.</p>
 </div>
 

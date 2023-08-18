@@ -12,7 +12,7 @@
 <<questionMacro "You must" $questionOption "Head for more sheltered water">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Get safe!</h3>
+    <h3>Not quite. Get safe!</h3>
     <p>In very heavy wind/seas, the cox may not be able to control the boat without heading directly into or out of the wind/seas. At this point, head for more sheltered water.</p>
 </div>
 

@@ -14,7 +14,7 @@
 <<questionMacro "What did you forget?:" $questionOption "Bow spring">>
 
 <div class="incorrectFeedback hidden">
-    <h3>The bow spring</h3>
+    <h3>Not quite. The bow spring</h3>
     <p>The boat at South Beach comes in bow first; the bow spring runs fom the bow to the clear on the port side.</p>
 
     <img src="assets/laSirenaDocked.webp" alt="La Sirena berthed and tied up">

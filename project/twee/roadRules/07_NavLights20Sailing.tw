@@ -11,7 +11,7 @@
 <<questionMacro "Its navigation lights are:" $questionOption "White light only">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! </h3>
+    <h3>Not quite. </h3>
     <p>Sailing vessels under 23' require whie light only</p>
 </div>
 

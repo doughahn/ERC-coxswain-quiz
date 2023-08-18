@@ -24,7 +24,7 @@
 <div class="correctFeedback hidden" id="correctFeedback"><h3>That's correct!</h3></div>
 
 <div class="incorrectFeedback hidden">
-    <h3>Don't do donuts!</h3>
+    <h3>Not quite. Don't do donuts!</h3>
     <p>The <strong>course</strong> is the direction you intend to take the boat. A <strong>heading</strong> is the direction in which the boat is pointed at any given time. A <strong>bearing</strong> is the direction of an object, expressed either as a “true” bearing (by a compass or chart) or relative to the heading of the boat.</p>
     <p>The course over the bottom (the track actually followed by the boat) can be very crooked due to wave action, current, wind and/or the cox. To help stay on course, you can line up two stationary objects to use as range markers.</p>
 </div>

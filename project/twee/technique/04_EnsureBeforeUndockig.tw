@@ -11,7 +11,7 @@
 <<questionMacro "What is it?" $questionOption "All rowers are ready">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Everyone should be ready</h3>
+    <h3>Not quite. Everyone should be ready</h3>
     <p>Make sure everyone is alert and ready to go before pushing off.</p>
 </div>
 

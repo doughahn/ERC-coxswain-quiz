@@ -11,7 +11,7 @@
 <<questionMacro "You must:" $questionOption "Alter course or change speed">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Get out of the way!</h3>
+    <h3>Not quite. Get out of the way!</h3>
     <p>The thing on the horizon getting bigger and not changing its bearing is coming at you. Change our course.</p>
 </div>
 

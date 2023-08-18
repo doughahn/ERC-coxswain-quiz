@@ -11,7 +11,7 @@
 <<questionMacro "You must" $questionOption "Adjust your heading more to starboard">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Adjust to starboard</h3>
+    <h3>Not quite. Adjust to starboard</h3>
     <img src="assets/heading-course.webp" alt="heading vs course">
 </div>
 

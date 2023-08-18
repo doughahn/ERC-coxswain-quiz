@@ -11,7 +11,7 @@
 <<questionMacro "It is preferred you:" $questionOption "Pass port to port">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Just like the road…</h3>
+    <h3>Not quite. Just like the road…</h3>
     <p>…vessels approaching each other head-on are always supposed to pass each other port to port—or left to left. However, crowded harbors and times when many boats come together at once make this difficult to follow all the time—stick to the rules as much as possible, but use your best judgment to keep everyone safe.</p>
     <img src="assets/sailboat-stand-on.png" alt="Sailboat head on on">
 </div>

@@ -11,7 +11,7 @@
 <<questionMacro "Is is:" $questionOption "Under tow">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Be aware of tows!</h3>
+    <h3>Not quite. Be aware of tows!</h3>
     <p>When commercial vessels are towing or pushing a barge, they display one or more yellow lights in place of a sternlight as do the vesses under tow. There may be an unlit space of several hundred yards between the lights displayed on the bow and stern of the composite formed by the commercial vessel and its barge(s). You do not want to end up between those vessels.</p>
 </div>
 

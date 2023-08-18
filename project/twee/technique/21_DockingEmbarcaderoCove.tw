@@ -13,7 +13,7 @@
 <<questionMacro "What are the conditions?" $questionOption "Low tide">>
 
 <div class="incorrectFeedback hidden">
-    <h3>It's low tide</h3>
+    <h3>Not quite. It's low tide</h3>
     <p>The water is too lopw to turn the boat with the sweep, so you need to T-bone it then spin it in with a sterrn line. You likely want to bring it only on a regular mean high tide of at least 5'.</p>
 </div>
 

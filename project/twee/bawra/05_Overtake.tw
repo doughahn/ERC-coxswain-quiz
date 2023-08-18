@@ -12,7 +12,7 @@
 <<questionMacro "You must:" $questionOption "Have at least 10 feet space between oars">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Stay safe</h3>
+    <h3>Not quite. Stay safe</h3>
     <p>BAWRA requires at least 10' between oars. Also, clattering might mean a disqualification.</p>
 </div>
 

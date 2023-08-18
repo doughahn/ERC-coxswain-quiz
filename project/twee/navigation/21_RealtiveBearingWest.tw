@@ -12,7 +12,7 @@
 <<questionMacro "It\'s:" $questionOption "Impossible to tell cardinal direction">>
 
 <div class="incorrectFeedback hidden">
-    <h3>It's all relative.</h3>
+    <h3>Not quite. It's all relative.</h3>
     <p> This is a relative bearing, which is taken relative to the bow of the boat. The boat could be pointed in any direction, so there's no way to tell from the information given what direction the daybeacon is.</p>
 </div>
 

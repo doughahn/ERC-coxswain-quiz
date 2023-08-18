@@ -11,7 +11,7 @@
 <<questionMacro "You should:" $questionOption "All of the above">>
 
 <div class="incorrectFeedback hidden">
-    <h3>All of the above!</h3>
+    <h3>Not quite. All of the above!</h3>
     <p>Look at the weather, tides, and create a plan for the course. This may change later on or if conditions change, but it is a good starting point.</p>
 </div>
 

@@ -12,7 +12,7 @@
 <<questionMacro "You must:" $questionOption "Change course to pass astern">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>If you are the Give-Way vessel, you must act as if the "stand-on" vessel has the responsibility to keep going the way it is going. It is your responsibility to signal your intentions to the stand-on vessel, and it is your responsibility to maneuver your boat around the other in a safe manner.</p>
 </div>
 

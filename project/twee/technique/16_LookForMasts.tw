@@ -12,7 +12,7 @@
 <<questionMacro "Look for:" $questionOption "Masts moving at a steady rate">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Look for masts</h3>
+    <h3>Not quite. Look for masts</h3>
     <p>They may not be the only indicator (for example listen, too) but they are one clue about boat traffick. </p>
 </div>
 

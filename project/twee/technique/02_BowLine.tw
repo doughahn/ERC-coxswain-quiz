@@ -11,7 +11,7 @@
 <<questionMacro "It's to:" $questionOption "Keep wind that's blowing across to the dock from pushing your boat away from its secured position">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Bow lines protect against cross winds.</h3>
+    <h3>Not quite. Bow lines protect against cross winds.</h3>
     <p>It keeps wind that's blowing across to the dock from pushing your boat away from its secured position</p>
 </div>
 

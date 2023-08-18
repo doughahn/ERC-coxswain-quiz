@@ -11,7 +11,7 @@
 <<questionMacro "They are:" $questionOption "Four">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Two high; two low</h3>
+    <h3>Not quite. Two high; two low</h3>
     <p>Most coastal areas, with some exceptions, experience two high tides and two low tides every day, because the earth rotates through two tidal "bulges."</p>
 </div>
 

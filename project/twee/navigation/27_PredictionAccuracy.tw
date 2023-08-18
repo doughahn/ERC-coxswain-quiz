@@ -11,7 +11,7 @@
 <<questionMacro "Are" $questionOption "Only astronomical predictions">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Actual condisions trump whatever's in a book, smarty pants.</h3>
+    <h3>Not quite. Actual condisions trump whatever's in a book, smarty pants.</h3>
     <p>The actual tides along a coastline can be influenced by other factors such as weather and wind patterns, an area's topography or river runoff. There are some places where tide predictions won't necessarily be representative of what you're actually going to see on the water.</p>
     <p><a href="https://www.rei.com/learn/expert-advice/how-to-read-a-tide-table.html">REI</a></p>
 </div>

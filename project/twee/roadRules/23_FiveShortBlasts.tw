@@ -11,7 +11,7 @@
 <<questionMacro "This means:" $questionOption "You are in danger">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You're in trouble.</h3>
+    <h3>Not quite. You're in trouble.</h3>
     <p>Commonly five or more short blasts is known as the danger signal and is used when either vessel doubts whether sufficient action is being taken by the other vessel to avoid collision.</p>
 </div>
 

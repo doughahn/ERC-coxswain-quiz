@@ -11,7 +11,7 @@
 <<questionMacro "You must:" $questionOption "Keep clear of vessels on your starboard bow">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Keep clear of vessels on starboard</h3>
+    <h3>Not quite. Keep clear of vessels on starboard</h3>
     <p>The vessel which has the other on its starboard side must keep out of the way. In this case the give way vessel should sound one short blast and alter course to starboard thus leaving the stand on vessel to port.</p>
     <img src="assets/slide-crossing.png" alt="crossing situation">
 </div>

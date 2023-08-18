@@ -12,7 +12,7 @@
 <<questionMacro "What should you do?" $questionOption "Look for a vessel backing out of a slip">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Someone's backing up.</h3>
+    <h3>Not quite. Someone's backing up.</h3>
     <p>Three short blasts warns you that someone is backing up. Watch for that.</p>
 </div>
 

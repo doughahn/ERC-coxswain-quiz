@@ -11,7 +11,7 @@
 <<questionMacro "Which is it?" $questionOption "Feather Blades">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You can feather blades</h3>
+    <h3>Not quite. You can feather blades</h3>
     <p>Feathering blades is spinning the pars so they aren't catching so much wind. Shell rowers do this on their strokes; in the whaleboat we do it at rest on windy days. </p>
 </div>
 

@@ -13,7 +13,7 @@
 <<questionMacro "What should you do next?" $questionOption "Quickly pull the line back">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Don't foul their propellor!</h3>
+    <h3>Not quite. Don't foul their propellor!</h3>
     <p>Pull the line back fast, or it may get tangled in their props and cause all sorts of problems.</p>
 </div>
 

@@ -12,7 +12,7 @@
 <<questionMacro "It intends:" $questionOption "To leave you on its starboard side">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! It's going to pass on its starboard</h3>
+    <h3>Not quite. It's going to pass on its starboard</h3>
     <p>This means it will be on <i>your</i> port. Additionally, the blasts do not mean anything about speed (it may already be going at its passing speed).</p>
 </div>
 

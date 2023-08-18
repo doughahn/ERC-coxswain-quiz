@@ -11,7 +11,7 @@
 <<questionMacro "What am I?" $questionOption "Currents">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Ride the currents.</h3>
+    <h3>Not quite. Ride the currents.</h3>
     <p>Tides are driven by the gravitational force of the moon and sun. Tides are characterized by water moving up and down over a long period of time.</P>
 
     <p>When used in association with water, the term "current" describes the motion of the water and involve the back and forth motion. Oceanic currents are driven by several factors. One is the rise and fall of the tides. Tides create a current in the oceans, near the shore, and in bays and estuaries along the coast. These are called "tidal currents." Tidal currents are the only type of currents that change in a very regular pattern and can be predicted for future dates.</p>

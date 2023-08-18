@@ -1,6 +1,6 @@
 :: Navigation_07 [Navigation]
 
-<h2>You need to take a visual bearing of the Bayview Boatclub.</h2>
+<h2>You need to take a visual bearing of the Mariposa Yacht Club.</h2>
 
 <p class="note"><i>Drag and drop the items into the correct order.</i></p>
 
@@ -11,7 +11,7 @@
 
 
 <div class="incorrectFeedback hidden">
-    <h3>You got lost!</h3>
+    <h3>Not quite. You got lost!</h3>
     <iframe class="youtube-embed" src="https://www.youtube.com/embed/rZd0RfsC-9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 

@@ -10,7 +10,7 @@
 <<questionMacro "When you hear this on the radio, the first thing you should do is:" $questionOption "Remain silent and listen">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! Don't clog the channels.</h3>
+    <h3>Not quite. Don't clog the channels.</h3>
     <p>MAYDAY is a request for immediate assistance. LISTEN! DO NOT TRANSMIT!! Determine if you're in a position to help. If not, maintain radio silence. "MAYDAY" identifies an imminent, life-threatening emergency.</p>
     <p>However, if there is no response, take action. Try raising the distressed vessel over the radio. Gather more information, especially the position. Attempt to raise the Coast Guard while traveling toward the vessel. Sometimes the Coast Guard may not hear the distressed vessels transmissions, but can hear another vessel near the scene; therefore, call the Coast Guard again, just in case. If you raise them, give them the information you have and follow their instructions. If you cannot contact the Coast Guard, attempt to assist the other vessel to the best of your ability without placing yourself in danger.</p>
 </div>

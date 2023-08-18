@@ -14,7 +14,7 @@
 <<questionMacro "What should you do?" $questionOption "Tell them what you are doing">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Give them a tip before you dip.</h3>
+    <h3>Not quite. Give them a tip before you dip.</h3>
     <p>They're probably scared. Tell them that you're about to do. "We're going to push you down then pull you out of the water."</p>
 
 </div>

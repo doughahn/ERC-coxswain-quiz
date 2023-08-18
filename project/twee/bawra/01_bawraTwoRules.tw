@@ -9,7 +9,7 @@
 ]>>
 <<questionMacro "They are:" $questionOption "Safety and fairness">>
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>Safety and fairness, in that order.</p>
 </div>
 <div class="nextButton hidden">

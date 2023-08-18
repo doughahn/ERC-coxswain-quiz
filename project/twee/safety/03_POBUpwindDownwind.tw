@@ -6,7 +6,7 @@
 <<questionMacro "You should approach to their" $questionOption "Downwind Side">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You Drifted Away!</h3>
+    <h3>Not quite. You Drifted Away!</h3>
     <p>If contact isn't made by oar or line, try to approach the POB (person overboard) from downwind/down current. This will help keep the approach under control.</p> 
     
     <p>As the boat nears the POB, steer to the upwind side of the POB so the boat does not drift away. Hold water on the side of the POB.  The opposite side can take easy strokes one at a time to turn the boat to the upwind side. If you are unable to safely approach the POB, immediately contact the Coast Guard for assistance, providing as much detailed information as possible. Stand by; and maintain at least visual contact with the POB until the Coast Guard arrives.</p>

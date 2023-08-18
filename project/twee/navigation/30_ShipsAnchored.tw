@@ -11,7 +11,7 @@
 <<questionMacro "How can you tell which way the tide is flowing?" $questionOption "Look at the container ships, if their bows are pointed out to sea you're on a flood">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>Big container ships anchor from the bow. They therefore tend to point against the current. Note that wind is also a big factor here. If the thips are are pointed multiple ways you are likely at slack.</p>
     <img src="assets/cargo-ship-backup-800x450.jpg" alt="Cargo ships anchored on a flood">
 </div>

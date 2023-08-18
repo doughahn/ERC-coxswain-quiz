@@ -12,7 +12,7 @@
 <<questionMacro "Is is:" $questionOption "30\º West of Due South">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect! 30º west of Due South</h3>
+    <h3>Not quite. 30º west of Due South</h3>
     <p>The quadrant method describes a bearing in terms of the number of degrees from N, S, E or W. For example, N 550 E indicates a bearing of 55 degrees east of Due North. S 300 W is 30 degrees west of Due South.  The bearing is always described in terms of North or South first, then the degrees away toward East or West.</p>
     <img src="assets/quadrantMethod.webp" alt="Quadrant Method">
 </div>

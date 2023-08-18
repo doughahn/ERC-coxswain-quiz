@@ -12,7 +12,7 @@
 <<questionMacro "Which is it?" $questionOption "Command in a loud clear voice">>
 
 <div class="incorrectFeedback hidden">
-    <h3>You must be heard</h3>
+    <h3>Not quite. You must be heard</h3>
     <p>Many of the options are good, but only one is actually required: you must be undesrstood.</p>
 </div>
 

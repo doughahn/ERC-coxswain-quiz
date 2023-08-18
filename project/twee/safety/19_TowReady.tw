@@ -11,7 +11,7 @@
 <<questionMacro "What's the first thing you should do?" $questionOption "Brief the crew and assign duties">>
 
 <div class="incorrectFeedback hidden">
-    <h3>People need to know what to do</h3>
+    <h3>Not quite. People need to know what to do</h3>
     <p>Brief the crew and assign duties before taking action.</p>
 </div>
 

@@ -12,7 +12,7 @@
 <<questionMacro "That means" $questionOption "Row at a slight angle">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>Row at a slight angle in following seas, keeping the sweep buried and being prepared to straighten out to prevent a large wave from pushing you broadside.</p>
 </div>
 

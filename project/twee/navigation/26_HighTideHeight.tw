@@ -11,7 +11,7 @@
 <<questionMacro "Select the feet:" $questionOption "8.2">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Incorrect!</h3>
+    <h3>Not quite. Incorrect!</h3>
     <p>It's 8.2, look at the feet after the time. The feet are measured from the average height of the daily lowest tide observed over a 19-year period.</p>
 </div>
 
