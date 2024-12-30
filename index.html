@@ -188,9 +188,8 @@ Macro.add('setupQuestion', {
         let draggableItems = this.args[1].split(',');
         let correctOrder = this.args[2].split(',');
 
-        // Create a container for the entire drag-drop area
         let containerHTML = '<div class="dragdrop-container">';
-
+        
         let droppableHTML = '<div id="droppables">';
         for(let i = 1; i <= droppableCount; i++) {
             droppableHTML += `<div class="droppable empty" data-label="${i}" id="slot${i}"></div>`;
@@ -220,26 +219,15 @@ Macro.add('setupQuestion', {
 
 function initializeDragAndDrop() {
     let selectedElement = null;
-    let originalPosition = null;
-    let touchOffset = { x: 0, y: 0 };
-    let scrollOffset = { x: 0, y: 0 };
-
-    function getElementPosition(element) {
-        const rect = element.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        return {
-            x: rect.left + scrollLeft,
-            y: rect.top + scrollTop
-        };
-    }
-
-    function getDropTarget(x, y) {
-        // Get the element at position, accounting for scroll
-        const element = document.elementFromPoint(
-            x - window.pageXOffset,
-            y - window.pageYOffset
-        );
+    let initialTouch = { x: 0, y: 0 };
+    let initialElementPos = { x: 0, y: 0 };
+    
+    function getDropTarget(clientX, clientY) {
+        // Get element at current pointer position
+        const element = document.elementFromPoint(clientX, clientY);
+        if (!element) return null;
+        
+        // Return the closest droppable parent
         return $(element).closest('.droppable');
     }
 
@@ -268,66 +256,64 @@ function initializeDragAndDrop() {
         updateSubmitButton();
     }
 
-    $(document).on('mousedown touchstart', '.draggable', function(e) {
-        const touch = e.type === 'touchstart' ? e.originalEvent.touches[0] : e;
-        selectedElement = $(this);
-        
-        // Get initial scroll position
-        scrollOffset.x = window.pageXOffset;
-        scrollOffset.y = window.pageYOffset;
-        
-        // Calculate offset within the element
-        const rect = this.getBoundingClientRect();
-        touchOffset.x = touch.clientX - rect.left;
-        touchOffset.y = touch.clientY - rect.top;
-        
-        // Store original position for snap-back if needed
-        originalPosition = {
-            parent: selectedElement.parent(),
-            index: selectedElement.index()
-        };
-        
-        selectedElement.addClass('dragging')
-            .css({
-                position: 'absolute',
-                zIndex: 1000,
-                width: $(this).width() + 'px'
-            });
-            
-        moveElement(touch.clientX, touch.clientY);
-    });
-
-    function moveElement(x, y) {
+    function moveElement(clientX, clientY) {
         if (!selectedElement) return;
-        
-        const scrollDiff = {
-            x: window.pageXOffset - scrollOffset.x,
-            y: window.pageYOffset - scrollOffset.y
-        };
-        
+
+        const deltaX = clientX - initialTouch.x;
+        const deltaY = clientY - initialTouch.y;
+
+        const newX = initialElementPos.x + deltaX;
+        const newY = initialElementPos.y + deltaY;
+
         selectedElement.css({
-            left: (x - touchOffset.x + scrollDiff.x) + 'px',
-            top: (y - touchOffset.y + scrollDiff.y) + 'px'
+            position: 'fixed',
+            left: clientX - (selectedElement.width() / 2) + 'px',
+            top: clientY - (selectedElement.height() / 2) + 'px'
         });
     }
 
-    $(document).on('mousemove touchmove', function(e) {
+    function handleStart(e) {
+        const touch = e.type.includes('touch') ? e.originalEvent.touches[0] : e;
+        selectedElement = $(this);
+
+        // Store initial touch position
+        initialTouch.x = touch.clientX;
+        initialTouch.y = touch.clientY;
+
+        // Store initial element position
+        const rect = this.getBoundingClientRect();
+        initialElementPos.x = rect.left;
+        initialElementPos.y = rect.top;
+
+        selectedElement
+            .addClass('dragging')
+            .css({
+                position: 'fixed',
+                zIndex: 1000,
+                width: $(this).width() + 'px',
+                left: touch.clientX - (selectedElement.width() / 2) + 'px',
+                top: touch.clientY - (selectedElement.height() / 2) + 'px'
+            });
+    }
+
+    function handleMove(e) {
         if (!selectedElement) return;
-        
-        const touch = e.type === 'touchmove' ? e.originalEvent.touches[0] : e;
+        e.preventDefault();
+
+        const touch = e.type.includes('touch') ? e.originalEvent.touches[0] : e;
         moveElement(touch.clientX, touch.clientY);
-        
+
         const dropTarget = getDropTarget(touch.clientX, touch.clientY);
         $('.droppable').removeClass('drag-over');
-        if (dropTarget.length) {
+        if (dropTarget && dropTarget.length) {
             dropTarget.addClass('drag-over');
         }
-    });
+    }
 
-    $(document).on('mouseup touchend', function(e) {
+    function handleEnd(e) {
         if (!selectedElement) return;
-        
-        const touch = e.type === 'touchend' ? e.originalEvent.changedTouches[0] : e;
+
+        const touch = e.type.includes('touch') ? e.originalEvent.changedTouches[0] : e;
         const dropTarget = getDropTarget(touch.clientX, touch.clientY);
 
         selectedElement.removeClass('dragging').css({
@@ -338,20 +324,16 @@ function initializeDragAndDrop() {
             width: ''
         });
 
-        if (dropTarget.length) {
+        if (dropTarget && dropTarget.length) {
             swapElements(selectedElement, dropTarget);
         } else {
-            // Snap back to original position if no valid drop target
-            if (originalPosition.parent.hasClass('droppable')) {
-                selectedElement.detach().appendTo(originalPosition.parent);
-            } else {
-                selectedElement.detach().appendTo('#draggables');
-            }
+            // If not dropped on a valid target, return to original container
+            selectedElement.detach().appendTo('#draggables');
         }
 
         $('.droppable').removeClass('drag-over');
         selectedElement = null;
-    });
+    }
 
     function updateSubmitButton() {
         const allSlotsFilled = $('.droppable').toArray().every(slot => 
@@ -359,6 +341,18 @@ function initializeDragAndDrop() {
         );
         $('#submitOrder').prop('disabled', !allSlotsFilled);
     }
+
+    // Remove any existing event listeners
+    $('.draggable').off();
+
+    // Add touch and mouse event listeners
+    $('.draggable')
+        .on('mousedown touchstart', handleStart)
+        .on('click', function(e) { e.preventDefault(); });
+
+    $(document)
+        .on('mousemove touchmove', handleMove)
+        .on('mouseup touchend', handleEnd);
 
     $('#submitOrder').on('click', function() {
         const correctOrder = State.variables.correctOrder;
@@ -404,6 +398,7 @@ $(document.head).append(`
         .dragging {
             opacity: 0.8;
             pointer-events: none;
+            transform-origin: center center;
         }
 
         .droppable.empty {
@@ -427,7 +422,6 @@ $(document.head).append(`
         }
     </style>
 `);
-
 $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");</script><tw-passagedata pid="1" name="StoryBanner" tags="" position="100,100" size="100,100">/* &lt;&lt;if $score is 25&gt;&gt;
 &lt;img src=&quot;assets/ERC_whale.svg&quot;&gt;
 
