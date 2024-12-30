@@ -74,27 +74,22 @@ window.deductPoints = function(pointsToDeduct) {
     }
 }
 
-:: StoryInit
-<<set $selectedSafety to []>>
-
-:: StoryScript [script]
-// Load Sortable.js
+// First, ensure Sortable.js is loaded
 $.getScript('https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js');
 
-// Setup Question Macro
 Macro.add('setupQuestion', {
     handler: function() {
-        const droppableCount = parseInt(this.args[0]);
-        const draggableItems = this.args[1].split(',');
-        const correctOrder = this.args[2].split(',');
+        let droppableCount = parseInt(this.args[0], 10);
+        let draggableItems = this.args[1].split(',');
+        let correctOrder = this.args[2].split(',');
 
-        let droppableHTML = '<div id="droppables" class="sortable-list">';
+        let droppableHTML = '<div id="droppables">';
         for(let i = 1; i <= droppableCount; i++) {
             droppableHTML += `<div class="droppable empty" data-label="${i}" id="slot${i}"></div>`;
         }
         droppableHTML += '</div>';
         
-        let draggableHTML = '<div id="draggables" class="sortable-list">';
+        let draggableHTML = '<div id="draggables">';
         for(let i = 0; i < draggableItems.length; i++) {
             draggableHTML += `<div class="draggable" id="item${i+1}"><p>${draggableItems[i].trim()}</p></div>`;
         }
@@ -106,13 +101,10 @@ Macro.add('setupQuestion', {
             <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
         `;
 
-        // Store correct order in state
         State.variables.correctOrder = correctOrder;
+        $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
         
-        // Append HTML
-        $(this.output).wiki(droppableHTML + draggableHTML + controlsHTML);
-        
-        // Initialize Sortable after a short delay to ensure elements are rendered
+        // Initialize after a short delay to ensure elements are rendered
         setTimeout(() => {
             if (typeof Sortable !== 'undefined') {
                 initializeSortable();
@@ -123,45 +115,57 @@ Macro.add('setupQuestion', {
     }
 });
 
-// Initialize Sortable instances
 function initializeSortable() {
-    // Setup draggables container
+    const sortableOptions = {
+        group: {
+            name: 'shared',
+            pull: true,
+            put: true
+        },
+        animation: 150,
+        forceFallback: true,  // Force fallback for better mobile support
+        fallbackOnBody: true,
+        dragClass: 'dragging',
+        onStart: function(evt) {
+            const item = evt.item;
+            $(item).addClass('dragging');
+        },
+        onEnd: function(evt) {
+            const item = evt.item;
+            $(item).removeClass('dragging');
+            updateEmptyStates();
+            updateSubmitButton();
+        },
+        // Handle movement manually to ensure proper node handling
+        onMove: function(evt) {
+            return evt.related.className.includes('droppable') || 
+                   evt.related.className.includes('draggable') ||
+                   evt.related.id === 'draggables';
+        }
+    };
+
+    // Initialize source container
     new Sortable(document.getElementById('draggables'), {
-        group: 'shared',
-        animation: 150,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        onStart: function(evt) {
-            $(evt.item).addClass('dragging');
-        },
-        onEnd: function(evt) {
-            $(evt.item).removeClass('dragging');
-            updateEmptyStates();
-            updateSubmitButton();
-        }
+        ...sortableOptions,
+        removeCloneOnHide: true,
+        sort: false
     });
 
-    // Setup droppables container
-    new Sortable(document.getElementById('droppables'), {
-        group: 'shared',
-        animation: 150,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        onStart: function(evt) {
-            $(evt.item).addClass('dragging');
-        },
-        onEnd: function(evt) {
-            $(evt.item).removeClass('dragging');
-            updateEmptyStates();
-            updateSubmitButton();
-        }
+    // Initialize drop zones
+    document.querySelectorAll('.droppable').forEach(dropzone => {
+        new Sortable(dropzone, {
+            ...sortableOptions,
+            sort: false,
+            removeCloneOnHide: true,
+            filter: '.occupied'
+        });
     });
 
-    // Add button handlers
-    $('#submitOrder').on('click', function() {
+    // Button handlers
+    $('#submitOrder').off('click').on('click', function() {
         const correctOrder = State.variables.correctOrder;
-        const currentOrder = $('.droppable .draggable').map(function() {
-            return this.id;
+        const currentOrder = $('.droppable').map(function() {
+            return $(this).children('.draggable:first').attr('id');
         }).get();
 
         const isCorrect = correctOrder.every((id, index) => id === currentOrder[index]);
@@ -177,15 +181,18 @@ function initializeSortable() {
         $(this).addClass('hidden');
     });
 
-    $('#resetOrder').on('click', function() {
-        $('.draggable').appendTo('#draggables');
+    $('#resetOrder').off('click').on('click', function() {
+        // Safely move elements back
+        $('.draggable').each(function() {
+            const el = $(this).detach();
+            $('#draggables').append(el);
+        });
         updateEmptyStates();
         $('.correctFeedback, .incorrectFeedback, .nextButton').addClass('hidden');
         $('#submitOrder').prop('disabled', true).removeClass('hidden');
     });
 }
 
-// Helper functions
 function updateEmptyStates() {
     $('.droppable').each(function() {
         $(this).toggleClass('empty', !$(this).children('.draggable').length);
@@ -199,44 +206,46 @@ function updateSubmitButton() {
     $('#submitOrder').prop('disabled', !allSlotsFilled);
 }
 
-// Add styles
+// Add necessary styles
 $(document.head).append(`
     <style>
-        .sortable-list {
-            min-height: 30px;
-        }
-
-        .sortable-ghost {
-            opacity: 0.4;
-        }
-
-        .sortable-drag {
-            opacity: 0.8;
+        .dragging {
+            cursor: move;
+            opacity: 0.5 !important;
+            background: #f0f0f0;
         }
 
         .draggable {
             touch-action: none;
             -webkit-touch-callout: none;
-            cursor: move;
-            cursor: -webkit-grab;
-            margin: 5px 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             user-select: none;
+            cursor: move;
         }
 
-        .draggable:active {
-            cursor: -webkit-grabbing;
-            cursor: grabbing;
+        .sortable-fallback {
+            opacity: 0.8;
+            pointer-events: none;
         }
 
-        .droppable {
-            min-height: 44px;
+        .sortable-ghost {
+            opacity: 0.4;
+            background: #f0f0f0;
         }
 
         @media (hover: none) {
+            .droppable {
+                min-height: 44px;
+                margin: 5px 0;
+            }
+            
             .draggable {
-                padding: 12px;
+                margin: 5px 0;
             }
         }
     </style>
 `);
+
 $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");
