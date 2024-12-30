@@ -3,10 +3,10 @@
 <h2>Rogue wave! The boat capsizes!</h2>
 
 <<set $questionOption = ["Distribute PFDs", "Stay with the boat", "Notify the Coast Guard", "Administer first aid"]>>
-<<questionMacro "What should you NOT do right away?" $questionOption "Administer first aid">>
+<<questionMacro "What should you do last?" $questionOption "Administer first aid">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Get your priorities in order!</h3>
+    <h3>Get your priorities in order!</h3>
     <p>In the unlikely event the boat is swamped or capsized:</p>
     <ol>
         <li>Distribute PFDs</li>

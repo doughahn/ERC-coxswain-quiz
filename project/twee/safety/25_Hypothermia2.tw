@@ -1,0 +1,29 @@
+:: Safety_25 [Safety]
+
+<h2>A rower has lost muscle control, is drowsy, and incoherent.</h2>
+
+<<set $questionOption = [
+    "Exhaustion", 
+    "Stroke",
+    "Heart attack",
+    "Being drunk", 
+    "Hypothermia"
+]>>
+<<questionMacro "What should you treat them for?" $questionOption "Hypothermia">>
+
+<div class="incorrectFeedback hidden">
+    <h3>This is stage 2 hypothermia</h3>
+    <p>Signs of medium hypothermia are loss of certain muscle control, drowsiness, incoherence, stupor and exhaustion. Signs of severe hypothermia are collapse, unconsciousness, respiratory distress, and/or cardiac arrest probably leading to death.</P>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

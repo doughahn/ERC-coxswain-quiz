@@ -8,7 +8,7 @@
 <<setupQuestion "7" "Reach or Throw or Row,Alarm man overboard!,Stop,Administer First aid,Spot,Recover Amidships,Mark" "item2,item3,item5,item7,item1,item6,item4">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Oh no! You lost your person overboard!</h3>
+    <h3>Oh no! You lost your person overboard!</h3>
     <p>Here's the correct order… may the next sea dog be less salty:</p>
     <ol>
         <li><strong>ALARM:</strong> Sound the alarm so everyone understands what is happening. and gets into assigned positions (you covered that beforehand, right?)</li>

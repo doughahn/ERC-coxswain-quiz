@@ -1,0 +1,27 @@
+:: bawra_11 [bawra]
+
+<h2>You are getting disqualified.</h2>
+
+<<set $questionOption = [
+    "The lead stroke",
+    "The bowhook",
+    "The RO",
+    "The CRO"
+]>>
+<<questionMacro "Who did not weat their PFD?" $questionOption "The bowhook">>
+
+<div class="incorrectFeedback hidden">
+    <h3>In addition to the coxswain, the bowhook must wear a PFD.</h3>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

@@ -1,0 +1,29 @@
+:: Navigation_11 [Navigation]
+
+<h2>It's a beam sea!</h2>
+
+<<set $questionOption = [
+    "Running directly against the course of the vessel",
+    "Running stern to head against the vessel",
+    "The boat will be harder to capsize",
+    "Waves are at a right angle to the course",
+    "Waves are rolling along the beam of the vessel"
+]>>
+<<questionMacro "Waves are" $questionOption "Waves are at a right angle to the course">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. Beam seas run at a 90º angle to the vessel.</h3>
+    <img src="assets/beamSeas.webp" alt="beam seas">
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

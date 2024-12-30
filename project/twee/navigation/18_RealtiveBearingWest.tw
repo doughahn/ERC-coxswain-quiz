@@ -1,0 +1,29 @@
+:: Navigation_18 [Navigation]
+
+<h2>The daybeacon is 90º off the starboard bow.</h2>
+
+<<set $questionOption = [
+    "Due East",
+    "Due West",
+    "Due South",
+    "Due North",
+    "Impossible to tell cardinal direction"
+]>>
+<<questionMacro "It\'s:" $questionOption "Impossible to tell cardinal direction">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. It's all relative.</h3>
+    <p> This is a relative bearing, which is taken relative to the bow of the boat. The boat could be pointed in any direction, so there's no way to tell from the information given what direction the daybeacon is.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

@@ -6,7 +6,6 @@
     "Hold course so the other vessel knows what you're doing",
     "Give way and let the other boat pass",
     "Change course to pass astern",
-    "Change course to avoid collision", 
     "Maintain speed and course"
 ]>>
 <<questionMacro "You must:" $questionOption "Change course to pass astern">>

@@ -1,6 +1,6 @@
 :: Technique_17 [Technique]
 
-<h2>The row from South Beach will take place on an ebb.</h2>
+<h2>The row from South Beach (South of the Bay Bridge) will take place on an ebb.</h2>
 
 <<set $questionOption = [
     "Out to the bridge and then back",
@@ -11,7 +11,7 @@
 <<questionMacro "Plan for today's course to go:" $questionOption "Away from the bridge and back">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Make it easy on the way back.</h3>
+    <h3>Make it easy on the way back.</h3>
     <p>Water on an ebb is flowing out into the ocean, meaning currents along the coast will generally be moving that direction. Head against them in the first half of your rtow and then with them on the way back. You always want to make sure you can return. </p>
 </div>
 

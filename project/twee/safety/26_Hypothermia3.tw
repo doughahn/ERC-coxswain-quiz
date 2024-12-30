@@ -1,0 +1,28 @@
+:: Safety_26 [Safety]
+
+<h2>Someone has hypothermia. </h2>
+
+<<set $questionOption = [
+    "core", 
+    "limbs",
+    "armpits",
+    "groin area"
+]>>
+<<questionMacro "Donnot warm their:" $questionOption "limbs">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Keep the core warm, not the extremeties</h3>
+    <p>Consider the need for active warming of their core by person to person contact and/or hand warmers under the armpits and groin area. Do not warm the extremities. Consider that there may be other injuries.</P>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

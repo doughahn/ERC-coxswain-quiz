@@ -1,18 +1,22 @@
 :: Road_06 [RoadRules]
 
-<h2>You see a 20' power-driven vessel.</h2>
+<h2>You see two vertical lights above a red and green light. This is:</h2>
+
+<img src="assets/toing-less-than-200.webp" alt="Lights">
 
 <<set $questionOption = [
-    "White mast light, red and green sidelights, and stern light",
-    "White mast light, white sidelights, and white stern light", 
-    "Mast light, red and green sidelights and stern light.", 
-    "Red and green sidelights and 360º stern light"
+    "A vessel towing something, coming directly at you",
+    "A vessel engaged in pair trawling", 
+    "A vessel engaged in fishing off the bow.", 
+    "A sailing vessel about to get under power"
 ]>>
-<<questionMacro "Its navigation lights are:" $questionOption "Red and green sidelights and 360º stern light">>
+<<questionMacro "Its navigation lights are:" $questionOption "A vessel towing something, coming directly at you">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. </h3>
-    <p> Power-driven vessels less than 39 feet may display a 360º all-around stern light and combo red and green sidelights.</p>
+    <h3>Tow coming at you</h3>
+    <p>Vessels engaged in towing and whose purpose is to be able to tow will display the lights for a power driven vessel. In addition, they will display a second, white, forward facing masthead light and a yellow stern light above the usual white stern light (not pictured).</p>
+
+    <img src="assets/towing-revealed.webp" alt="Lights">
 </div>
 
 <div class="nextButton hidden">

@@ -1,0 +1,28 @@
+:: bawra_16 [bawra]
+
+<h2>When preparing for a race</h2>
+
+<<set $questionOption = [
+    "Review the BAWRA rules of racing",
+    "Practice the course with their team",
+    "Attend the cox meeting",
+    "Come up with a race plan"
+]>>
+<<questionMacro "What must the coxswain do?" $questionOption "Attend the cox meeting">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Attend the cox meeting</h3>
+    <p>Failure to attend can mean you are not allowed to cox the race, and if you do so your team will be disqualified.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

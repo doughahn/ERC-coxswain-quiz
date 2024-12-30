@@ -1,0 +1,28 @@
+:: bawra_13 [bawra]
+
+<h2>Who can lodge a protest?</h2>
+
+<<set $questionOption = [
+    "The CRO",
+    "The bowhook",
+    "The team captain",
+    "The cox"
+]>>
+<<questionMacro "There are:" $questionOption "The cox">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Only the cox can lodge a protest</h3>
+    <p>Protests must be lodged immediately by a team’s coxswain with a Race Official by VHF  radio at the end of the race, and in-person by the cox after their whaleboat has safely  docked. Protests lodged on shore by coaches will not be considered.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

@@ -11,7 +11,7 @@
 <<questionMacro "It may feature:" $questionOption "All of the above">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. A daymarker is just a fancy-pants term for somethingn visible in the daytime.</h3>
+    <h3>A daymarker is a marker that's visible in the daytime.</h3>
     <p>An unlighted fixed structure with a pointer, sign or "daymarker." It's a navigational aid for sailors and pilots, distinctively marked to maximize its visibility in daylight.</p>
 </div>
 

@@ -5,14 +5,14 @@
 <<set $questionOption = [
     "Toward the cox",
     "Away from the cox",
-    "Trail in the wayer",
+    "Trail in the water",
     "Either way along the gunwales"
 ]>>
 <<questionMacro "The blades go:" $questionOption "Toward the cox">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. You gotta get skinny right!</h3>
-    <p>This command is given when passing an obstruction or another boat. The oars are dragged alongside of the boat with the tips of the blades opposite the motion of the boat (at your cox).</p>
+    <h3>You gotta get skinny right!</h3>
+    <p>This command is given when passing an obstruction or another boat. The oars are dragged alongside of the boat with the tips of the blades opposite the motion of the boat (at the cox).</p>
 </div>
 
 <div class="nextButton hidden">

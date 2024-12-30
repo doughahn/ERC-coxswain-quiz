@@ -11,8 +11,8 @@
 <<questionMacro "That means:" $questionOption "Start from a stationary line in your lane and then go">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Easy ain't always Easy</h3>
-    <p>You start from a stationary line in your lane and then go.</p>
+    <h3>Easy ain't always easy</h3>
+    <p>In an Easy Start, start from a stationary line in your lane and then go.</p>
 </div>
 
 <div class="nextButton hidden">

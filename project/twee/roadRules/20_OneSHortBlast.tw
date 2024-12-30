@@ -4,16 +4,16 @@
 
 <<set $questionOption = [
     "To leave you on your port side",
-    "To leave you on its port side",
+    "To leave you on your starboard side",
     "To leave you on either side",
-    "To speed up and pass you on your starboard side",
-    "To speed up and pass you on your port side",
+    "To leave you on your stern",
 ]>>
-<<questionMacro "It intends:" $questionOption "To leave you on its port side">>
+<<questionMacro "It intends:" $questionOption "To leave you on your starboard side">>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. It's going to pass on its port</h3>
     <p>This means <i>your</i> starboard.</p>
+    <img src="assets/overtaking.webp" alt="overtaking">
 </div>
 
 <div class="nextButton hidden">

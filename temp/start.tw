@@ -1,0 +1,270 @@
+
+
+:: StoryJavascript [script]
+
+Macro.add('questionMacro', {
+    handler: function () {
+        if (this.args.length < 3) {
+            return this.error('Incorrect number of arguments. Expected at least 3: question, options, correct answer.');
+        }
+        
+        var question = this.args[0];
+        var options = this.args[1].map(opt => opt.trim());
+        var correctAnswer = this.args[2].trim();
+
+        // Escape single quotes in the correct answer
+        var escapedCorrectAnswer = correctAnswer.replace(/'/g, "\\'");
+
+        // Generate the question
+        var output = '<fieldset><legend>' + question + '</legend>';
+        
+        // Generate the options with onchange event to automatically check answer
+        for (let i = 0; i < options.length; i++) {
+            output += `<label><input type="radio" name="questionOption" value="${options[i]}" onchange="window.checkAnswer('${escapedCorrectAnswer}')"><span class="radio-custom"></span> <span>${options[i]}</span></label>`;
+        }
+
+        output += '</fieldset>';
+        
+        // Correct feedback div
+        output += '<div class="correctFeedback hidden"><h3>Well done! Correct!</h3></div>';
+
+        // Render the output using SugarCube's wiki method
+        $(this.output).wiki(output);
+    }
+});
+
+
+
+// JS Logic
+window.checkAnswer = function(correctAnswer) {
+    console.log("correctAnswer:", correctAnswer);  // Log the value
+    if (typeof correctAnswer !== 'string') {
+        console.error("The correct answer is not a string.");
+        return;
+    }
+    
+    var selectedElement = jQuery('input[name="questionOption"]:checked');
+    
+    if (!selectedElement.length) {
+        console.error("No radio button was selected.");
+        return;
+    }
+
+    var selectedValue = selectedElement.val();  // <-- Removed .trim() here
+
+    jQuery('input[name="questionOption"]').prop('disabled', true);
+    
+    if (selectedValue !== correctAnswer) {  // <-- No need to trim correctAnswer here, since it was already trimmed in the macro.
+        jQuery('.incorrectFeedback').removeClass('hidden');
+        window.deductPoints(1);  // Deducts 1 point
+    } else {
+        jQuery('.correctFeedback').removeClass('hidden');
+    }
+
+    jQuery('.nextButton').removeClass('hidden');
+}
+
+
+
+
+window.deductPoints = function(pointsToDeduct) {
+    State.variables.score -= pointsToDeduct;
+
+    // Ensure score doesn't go below 0
+    if (State.variables.score < 0) {
+        State.variables.score = 0;
+    }
+}
+
+Macro.add('setupQuestion', {
+    handler : function() {
+        // Extract and parse arguments
+        let droppableCount = parseInt(this.args[0], 10);
+        let draggableItems = this.args[1].split(','); // Split string into an array
+        let correctOrder = this.args[2].split(','); // Split string into an array
+
+        // Create droppable slots
+        let droppableHTML = '<div id="droppables">';
+        for(let i = 1; i <= droppableCount; i++) {
+            droppableHTML += `<div class="droppable" data-label="${i}" id="slot${i}"></div>`;
+        }
+        droppableHTML += '</div><br>'; // Close the div and add a break
+        
+        // Create draggable items
+        let draggableHTML = '<div id="draggables">';
+        for(let i = 0; i < draggableItems.length; i++) {
+            draggableHTML += `<div class="draggable" id="item${i+1}" draggable="true"><p>${draggableItems[i]}</p></div>`;
+        }
+        draggableHTML += '</div><br>'; // Close the div and add a break
+
+        // Create submit and reset buttons and feedback div for correct answer
+        let buttonAndFeedbackHTML = `
+            <button id="submitOrder" disabled>Submit</button>
+            
+            <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
+        `;
+
+        // Save correct order to state variable
+        State.variables.correctOrder = correctOrder;
+
+        // Append to the output
+        $(this.output).append(droppableHTML + draggableHTML + buttonAndFeedbackHTML);
+    }
+});
+
+$(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");
+
+:: StoryBanner
+
+
+/* <<if $score is 25>>
+<img src="assets/ERC_whale.svg">
+
+<<elseif $score gt 23 and $score lt 25>>
+
+<img src="assets/ERC_whale_scared.svg">
+
+<<elseif $score gt 22 and $score lt 24>>
+
+<img src="assets/ERC_whale_more_scared.svg">
+
+<<elseif $score gt 21 and $score lt 23>>
+
+<img src="assets/ERC_whale_more_more_scared.svg">
+
+<<elseif $score gt 20 and $score lt 22>>
+<img src="assets/ERC_whale_dead.svg">
+
+<</if>> */
+
+
+<<if $score is 25>>
+<img src="assets/ERC_whale.svg">
+
+<<elseif $score gt 22 and $score lt 25>>
+<img src="assets/ERC_whale_scared.svg">
+
+<<elseif $score gt 19 and $score lt 23>>
+<img src="assets/ERC_whale_more_scared.svg">
+
+<<elseif $score gt 14 and $score lt 20>>
+<img src="assets/ERC_whale_more_more_scared.svg">
+
+<<elseif $score lt 15>>
+<img src="assets/ERC_whale_dead.svg">
+<</if>>
+
+:: StoryCaption
+
+/* Score: <<print $score>>/25 */
+
+<h6 class="score">Your Score</h6>
+<p class="score"><span class="fractop"><<print $score>></span><span class="fracbar">&frasl;</span><span class="fracbot">25</span></p>
+
+    
+
+:: StoryInit
+
+<<set $score = 25>>
+
+<<set $safetyQuestions = Story.lookup("tags", "Safety")>>
+<<set $selectedSafety to $safetyQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $bawraQuestions = Story.lookup("tags", "bawra")>>
+<<set $selectedBawra to $bawraQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $navigationQuestions = Story.lookup("tags", "Navigation")>>
+<<set $selectedNavigation to $navigationQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $roadRulesQuestions = Story.lookup("tags", "RoadRules")>>
+<<set $selectedRoadRules to $roadRulesQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+<<set $techniqueQuestions = Story.lookup("tags", "Technique")>>
+<<set $selectedTechnique to $techniqueQuestions.shuffle().slice(0,5).map(p => p.title)>>
+
+:: StoryTitle
+ERC Coxwains
+
+:: Start
+
+<h2>Put your knowledge to the test!</h2>
+
+<p>You'll be tested on 25 random questions from 5 domains:</p>
+
+<ol class="toc">
+    <li>Safety</li>
+    <li>Navigation</li>
+    <li>Road Rules</li>
+    <li>BAWRA rules</li>
+    <li>Technique</li>
+</ol>
+
+<p>Click the box below to begin.</p>
+
+<div class="sectionLink" id="safetyQuiz">
+<<link "Safety">>
+    <<goto $selectedSafety.pop()>>
+<</link>> 
+</div>
+
+<p><i><strong>Just Remember:</strong> None of this replaces actually practicing in the boat, with a crew.</i></p> 
+
+:: conclusion
+
+<<if $score is 25>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale.svg">
+<h3>Kick ass coxin'!</h3>
+
+<<elseif $score gt 22 and $score lt 25>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_scared.svg">
+<h3>Ain't half bad.</h3>
+
+<<elseif $score gt 19 and $score lt 23>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_more_scared.svg">
+<h3>Is that nervous laughter you hear?</h3>
+
+<<elseif $score gt 14 and $score lt 20>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_more_more_scared.svg">
+<h3>The crew's left you at the dock!</h3>
+
+<<elseif $score lt 15>>
+<h2>Score: <<print $score>>/25</h2>
+<img src="assets/ERC_whale_dead.svg">
+<h3>Abandon ship!</h3>
+<</if>>
+
+
+
+:: bawra_01 [bawra]
+
+<h2>BAWRA has two important rules.</h2>
+<<set $questionOption = [
+    "Safety and equality",
+    "Safety and hard work",
+    "Safety and community",
+    "Safety and fairness"
+]>>
+<<questionMacro "They are:" $questionOption "Safety and fairness">>
+<div class="incorrectFeedback hidden">
+    <h3>Not quite!</h3>
+    <p>Safety and fairness, in that order.</p>
+</div>
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>
+
+
+:: Start
+<<goto "bawra_01">>

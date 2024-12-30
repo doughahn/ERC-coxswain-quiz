@@ -1,19 +1,19 @@
 :: bawra_05 [bawra]
 
-<h2>You want to overtake your competitor in a bawra race.</h2>
+<h2>You're overtaking your competitor in a race!</h2>
 
 <<set $questionOption = [
-    "Yell at them so they know you're coming",
+    "Yell at them so they know where you are",
     "Do a power 20 to pass as fast as possible",
-    "Have at least 10 feet space between oars",
-    "Cut in front of their bow as soon as you can",
+    "Make sure there is at least 10 feet space between oars",
+    "Move in front of their bow quickly to conserve course steerageway",
     "All of the above"
 ]>>
-<<questionMacro "You must:" $questionOption "Have at least 10 feet space between oars">>
+<<questionMacro "You must:" $questionOption "Make sure there is at least 10 feet space between oars">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Stay safe</h3>
-    <p>BAWRA requires at least 10' between oars. Also, clattering might mean a disqualification.</p>
+    <h3>Stay safe</h3>
+    <p>BAWRA requires at least 10' between oars. Also, clattering can mean a disqualification.</p>
 </div>
 
 <div class="nextButton hidden">

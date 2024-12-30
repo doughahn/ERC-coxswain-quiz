@@ -1,0 +1,28 @@
+:: bawra_14 [bawra]
+
+<h2>You finished a race but didn't receive a time.</h2>
+
+<<set $questionOption = [
+    "It was an order of finish race",
+    "The RO at the finish made a mistake",
+    "It was a side by side race",
+    "It was a sprint race"
+]>>
+<<questionMacro "What happend?" $questionOption "It was an order of finish race">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Order of finish is not timed</h3>
+    <p>Results are determined by the order in which teams cross the finish line. All teams start together from the same line when their bows  are fairly aligned. Time is not a factor.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

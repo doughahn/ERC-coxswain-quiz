@@ -11,8 +11,9 @@
 <<questionMacro "You use:" $questionOption "T method">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. T-Bone is sad.</h3>
+    <h3>Use the "T"</h3>
     <p>T method is safest.</p>
+    <img src="assets/t-method.webp" alt="t-method">
 </div>
 
 <div class="nextButton hidden">

@@ -1,0 +1,31 @@
+:: Road_03 [RoadRules]
+
+<h2>You see a white light at night.</h2>
+
+<img src="assets/stern.webp" alt="Lights">
+
+<<set $questionOption = [
+    "Boat that's anchored and fishing",
+    "A vessel headed away from you", 
+    "A vessel under motor heading straight at you", 
+    "A container ship at anchor"
+]>>
+<<questionMacro "This is a:" $questionOption "A vessel headed away from you">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You're astern!</h3>
+    <p>A power driven vessel has a single white stern light. When this light is visible to us, we can’t see any of the bow or steaming lights. </p>
+    <img src="assets/stern-revealed.webp" alt="stern light" />
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>

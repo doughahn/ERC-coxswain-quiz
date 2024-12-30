@@ -1,18 +1,20 @@
 :: Safety_15 [Safety]
 
-<h2>A motorboat off your stern gives two short blasts during a race. You need to turn to port to stay in the good currents and pass Iron Oars. </h2>
+<h2>A motorboat off your stern gives two short blasts during a race. You need to turn to port to stay in the good currents and take first place. </h2>
 
 <<set $questionOption = [
     "Turn to port", 
-    "Give 5 short blows on your whistle", 
+    "Give 5 short blasts on your whistle", 
     "Maintain your current heading", 
     "Do a power 20 to get there quicker"
 ]>>
 <<questionMacro "You should:" $questionOption "Maintain your current heading">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Safety is more impoirtant than winning… even against Iron Oars.</h3>
-    <p>Two short blasts means it will pass you on your port side (to its starboard). If you turn to port you may have a collision. As the stand-on vessel you must maintain your heading until the boat safely passes you.</p>
+    <h3>Safety is more important than winning.</h3>
+    <p>Two short blasts means the motorboat will pass you on your port side (to its starboard). If you turn to port you may have a collision. As the stand-on vessel you must maintain your heading until the boat safely passes you.</p>
+    <img src="assets/overtaking-signals.webp" alt="Overtaking Signals" />
+    
 </div>
 
 <div class="nextButton hidden">

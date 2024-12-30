@@ -2,7 +2,7 @@
 
 <h2>Select the 5 pieces of additonal equipment required by BAWRA:</h2>
 
-<p>Everything on this list is required, but the items you must choose are in addition to the minimum required by maritime law for the whaleboat.</p>
+<p>Everything on this list is required, but the items you must choose are in addition to the minimum that's required by maritime law for the whaleboat.</p>
 
 <div id="droppables">
     <div class="droppable" data-label="1" id="slot1"></div>

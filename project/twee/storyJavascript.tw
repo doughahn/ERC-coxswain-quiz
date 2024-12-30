@@ -75,39 +75,189 @@ window.deductPoints = function(pointsToDeduct) {
 }
 
 Macro.add('setupQuestion', {
-    handler : function() {
-        // Extract and parse arguments
+    handler: function() {
         let droppableCount = parseInt(this.args[0], 10);
-        let draggableItems = this.args[1].split(','); // Split string into an array
-        let correctOrder = this.args[2].split(','); // Split string into an array
+        let draggableItems = this.args[1].split(',');
+        let correctOrder = this.args[2].split(',');
 
-        // Create droppable slots
         let droppableHTML = '<div id="droppables">';
         for(let i = 1; i <= droppableCount; i++) {
-            droppableHTML += `<div class="droppable" data-label="${i}" id="slot${i}"></div>`;
+            droppableHTML += `<div class="droppable empty" data-label="${i}" id="slot${i}"></div>`;
         }
-        droppableHTML += '</div><br>'; // Close the div and add a break
+        droppableHTML += '</div>';
         
-        // Create draggable items
         let draggableHTML = '<div id="draggables">';
         for(let i = 0; i < draggableItems.length; i++) {
-            draggableHTML += `<div class="draggable" id="item${i+1}" draggable="true"><p>${draggableItems[i]}</p></div>`;
+            draggableHTML += `<div class="draggable" id="item${i+1}" draggable="true"><p>${draggableItems[i].trim()}</p></div>`;
         }
-        draggableHTML += '</div><br>'; // Close the div and add a break
+        draggableHTML += '</div>';
 
-        // Create submit and reset buttons and feedback div for correct answer
-        let buttonAndFeedbackHTML = `
+        let controlsHTML = `
             <button id="submitOrder" disabled>Submit</button>
-            
+            <button id="resetOrder">Reset</button>
             <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
         `;
 
-        // Save correct order to state variable
         State.variables.correctOrder = correctOrder;
-
-        // Append to the output
-        $(this.output).append(droppableHTML + draggableHTML + buttonAndFeedbackHTML);
+        $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
+        
+        initializeDragAndDrop();
     }
 });
+
+function initializeDragAndDrop() {
+    let dragSrcEl = null;
+
+    function findActualDropTarget(element) {
+        // If we're over a draggable, get its parent droppable
+        const draggable = $(element).closest('.draggable');
+        if (draggable.length) {
+            return draggable.parent('.droppable');
+        }
+        // If we're over a droppable, return it
+        const droppable = $(element).closest('.droppable');
+        if (droppable.length) {
+            return droppable;
+        }
+        return null;
+    }
+
+    function handleDragStart(e) {
+        dragSrcEl = this;
+        e.originalEvent.dataTransfer.effectAllowed = 'move';
+        $(this).addClass('dragging');
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+        e.originalEvent.dataTransfer.dropEffect = 'move';
+        
+        const dropTarget = findActualDropTarget(e.target);
+        if (dropTarget && dropTarget.length) {
+            $('.droppable').removeClass('drag-over');
+            dropTarget.addClass('drag-over');
+        }
+    }
+
+    function handleDragEnter(e) {
+        const dropTarget = findActualDropTarget(e.target);
+        if (dropTarget && dropTarget.length) {
+            $('.droppable').removeClass('drag-over');
+            dropTarget.addClass('drag-over');
+        }
+    }
+
+    function handleDragLeave(e) {
+        const dropTarget = findActualDropTarget(e.target);
+        if (dropTarget && dropTarget.length) {
+            dropTarget.removeClass('drag-over');
+        }
+    }
+
+    function swapElements(draggedEl, dropTarget) {
+        const draggedParent = $(draggedEl).parent();
+        const existingDraggable = dropTarget.children('.draggable').first();
+        
+        if (existingDraggable.length) {
+            // If there's an existing draggable in the drop target
+            if (draggedParent.hasClass('droppable')) {
+                // If dragged from another droppable, swap positions
+                $(draggedEl).detach();
+                existingDraggable.detach();
+                draggedParent.append(existingDraggable);
+                dropTarget.append($(draggedEl));
+            } else {
+                // If dragged from #draggables, move existing to #draggables and place dragged in target
+                existingDraggable.detach().appendTo('#draggables');
+                $(draggedEl).detach().appendTo(dropTarget);
+            }
+        } else {
+            // If drop target is empty, simply move the dragged element
+            $(draggedEl).detach().appendTo(dropTarget);
+            if (draggedParent.hasClass('droppable')) {
+                draggedParent.addClass('empty');
+            }
+        }
+        
+        dropTarget.removeClass('empty');
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $('.droppable').removeClass('drag-over');
+        
+        if (!dragSrcEl) return false;
+
+        const dropTarget = findActualDropTarget(e.target);
+        if (!dropTarget || !dropTarget.length) return false;
+
+        // Prevent dropping a draggable inside another draggable
+        if ($(e.target).closest('.draggable').length > 0 && !$(e.target).closest('.droppable').length) {
+            return false;
+        }
+
+        swapElements(dragSrcEl, dropTarget);
+        updateSubmitButton();
+        return false;
+    }
+
+    function handleDragEnd() {
+        $('.draggable').removeClass('dragging');
+        $('.droppable').removeClass('drag-over');
+        dragSrcEl = null;
+    }
+
+    function updateSubmitButton() {
+        const allSlotsFilled = $('.droppable').toArray().every(slot => 
+            $(slot).children('.draggable').length === 1
+        );
+        $('#submitOrder').prop('disabled', !allSlotsFilled);
+    }
+
+    function resetOrder() {
+        $('.draggable').detach().appendTo('#draggables');
+        $('.droppable').addClass('empty');
+        $('.correctFeedback, .incorrectFeedback, .nextButton').addClass('hidden');
+        $('#submitOrder').prop('disabled', true).removeClass('hidden');
+    }
+
+    // Remove existing event listeners
+    $('.draggable, .droppable').off();
+    $('#submitOrder, #resetOrder').off();
+
+    // Add event listeners
+    $('.draggable')
+        .on('dragstart', handleDragStart)
+        .on('dragend', handleDragEnd);
+
+    $('.droppable, .draggable')
+        .on('dragover', handleDragOver)
+        .on('dragenter', handleDragEnter)
+        .on('dragleave', handleDragLeave)
+        .on('drop', handleDrop);
+
+    $('#submitOrder').on('click', function() {
+        const correctOrder = State.variables.correctOrder;
+        const currentOrder = $('.droppable').map(function() {
+            return $(this).children('.draggable:first').attr('id');
+        }).get();
+
+        const isCorrect = correctOrder.every((id, index) => id === currentOrder[index]);
+
+        if (isCorrect) {
+            $('.correctFeedback').removeClass('hidden');
+        } else {
+            $('.incorrectFeedback').removeClass('hidden');
+            State.variables.score -= 1;
+        }
+
+        $('.nextButton').removeClass('hidden');
+        $(this).addClass('hidden');
+    });
+
+    $('#resetOrder').on('click', resetOrder);
+}
 
 $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");

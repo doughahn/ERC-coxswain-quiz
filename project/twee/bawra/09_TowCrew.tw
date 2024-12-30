@@ -1,6 +1,6 @@
 :: bawra_09 [bawra]
 
-<h2>You are getting towed.</h2>
+<h2>You are seating the boat for a tow. </h2>
 
 <<set $questionOption = [
     "Minimum 4 rowers, maximum 10 crew",
@@ -8,7 +8,7 @@
     "Minimum 6 rowers, maximum 10 crew",
     "Minimum 8 rowers, maximum 9 crew"
 ]>>
-<<questionMacro "What's yor minimum and maximum crew?" $questionOption "Minimum 4 rowers, maximum 10 crew">>
+<<questionMacro "What's the minimum and maximum crew?" $questionOption "Minimum 4 rowers, maximum 10 crew">>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. Not too heavy, not too light</h3>

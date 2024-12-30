@@ -11,7 +11,7 @@
 <<questionMacro "You must:" $questionOption "Stay clear of them">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Stay clear</h3>
+    <h3>Stay clear</h3>
     <p>It does not matter which side you pass, just stay clear so it's safe. </p>
     <img src="assets/SlideOvertakingRG.png" alt="Overtaking">
 </div>

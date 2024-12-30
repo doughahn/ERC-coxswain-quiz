@@ -1,19 +1,24 @@
 :: Road_07 [RoadRules]
 
-<h2>You see a 20' sailing vessel.</h2>
+<h2>You see what looks like a single green / red light.</h2>
 
+<img src="assets/sailing-ahead-small.webp" alt="Lights">
 <<set $questionOption = [
-    "White mast light, red and green sidelights, and stern light",
-    "White light only", 
-    "Mast light, red and green sidelights and stern light.", 
-    "Red and green sidelights and 360º stern light"
+    "small motorboat coming at you",
+    "large sailing vessel coming at you", 
+    "small sailing vessel coming at you", 
+    "large motorboat coming at you"
 ]>>
-<<questionMacro "Its navigation lights are:" $questionOption "White light only">>
+<<questionMacro "Its a:" $questionOption "small sailing vessel coming at you">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. </h3>
-    <p>Sailing vessels under 23' require whie light only</p>
+    <h3>Small sails!</h3>
+    <p>Smaller sailing vessels, under 20 metres in length are allowed to combine the two lights at the top of the mast.</p>
+
+    <img src="assets/sailing-ahead-small-revealed.webp" alt="Lights">
 </div>
+
+
 
 <div class="nextButton hidden">
 <<if $selectedRoadRules.length > 0>>

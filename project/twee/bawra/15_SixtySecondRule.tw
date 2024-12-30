@@ -1,0 +1,28 @@
+:: bawra_15 [bawra]
+
+<h2>When is the 60 second rule used?</h2>
+
+<<set $questionOption = [
+    "A cox calls to restart within 60 seconds of start because of broken equipment",
+    "A team does not respond to the ready all radio call within 60 seconds",
+    "A team is more than one minute late to the start line",
+    "The CRO decides the progress of any team has  been unfairly impeded"
+]>>
+<<questionMacro "There are:" $questionOption "The CRO decides the progress of any team has  been unfairly impeded">>
+
+<div class="incorrectFeedback hidden">
+    <h3>The CRO calls a restart</h3>
+    <p>When a foul has occurred or the progress of any team has been unfairly impeded within the first 60 seconds following the start, the CRO may re-start the race to restore fairness to all competitors. Broken equipment is not  grounds for re-rowing a race within the first 60 seconds.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

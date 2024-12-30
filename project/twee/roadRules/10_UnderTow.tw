@@ -1,18 +1,23 @@
 :: Road_10 [RoadRules]
 
-<h2>You see a vessel ahead with yellow stern light placed above the usual white stern light. </h2>
+<h2>You see a two vertical white lights, and two green lights below them.</h2>
+
+<img src="assets/towing-dredge.webp" alt="Lights">
 
 <<set $questionOption = [
-    "Restricted in ability to maneuver",
-    "Not under command", 
-    "Under tow", 
-    "Engaged in fishing"
+    "vessel restricted in ability to maneuver",
+    "vessel run aground on starboard side", 
+    "vessel run aground on port side",
+    "vessel pushing ahead another vessel viewed from the starboard side", 
+    "vessel pushing ahead another vessel viewed from the port side"
 ]>>
-<<questionMacro "Is is:" $questionOption "Under tow">>
+<<questionMacro "This is a:" $questionOption "vessel pushing ahead another vessel viewed from the starboard side">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Be aware of tows!</h3>
-    <p>When commercial vessels are towing or pushing a barge, they display one or more yellow lights in place of a sternlight as do the vesses under tow. There may be an unlit space of several hundred yards between the lights displayed on the bow and stern of the composite formed by the commercial vessel and its barge(s). You do not want to end up between those vessels.</p>
+    <h3>Pushing ahead</h3>
+    <p>On occasion, rather than towing behind, it is necessary to push another vessel ahead. In these circumstances the towing vessel displays the same lights as above. However, the vessel being pushed will also display its own side lights.</p>
+    <p><i>We have seen this at night in the Oakland Estuary!</i></p>
+    <img src="assets/tug-dredge-revealed.webp" alt="Lights">
 </div>
 
 <div class="nextButton hidden">

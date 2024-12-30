@@ -1,0 +1,31 @@
+:: Navigation_28 [Navigation]
+
+<h2>A Buoy ahead has an empty diamond.</h2>
+
+<img src="assets/CN-buoy-sp-hazard.jpg" alt="Diamond buoy">
+
+<<set $questionOption = [
+    "Stay to the right",
+    "Proceed with steerageway",
+    "Proceed with more way",
+    "Keep a safe distance",
+    "Hold water immediately"
+]>>
+<<questionMacro "You should:" $questionOption "Keep a safe distance">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Hazards ahead!</h3>
+    <p>Diamonds warn of hazards such as rocks, shoals, or turbulent waters. Keep a safe distance and proceed through the area with caution. Never assume that every hazard will be marked by a buoy.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

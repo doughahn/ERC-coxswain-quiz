@@ -1,18 +1,18 @@
 :: Technique_18 [Technique]
 
-<h2>It's a steady drizzle.</h2>
+<h2>It's foggy out.</h2>
 
 <<set $questionOption = [
-    "Tough it out; rowers are not made of sugar",
-    "Make sure everyone has rain gear",
+    "Tough it out",
+    "Make sure everyone assents",
     "Call off the row",
     "See how it is out on the water"
 ]>>
 <<questionMacro "You should:" $questionOption "Call off the row">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Drinks at the bayview instead?</h3>
-    <p>Don't row in the rain.</p>
+    <h3>Fog is really dasngerous!</h3>
+    <p>Don't row in dangerouys conditions. If fog comes in, immediately take the boat back in or to safe harbor.</p>
 </div>
 
 <div class="nextButton hidden">

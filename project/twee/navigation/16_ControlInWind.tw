@@ -1,0 +1,29 @@
+:: Navigation_16 [Navigation]
+
+<h2>You can't control the boat without heading directly into or away from the wind.</h2>
+
+<<set $questionOption = [
+    "Continue heading into the wind",
+    "Head for more sheltered water",
+    "Hold water until the wind shifts",
+    "Head away from the wind",
+    "Call the coast guard for help"
+]>>
+<<questionMacro "You must" $questionOption "Head for more sheltered water">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. Get safe!</h3>
+    <p>In very heavy wind/seas, the cox may not be able to control the boat without heading directly into or out of the wind/seas. At this point, head for more sheltered water.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

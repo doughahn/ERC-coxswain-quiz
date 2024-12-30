@@ -1,6 +1,8 @@
 :: Road_11 [RoadRules]
 
-<h2>A vessel ahead has 2 vertical masthead lights.</h2>
+<h2>You see two vertical lights and a green light:.</h2>
+
+<img src="assets/tug-starboard.webp" alt="Lights">
 
 <<set $questionOption = [
     "A power-driven vessel towing another vessel, with a length of tow  (stern to stern)  over 200 meters",
@@ -11,8 +13,9 @@
 <<questionMacro "It is:" $questionOption "A power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Be aware of tows on the open water!</h3>
-    <p>Two of these lights means a power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters.</p>
+    <h3>Be aware of tows on the open water!</h3>
+    <p>Two of these lights means a power-driven vessel towing another vessel, with a length of tow (stern to stern) under 200 meters. Don't cross behind it.</p>
+    <img src="assets/tug-revealed.webp" alt="Lights">
 </div>
 
 <div class="nextButton hidden">

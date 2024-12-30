@@ -1,0 +1,28 @@
+:: Navigation_26 [Navigation]
+
+<h2>You want to row under Lefty O'doul's bridge this week, as late in the evening as possible.</h2>
+<img src="assets/tide-january.webp" alt="Tide">
+<<set $questionOption = [
+    "Sunday at 2:38",
+    "Thursday at 5:36",
+    "Friday at 6:12",
+    "Saturday at 6:47"
+]>>
+<<questionMacro "When's the best time to go, ensuring you haver the most clearance?" $questionOption "Saturday at 6:47">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. That southpaw struck you out!</h3>
+    <p>Saturday is both the latest time and lowest tide, at .5' below the daily lower tide average.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

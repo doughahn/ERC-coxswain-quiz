@@ -18,8 +18,8 @@
 <<questionMacro "What piece of gear is missing, and required by maritime law?" $questionOption "A type IV PFD">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. You need a throwable PFD!</h3>
-    <p>Manually =powered boats need:</p>
+    <h3>You need a throwable PFD!</h3>
+    <p>Manually powered boats need:</p>
     <ol>
         <li>Wearable Type I, II, III or V PFD's for each person</li>
         <li>One throwable Type IV PFD </li>

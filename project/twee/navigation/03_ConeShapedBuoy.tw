@@ -11,8 +11,9 @@
 <<questionMacro "What do you do?" $questionOption "Keep it to your right">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Red right returning.</h3>
-    <p> Remember the phrase "red right returning," and keep the red markers to your right when returning from open water or traveling upstream. </p>
+    <h3>Red right returning.</h3>
+    <p>Remember the phrase "red right returning," and keep the red markers to your right when returning from open water or traveling upstream. When heading toward the sea or leaving port, keep the red buoy on the port (left) side.</p>
+    <img src="assets/aids-to-navigation-40-728.webp" alt="Navigation aids">
 </div>
 
 <div class="nextButton hidden">

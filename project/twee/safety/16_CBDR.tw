@@ -3,12 +3,12 @@
 <h2>You're in a CBDR situation.</h2>
 
 <<set $questionOption = [
-    "If it continues, vessels will collide", 
+    "Unless one of you changes course, vessels will collide", 
     "THC in any amount not allowed in the boat",
     "You won't have enough time to react", 
-    "You think you will have enough time but you do not"
+    "Blast your whistle 5 times"
 ]>>
-<<questionMacro "This is dangerous because:" $questionOption "If it continues, vessels will collide">>
+<<questionMacro "This is dangerous because:" $questionOption "Unless one of you changes course, vessels will collide">>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. Constant Beearing, Decreasing Range is a fancy way of saying "Incoming Collision"</h3>

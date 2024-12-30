@@ -571,3 +571,24 @@ input[type="text"]:focus {
 #restart-cancel:hover {
     background-color: var(--off-white);
 }
+
+.drag-over {
+    border-color: var(--light-color) !important;
+    background-color: rgba(127, 164, 188, 0.1) !important;
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+.droppable.empty {
+    background-color: transparent;
+}
+
+/* Prevent text selection during drag */
+.draggable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

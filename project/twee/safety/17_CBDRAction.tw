@@ -11,8 +11,8 @@
 <<questionMacro "You must:" $questionOption "Alter course or change speed">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Get out of the way!</h3>
-    <p>CBDR is just a fancy way of sayinig "Constant Beearing, Decreasing Range." In other words, the scary ship on the horizon is getting bigger but not moving. It is coming right at you. Change our course.</p> 
+    <h3>Get out of the way!</h3>
+    <p>CBDR stands for "Constant Beearing, Decreasing Range." In other words, the scary ship on the horizon is coming right at you. Change our course. If possible, steer at its stern.</p> 
 </div>
 
 <div class="nextButton hidden">

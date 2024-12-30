@@ -1,0 +1,29 @@
+:: Navigation_17 [Navigation]
+
+<h2>The wind starts blowing in from starboard. You should:</h2>
+
+<<set $questionOption = [
+    "Adjust your course more to port",
+    "Adjust your course more to starboard",
+    "Adjust your heading more to starboard",
+    "Adjust your heading more to port"
+]>>
+<<questionMacro "You must" $questionOption "Adjust your heading more to starboard">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. Adjust the heading to starboard</h3>
+    <p>Your course stays the same, but your heading nmeeds to adjust and push against the wind.</p>
+    <img src="assets/heading-course.webp" alt="heading vs course">
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

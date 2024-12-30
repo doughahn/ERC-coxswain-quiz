@@ -1,6 +1,6 @@
 :: Safety_19 [Safety]
 
-<h2>Your whaleboat is being towed.</h2>
+<h2>Your whaleboat is going to be towed.</h2>
 
 <<set $questionOption = [
     "Ready the boat for a tow", 

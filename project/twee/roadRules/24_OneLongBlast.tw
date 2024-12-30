@@ -11,8 +11,8 @@
 <<questionMacro "This means:" $questionOption "A boat is in restricted visibility">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Someone can't see.</h3>
-    <p>A long blast indicates a vessel is in restricted visibility.</p>
+    <h3>Someone can't see.</h3>
+    <p>A long blast indicates a vessel is in restricted visibility. A power-driven vessel making way through the water shall sound at intervals of not more than 2 minutes one prolonged blast. This is important when it is foggy out, which happens on the bay.</p>
 </div>
 
 <div class="nextButton hidden">

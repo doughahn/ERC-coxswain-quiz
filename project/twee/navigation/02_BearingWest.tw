@@ -8,11 +8,11 @@
     "NNW",
     "WNW"
 ]>>
-<<questionMacro "You are turned" $questionOption "WNW">>
+<<questionMacro "You are pointed" $questionOption "WNW">>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. Azimuth the horizontal angle or direction of a compass bearing.</h3>
-    <p>The compass is 360º around. North is 0º, E is 90º, S is 180º, W is 270º. So, you are somwehere between West and North, eliminating the first two options. NW is 315º so you know you;re NW and W, or WNW. Even if you didn't know that NW was 315º you might be able to make an educated guess guess because the given azimuth was under 300º.</p>
+    <p>The compass is 360º around. North is 0º, E is 90º, S is 180º, W is 270º. So, you are somwehere between West and North, eliminating the first two options. NW is 315º so you know you're NW and W, or WNW. Even if you didn't know that NW was 315º you might be able to make an educated guess guess because the given azimuth was under 300º.</p>
     <img src="assets/compass.webp" alt="Compass" />
 </div>
 

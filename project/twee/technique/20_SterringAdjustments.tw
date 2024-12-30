@@ -1,0 +1,28 @@
+:: Technique_20 [Technique]
+
+<h2>You need to steer a straight course.</h2>
+
+<<set $questionOption = [
+    "The stroke watch",
+    "Channel markers",
+    "A stationary landmark ahead",
+    "The rowers power on each side"
+]>>
+<<questionMacro "What should you focus on?" $questionOption "A stationary landmark ahead">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Pick a line</h3>
+    <p>The best way to hold a straight course is to pick a stationary point or landmark on shore (or on the horizon) and align the boat’s centerline with that point.</p>
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedTechnique.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedTechnique.pop()>>
+    <</link>>
+<<else>>
+    <<link "Conclusion">>
+        <<goto "conclusion">>
+    <</link>>
+<</if>>
+</div>

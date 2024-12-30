@@ -1,19 +1,19 @@
 :: Safety_21 [Safety]
 
-<h2>The tow boat is pulling you into dangerous waters.</h2>
+<h2>The tow boat is pulling you into some rocks.</h2>
 
 
 <<set $questionOption = [
     "Cut the line", 
-    "Ask the tow boat to stop",
+    "Wait for the boat to stop",
     "Turn the whaleboat away", 
     "Back water"
 ]>>
 <<questionMacro "You should" $questionOption "Cut the line">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Cut your losses</h3>
-    <p>Cut the line and get the boat under your own control.</p>
+    <h3>Cut your losses</h3>
+    <p>Cut the line and get the boat under your own control. The person in the bow should stay out of the way of the line and have a sharp, serrated blacde on hand.</p>
 </div>
 
 <div class="nextButton hidden">

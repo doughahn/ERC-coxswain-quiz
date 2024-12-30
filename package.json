@@ -10,7 +10,8 @@
     "watch:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -w",
     "testmode:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -t",
     "build": "npm run compile:src && npm run compile:twee",
-    "build:test": "npm run compile:src && npm run testmode:twee"
+    "build:test": "npm run compile:src && npm run testmode:twee",
+    "test:passage": "node scripts/compile-passage.js"
   },
   "keywords": [
     "twine",

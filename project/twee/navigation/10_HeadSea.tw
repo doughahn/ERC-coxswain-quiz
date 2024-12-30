@@ -1,0 +1,29 @@
+:: Navigation_10 [Navigation]
+
+<h2>It's a head sea!</h2>
+
+<<set $questionOption = [
+    "Running directly against the course of the vessel",
+    "Running stern to head against the vessel",
+    "Running alongside the gunwales against the vessel",
+    "Running stern to bow against the course of the vessel",
+    "Running with whitecaps higher than your head"
+]>>
+<<questionMacro "Waves are:" $questionOption "Running directly against the course of the vessel">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Not quite. Head seas run directly against the course of the vessel.</h3>
+    <img src="assets/headSeas.webp" alt="head seas">
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

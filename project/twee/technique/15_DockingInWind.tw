@@ -2,6 +2,8 @@
 
 <h2>You are approaching the berth in a moderate head wind.</h2>
 
+<img src="assets/bertingInWind-q.webp" alt="berthing in a head wind">
+
 <<set $questionOption = [
     "With maximum way",
     "With minimal way",

@@ -1,5 +1,38 @@
 :: StoryInit
 
+<<script>>
+// Disable autosave and slots for QA
+Config.saves.maxAutoSaves = 0;
+Config.saves.maxSlotSaves = 0;
+
+// Debug mode setup
+(function() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const debugPassage = params.get('start');
+        console.log("Debugging script loaded.");
+
+        if (debugPassage) {
+            console.log(`Debug mode enabled. Target passage: ${debugPassage}`);
+            State.variables.debugMode = true;
+            State.variables.debugPassage = debugPassage;
+
+            if (Story.has(debugPassage)) {
+                console.log(`Redirecting to debug passage: ${debugPassage}`);
+                Engine.play(debugPassage);
+                return;
+            } else {
+                console.warn(`Passage "${debugPassage}" not found.`);
+            }
+        } else {
+            console.log("Debug mode not enabled. Proceeding with default story flow.");
+        }
+    } catch (err) {
+        console.error("Error in debug script:", err);
+    }
+})();
+<<endscript>>
+
 <<set $score = 25>>
 
 <<set $safetyQuestions = Story.lookup("tags", "Safety")>>

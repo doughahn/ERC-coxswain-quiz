@@ -13,7 +13,7 @@
 <<questionMacro "Pass them an oar:" $questionOption "In calm water">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Don't clobber them with John's beautifully varnished oars!</h3>
+    <h3>Don't clobber them!</h3>
     <p>Passing an oar is dangerous. Only pass them an oar in calm water.</p>
 
 </div>

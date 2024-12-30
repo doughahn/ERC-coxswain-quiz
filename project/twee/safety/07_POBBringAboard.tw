@@ -13,8 +13,8 @@
 <<questionMacro "Where are they positioned?" $questionOption "Amidships">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Don't make it harder than it needs to be!</h3>
-    <p>It's easier to bring them aboard amidships, as it's lowerto the water. Have the 2 and 3 seats on the relevant side ship oars to help get them aboard using any of the various methods.</p>
+    <h3>Don't make it harder than it needs to be!</h3>
+    <p>It's easier to bring them aboard amidships, as it's lower to the water. Have the 2 and 3 seats on the relevant side ship oars to help get them aboard using any of the various methods (climb, sling, dip, lever).</p>
 </div>
 
 <div class="nextButton hidden">

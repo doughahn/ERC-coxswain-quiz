@@ -4,16 +4,16 @@
 
 <<set $questionOption = [
     "To leave you on your starboard side",
-    "To leave you on its starboard side",
+    "To leave you on your port side",
     "To leave you on either side",
-    "To speed up and pass you on your starboard side",
-    "To speed up and pass you on your port side",
+    "To cross in front of your bow"
 ]>>
-<<questionMacro "It intends:" $questionOption "To leave you on its starboard side">>
+<<questionMacro "It intends:" $questionOption "To leave you on your port side">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. It's going to pass on its starboard</h3>
+    <h3>It's going to pass on your port</h3>
     <p>This means it will be on <i>your</i> port. Additionally, the blasts do not mean anything about speed (it may already be going at its passing speed).</p>
+    <img src="assets/overtaking-to-port.webp" alt="overtaking-to-port">
 </div>
 
 <div class="nextButton hidden">

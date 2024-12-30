@@ -11,8 +11,8 @@
 <<questionMacro "Which is it?" $questionOption "Back Oars">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. So many oars</h3>
-    <p>No such thing as back oars.</p>
+    <h3>So many oars</h3>
+    <p>But there is no such thing as back oars.</p>
     <ul>
         <li><strong>Toss oars/up oars:</strong> Oars are lifted straight up, handles on the floorboards, blades in the air.  Given from "oars" or when oars are in the boat.</li>
         <li><strong>Oars:</strong> The oars, in oarlocks, are positioned perpendicular to the boat, level with the water.  This command brings rowers "to attention," and also tells them to stop rowing.  Another command for "stop rowing" is "way enough."</li>

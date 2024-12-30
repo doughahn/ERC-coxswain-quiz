@@ -1,0 +1,24 @@
+:: Safety_23 [Safety]
+
+<h2>You need to row towards a person overboard who's close to the vessel. Approach from the:</h2>
+
+<<set $questionOption = ["Upwind Side", "Amidships Side", "Downwind Side", "Bow forward"]>>
+<<questionMacro "You should approach to their" $questionOption "Upwind Side">>
+
+<div class="incorrectFeedback hidden">
+    <h3>You drifted away!</h3>
+    <p>Approach from the <i>downwind</i> side then as you near go <i>upwind</i> so the boat does not drift away.</p> 
+    <img src="assets/windward-leeward.webp" alt="Windward and Leewardp" />
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedSafety.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedSafety.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "Nav_Intro">>
+    <</link>>
+<</if>>
+</div>

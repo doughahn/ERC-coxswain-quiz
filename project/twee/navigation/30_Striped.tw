@@ -1,0 +1,31 @@
+:: Navigation_30 [Navigation]
+
+<h2>A Buoy ahead has vertical stripes.</h2>
+
+<img src="assets/buoy_safe_water_red_stripe.jpg" alt="Striped buoy">
+
+<<set $questionOption = [
+    "Turn around and row away from the area", 
+    "Pass between the buoy and shore", 
+    "Pass opposite the buoy and shore", 
+    "Slow down and proceed with caution",
+    "Hold water immediately"
+]>>
+<<questionMacro "You should:" $questionOption "Pass opposite the buoy and shore">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Danger between here and shore!</h3>
+    <p>The State Water Obstruction Mark indicates to a vessel operator that an obstruction to navigation extends from the nearest shore to the buoy. Do not pass between the buoy and the shore.</p>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedNavigation.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedNavigation.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Road_Intro">>
+        <</link>>
+    <</if>>
+</div>

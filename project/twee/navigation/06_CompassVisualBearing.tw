@@ -1,18 +1,25 @@
 :: Navigation_06 [Navigation]
 
-<h2>You need to take a visual bearing of the Bayview Boatclub.</h2>
+<h2>You need to take a compass bearing to a landmark, such as the Bayview Boat CLub.</h2>
 
 <p class="note"><i>Drag and drop the items into the correct order.</i></p>
 
-<<set $actionsList = "Rotate the azimuth ring so the orienting arrow lines up with the magnetic needle,Hold it level and point the direction of travel arrow toward your destination,Note the degree markings on the azimuth ring that line up with the direction-of-travel arrow">>
-<<set $actionsOrder = "item2,item3,item2">>
+<<set $actionsList = "Hold it level and point the direction of travel arrow toward your destination,Note the degree markings on the azimuth ring that line up with the direction-of-travel arrow,Rotate the azimuth ring so the orienting arrow lines up with the magnetic needle">>
+
+<<set $actionsOrder = "item1,item2,item3">>
 
 <<setupQuestion "3" $actionsList $actionsOrder>>
 
+<div class="correctFeedback hidden" id="correctFeedback"><h3>That's correct!</h3></div>
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. You got lost!</h3>
-<iframe class="youtube-embed" src="https://www.youtube.com/embed/rZd0RfsC-9I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe class="youtube-embed" src="https://www.youtube.com/embed/rZd0RfsC-9I" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+    </iframe>
 </div>
 
 <div class="nextButton hidden">
@@ -45,6 +52,7 @@ $(document).ready(function() {
     });
 
     function checkIfAllSlotsFilled() {
+        // Enable "Submit" only if all droppable slots have something
         if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
             $("button#submitOrder").removeAttr("disabled");
         } else {
@@ -53,28 +61,28 @@ $(document).ready(function() {
     }
 
     $("button#submitOrder").click(function() {
-        // Disable the draggables
-        $(".draggable").attr("draggable", false).off('dragstart');
-        $(".draggable").addClass("disabled");
-
-        // Check the order
-        if (document.getElementById("slot1").firstChild.id === "item3" &&
-            document.getElementById("slot2").firstChild.id === "item1" &&
-            document.getElementById("slot7").firstChild.id === "item2") {
-            $(".feedback").text("Correct order!").removeClass("hidden");
-            // Optionally hide the submit button
-            $("button#submitOrder").addClass("hidden");
+        // Some success test, e.g.:
+        if (
+        document.getElementById("slot1").firstChild.id === "item1" &&
+        document.getElementById("slot2").firstChild.id === "item3" &&
+        document.getElementById("slot3").firstChild.id === "item2"
+        ) {
+            // Hide incorrect
+            $(".incorrectFeedback").addClass("hidden");
+            
+            // Show correct
+            $("#correctFeedback").removeClass("hidden");
         } else {
+            // Hide correct
+            $("#correctFeedback").addClass("hidden");
+
+            // Show incorrect
             $(".incorrectFeedback").removeClass("hidden");
-            // Deduct score and optionally hide the submit button
-            State.variables.score -= 1; // Deduct a point for wrong attempt
-            $("button#submitOrder").addClass("hidden");
         }
-        // Show the next button/div
-        $(".nextButton").removeClass("hidden");
     });
 
-    checkIfAllSlotsFilled(); // Initial check
+    // Initial check
+    checkIfAllSlotsFilled();
 
     $("#resetOrder").click(function() {
         resetOrder();
@@ -84,19 +92,19 @@ $(document).ready(function() {
         // Move all draggable items back to their original container
         $(".draggable").appendTo("#draggables");
 
-        // Enable the draggables again
+        // Enable draggables again
         $(".draggable").attr("draggable", true).on("dragstart", function(event) {
             event.originalEvent.dataTransfer.setData("text", event.target.id);
         });
         $(".draggable").removeClass("disabled");
 
-        // Hide feedback and the next button/div
+        // Hide feedback and next button
         $(".feedback").addClass("hidden");
+        $(".incorrectFeedback").addClass("hidden");
         $(".nextButton").addClass("hidden");
 
-        // Disable the submit button again until all slots are filled
+        // Disable submit until all slots are filled
         $("button#submitOrder").attr("disabled", "disabled");
     }
 });
-
 <</script>>

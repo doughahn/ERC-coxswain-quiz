@@ -1,0 +1,27 @@
+:: bawra_12 [bawra]
+
+<h2>You are putting new numbers on your boat.</h2>
+
+<<set $questionOption = [
+    "24 inches high",
+    "10 inches high",
+    "Clearly visible",
+    "18 inches high"
+]>>
+<<questionMacro "They must be:" $questionOption "18 inches high">>
+
+<div class="incorrectFeedback hidden">
+    <h3>The numbers must be 18" high as of 2025. Failure will be a disqualification.</h3>
+</div>
+
+<div class="nextButton hidden">
+    <<if $selectedBawra.length > 0>>
+        <<link "Next Question">>
+            <<goto $selectedBawra.pop()>>
+        <</link>>
+    <<else>>
+        <<link "Next Chapter">>
+            <<goto "Technique_Intro">>
+        <</link>>
+    <</if>>
+</div>

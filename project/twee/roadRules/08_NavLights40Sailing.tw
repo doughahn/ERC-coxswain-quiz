@@ -1,18 +1,21 @@
 :: Road_08 [RoadRules]
 
-<h2>You see a 40' sailing vessel.</h2>
+<h2>Ahead you see a green and red light.</h2>
+
+<img src="assets/sailing-large-ahead.webp" alt="Lights">
 
 <<set $questionOption = [
-    "Sidelights and stern light",
-    "Mast light, white sidelights, and stern light.", 
-    "Mast light, red and green sidelights and stern light.", 
-    "White mast light and white stern light"
+    "A small sailing vessel from the port.",
+    "A large sailing vessel from the port.", 
+    "A small sailing vessel from ahead.", 
+    "A large sailing vessel from ahead."
 ]>>
-<<questionMacro "Its navigation lights are:" $questionOption "Sidelights and stern light">>
+<<questionMacro "Its most likely are:" $questionOption "A large sailing vessel from ahead">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. </h3>
-    <p>Sailing vessels under sail and over 23 feet require sidelights and stern light. </p>
+    <h3>No masthead light!</h3>
+    <p>When sailing, the vessel has to display red and green side lights and a white stern light. It does not display a forward facing masthead light as that would mean it was being propelled by machinery. A masthead does need to be fitted though as it must be displayed when the engine is turned on. This is an important distinction because sailing vessels and power driven vessels avoid collisions in different ways.</p>
+    <img src="assets/large-sailing-ahead-revealed.webp" alt="Lights">
 </div>
 
 <div class="nextButton hidden">

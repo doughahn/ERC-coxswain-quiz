@@ -10,7 +10,7 @@
 <<questionMacro "When you hear this on the radio it means:" $questionOption "Person overboard or vessel in danger">>
 
 <div class="incorrectFeedback hidden">
-    <h3>Not quite. Pan-Pan has a specific meaning</h3>
+    <h3>Pan-Pan has a specific meaning</h3>
     <p>PAN-PAN is used when the safety of a boat or person is in jeopardy. Person-overboard messages are sent with the PAN-PAN signal.</p>
 </div>
 

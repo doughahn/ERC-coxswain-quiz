@@ -1,6 +1,6 @@
 :: Road_09 [RoadRules]
 
-<h2>What are the navigation lights for a vessel under oars?</h2>
+<h2>What are the navigation lights allowed for a vessel under oars?</h2>
 
 <<set $questionOption = [
     "Electric torch or lantern",
@@ -12,7 +12,7 @@
 
 <div class="incorrectFeedback hidden">
     <h3>Not quite. </h3>
-    <p>Vessels under oars (electric torch/lantern showing white light or may use same lights as sailing vessels)</p>
+    <p>Vessels under oars (electric torch/lantern showing white light, or may use same lights as sailing vessels). That said, we recommend bow and stern lights at least.</p>
 </div>
 
 <div class="nextButton hidden">

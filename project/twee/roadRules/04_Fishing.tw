@@ -1,0 +1,31 @@
+:: Road_04 [RoadRules]
+
+<h2>You see a red light above a white light, and a green light.</h2>
+
+<img src="assets/fishing.webp" alt="Lights">
+
+<<set $questionOption = [
+    "A vessel pushing ahead another vessel",
+    "A vessel run aground and in distress", 
+    "A vessel that is not under its own power", 
+    "Vessel engaged in fishing, starboard side"
+]>>
+<<questionMacro "This is a:" $questionOption "Vessel engaged in fishing, starboard side">>
+
+<div class="incorrectFeedback hidden">
+    <h3>Red over white, frying tonight?</h3>
+    <p>Vessels engaged in standard fishing will display a red light over a white light to indicate what they are doing.</p>
+    <img src="assets/fishing-revealed.webp" alt="fishing light" />
+</div>
+
+<div class="nextButton hidden">
+<<if $selectedRoadRules.length > 0>>
+    <<link "Next Question">>
+        <<goto $selectedRoadRules.pop()>>
+    <</link>>
+<<else>>
+    <<link "Next Chapter">>
+        <<goto "bawra_Intro">>
+    <</link>>
+<</if>>
+</div>
