@@ -88,7 +88,7 @@ Macro.add('setupQuestion', {
         
         let draggableHTML = '<div id="draggables">';
         for(let i = 0; i < draggableItems.length; i++) {
-            draggableHTML += `<div class="draggable" id="item${i+1}" draggable="true"><p>${draggableItems[i].trim()}</p></div>`;
+            draggableHTML += `<div class="draggable" id="item${i+1}"><p>${draggableItems[i].trim()}</p></div>`;
         }
         draggableHTML += '</div>';
 
@@ -106,107 +106,38 @@ Macro.add('setupQuestion', {
 });
 
 function initializeDragAndDrop() {
-    let dragSrcEl = null;
+    let selectedElement = null;
+    let originalPosition = null;
+    let touchOffset = { x: 0, y: 0 };
+    let isMobile = 'ontouchstart' in window;
 
-    function findActualDropTarget(element) {
-        // If we're over a draggable, get its parent droppable
-        const draggable = $(element).closest('.draggable');
-        if (draggable.length) {
-            return draggable.parent('.droppable');
-        }
-        // If we're over a droppable, return it
-        const droppable = $(element).closest('.droppable');
-        if (droppable.length) {
-            return droppable;
-        }
-        return null;
+    function getDropTarget(element) {
+        return $(element).closest('.droppable');
     }
 
-    function handleDragStart(e) {
-        dragSrcEl = this;
-        e.originalEvent.dataTransfer.effectAllowed = 'move';
-        $(this).addClass('dragging');
-    }
-
-    function handleDragOver(e) {
-        e.preventDefault();
-        e.originalEvent.dataTransfer.dropEffect = 'move';
+    function swapElements($draggedEl, $dropTarget) {
+        const $draggedParent = $draggedEl.parent();
+        const $existingDraggable = $dropTarget.children('.draggable').first();
         
-        const dropTarget = findActualDropTarget(e.target);
-        if (dropTarget && dropTarget.length) {
-            $('.droppable').removeClass('drag-over');
-            dropTarget.addClass('drag-over');
-        }
-    }
-
-    function handleDragEnter(e) {
-        const dropTarget = findActualDropTarget(e.target);
-        if (dropTarget && dropTarget.length) {
-            $('.droppable').removeClass('drag-over');
-            dropTarget.addClass('drag-over');
-        }
-    }
-
-    function handleDragLeave(e) {
-        const dropTarget = findActualDropTarget(e.target);
-        if (dropTarget && dropTarget.length) {
-            dropTarget.removeClass('drag-over');
-        }
-    }
-
-    function swapElements(draggedEl, dropTarget) {
-        const draggedParent = $(draggedEl).parent();
-        const existingDraggable = dropTarget.children('.draggable').first();
-        
-        if (existingDraggable.length) {
-            // If there's an existing draggable in the drop target
-            if (draggedParent.hasClass('droppable')) {
-                // If dragged from another droppable, swap positions
-                $(draggedEl).detach();
-                existingDraggable.detach();
-                draggedParent.append(existingDraggable);
-                dropTarget.append($(draggedEl));
+        if ($existingDraggable.length) {
+            if ($draggedParent.hasClass('droppable')) {
+                $draggedEl.detach();
+                $existingDraggable.detach();
+                $draggedParent.append($existingDraggable);
+                $dropTarget.append($draggedEl);
             } else {
-                // If dragged from #draggables, move existing to #draggables and place dragged in target
-                existingDraggable.detach().appendTo('#draggables');
-                $(draggedEl).detach().appendTo(dropTarget);
+                $existingDraggable.detach().appendTo('#draggables');
+                $draggedEl.detach().appendTo($dropTarget);
             }
         } else {
-            // If drop target is empty, simply move the dragged element
-            $(draggedEl).detach().appendTo(dropTarget);
-            if (draggedParent.hasClass('droppable')) {
-                draggedParent.addClass('empty');
+            $draggedEl.detach().appendTo($dropTarget);
+            if ($draggedParent.hasClass('droppable')) {
+                $draggedParent.addClass('empty');
             }
         }
         
-        dropTarget.removeClass('empty');
-    }
-
-    function handleDrop(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $('.droppable').removeClass('drag-over');
-        
-        if (!dragSrcEl) return false;
-
-        const dropTarget = findActualDropTarget(e.target);
-        if (!dropTarget || !dropTarget.length) return false;
-
-        // Prevent dropping a draggable inside another draggable
-        if ($(e.target).closest('.draggable').length > 0 && !$(e.target).closest('.droppable').length) {
-            return false;
-        }
-
-        swapElements(dragSrcEl, dropTarget);
+        $dropTarget.removeClass('empty');
         updateSubmitButton();
-        return false;
-    }
-
-    function handleDragEnd() {
-        $('.draggable').removeClass('dragging');
-        $('.droppable').removeClass('drag-over');
-        dragSrcEl = null;
     }
 
     function updateSubmitButton() {
@@ -223,20 +154,80 @@ function initializeDragAndDrop() {
         $('#submitOrder').prop('disabled', true).removeClass('hidden');
     }
 
-    // Remove existing event listeners
-    $('.draggable, .droppable').off();
-    $('#submitOrder, #resetOrder').off();
+    // Handle both touch and mouse events
+    $(document).on('mousedown touchstart', '.draggable', function(e) {
+        e.preventDefault();
+        const touch = e.type === 'touchstart' ? e.originalEvent.touches[0] : e;
+        selectedElement = $(this);
+        
+        // Store original position and calculate offset
+        const rect = this.getBoundingClientRect();
+        touchOffset.x = touch.clientX - rect.left;
+        touchOffset.y = touch.clientY - rect.top;
+        
+        selectedElement.addClass('dragging')
+            .css({
+                position: 'fixed',
+                zIndex: 1000,
+                width: $(this).width() + 'px'
+            });
+        
+        moveElement(touch.clientX, touch.clientY);
+    });
 
-    // Add event listeners
-    $('.draggable')
-        .on('dragstart', handleDragStart)
-        .on('dragend', handleDragEnd);
+    $(document).on('mousemove touchmove', function(e) {
+        if (!selectedElement) return;
+        e.preventDefault();
+        
+        const touch = e.type === 'touchmove' ? e.originalEvent.touches[0] : e;
+        moveElement(touch.clientX, touch.clientY);
+        
+        // Highlight droppable under touch point
+        const dropTarget = getDropTarget(document.elementFromPoint(
+            touch.clientX,
+            touch.clientY
+        ));
+        
+        $('.droppable').removeClass('drag-over');
+        if (dropTarget.length) {
+            dropTarget.addClass('drag-over');
+        }
+    });
 
-    $('.droppable, .draggable')
-        .on('dragover', handleDragOver)
-        .on('dragenter', handleDragEnter)
-        .on('dragleave', handleDragLeave)
-        .on('drop', handleDrop);
+    function moveElement(x, y) {
+        if (!selectedElement) return;
+        
+        selectedElement.css({
+            left: (x - touchOffset.x) + 'px',
+            top: (y - touchOffset.y) + 'px'
+        });
+    }
+
+    $(document).on('mouseup touchend', function(e) {
+        if (!selectedElement) return;
+        e.preventDefault();
+        
+        const touch = e.type === 'touchend' ? e.originalEvent.changedTouches[0] : e;
+        const dropTarget = getDropTarget(document.elementFromPoint(
+            touch.clientX,
+            touch.clientY
+        ));
+
+        selectedElement.removeClass('dragging').css({
+            position: '',
+            left: '',
+            top: '',
+            zIndex: '',
+            width: ''
+        });
+
+        if (dropTarget.length) {
+            swapElements(selectedElement, dropTarget);
+        }
+
+        $('.droppable').removeClass('drag-over');
+        selectedElement = null;
+    });
 
     $('#submitOrder').on('click', function() {
         const correctOrder = State.variables.correctOrder;
