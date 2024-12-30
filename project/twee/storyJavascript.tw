@@ -80,6 +80,9 @@ Macro.add('setupQuestion', {
         let draggableItems = this.args[1].split(',');
         let correctOrder = this.args[2].split(',');
 
+        // Create a container for the entire drag-drop area
+        let containerHTML = '<div class="dragdrop-container">';
+
         let droppableHTML = '<div id="droppables">';
         for(let i = 1; i <= droppableCount; i++) {
             droppableHTML += `<div class="droppable empty" data-label="${i}" id="slot${i}"></div>`;
@@ -98,8 +101,10 @@ Macro.add('setupQuestion', {
             <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
         `;
 
+        containerHTML += droppableHTML + draggableHTML + controlsHTML + '</div>';
+
         State.variables.correctOrder = correctOrder;
-        $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
+        $(this.output).append(containerHTML);
         
         initializeDragAndDrop();
     }
@@ -109,9 +114,24 @@ function initializeDragAndDrop() {
     let selectedElement = null;
     let originalPosition = null;
     let touchOffset = { x: 0, y: 0 };
-    let isMobile = 'ontouchstart' in window;
+    let scrollOffset = { x: 0, y: 0 };
 
-    function getDropTarget(element) {
+    function getElementPosition(element) {
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        return {
+            x: rect.left + scrollLeft,
+            y: rect.top + scrollTop
+        };
+    }
+
+    function getDropTarget(x, y) {
+        // Get the element at position, accounting for scroll
+        const element = document.elementFromPoint(
+            x - window.pageXOffset,
+            y - window.pageYOffset
+        );
         return $(element).closest('.droppable');
     }
 
@@ -140,78 +160,67 @@ function initializeDragAndDrop() {
         updateSubmitButton();
     }
 
-    function updateSubmitButton() {
-        const allSlotsFilled = $('.droppable').toArray().every(slot => 
-            $(slot).children('.draggable').length === 1
-        );
-        $('#submitOrder').prop('disabled', !allSlotsFilled);
-    }
-
-    function resetOrder() {
-        $('.draggable').detach().appendTo('#draggables');
-        $('.droppable').addClass('empty');
-        $('.correctFeedback, .incorrectFeedback, .nextButton').addClass('hidden');
-        $('#submitOrder').prop('disabled', true).removeClass('hidden');
-    }
-
-    // Handle both touch and mouse events
     $(document).on('mousedown touchstart', '.draggable', function(e) {
-        e.preventDefault();
         const touch = e.type === 'touchstart' ? e.originalEvent.touches[0] : e;
         selectedElement = $(this);
         
-        // Store original position and calculate offset
+        // Get initial scroll position
+        scrollOffset.x = window.pageXOffset;
+        scrollOffset.y = window.pageYOffset;
+        
+        // Calculate offset within the element
         const rect = this.getBoundingClientRect();
         touchOffset.x = touch.clientX - rect.left;
         touchOffset.y = touch.clientY - rect.top;
         
+        // Store original position for snap-back if needed
+        originalPosition = {
+            parent: selectedElement.parent(),
+            index: selectedElement.index()
+        };
+        
         selectedElement.addClass('dragging')
             .css({
-                position: 'fixed',
+                position: 'absolute',
                 zIndex: 1000,
                 width: $(this).width() + 'px'
             });
-        
+            
         moveElement(touch.clientX, touch.clientY);
     });
 
+    function moveElement(x, y) {
+        if (!selectedElement) return;
+        
+        const scrollDiff = {
+            x: window.pageXOffset - scrollOffset.x,
+            y: window.pageYOffset - scrollOffset.y
+        };
+        
+        selectedElement.css({
+            left: (x - touchOffset.x + scrollDiff.x) + 'px',
+            top: (y - touchOffset.y + scrollDiff.y) + 'px'
+        });
+    }
+
     $(document).on('mousemove touchmove', function(e) {
         if (!selectedElement) return;
-        e.preventDefault();
         
         const touch = e.type === 'touchmove' ? e.originalEvent.touches[0] : e;
         moveElement(touch.clientX, touch.clientY);
         
-        // Highlight droppable under touch point
-        const dropTarget = getDropTarget(document.elementFromPoint(
-            touch.clientX,
-            touch.clientY
-        ));
-        
+        const dropTarget = getDropTarget(touch.clientX, touch.clientY);
         $('.droppable').removeClass('drag-over');
         if (dropTarget.length) {
             dropTarget.addClass('drag-over');
         }
     });
 
-    function moveElement(x, y) {
-        if (!selectedElement) return;
-        
-        selectedElement.css({
-            left: (x - touchOffset.x) + 'px',
-            top: (y - touchOffset.y) + 'px'
-        });
-    }
-
     $(document).on('mouseup touchend', function(e) {
         if (!selectedElement) return;
-        e.preventDefault();
         
         const touch = e.type === 'touchend' ? e.originalEvent.changedTouches[0] : e;
-        const dropTarget = getDropTarget(document.elementFromPoint(
-            touch.clientX,
-            touch.clientY
-        ));
+        const dropTarget = getDropTarget(touch.clientX, touch.clientY);
 
         selectedElement.removeClass('dragging').css({
             position: '',
@@ -223,11 +232,25 @@ function initializeDragAndDrop() {
 
         if (dropTarget.length) {
             swapElements(selectedElement, dropTarget);
+        } else {
+            // Snap back to original position if no valid drop target
+            if (originalPosition.parent.hasClass('droppable')) {
+                selectedElement.detach().appendTo(originalPosition.parent);
+            } else {
+                selectedElement.detach().appendTo('#draggables');
+            }
         }
 
         $('.droppable').removeClass('drag-over');
         selectedElement = null;
     });
+
+    function updateSubmitButton() {
+        const allSlotsFilled = $('.droppable').toArray().every(slot => 
+            $(slot).children('.draggable').length === 1
+        );
+        $('#submitOrder').prop('disabled', !allSlotsFilled);
+    }
 
     $('#submitOrder').on('click', function() {
         const correctOrder = State.variables.correctOrder;
@@ -248,7 +271,53 @@ function initializeDragAndDrop() {
         $(this).addClass('hidden');
     });
 
-    $('#resetOrder').on('click', resetOrder);
+    $('#resetOrder').on('click', function() {
+        $('.draggable').detach().appendTo('#draggables');
+        $('.droppable').addClass('empty');
+        $('.correctFeedback, .incorrectFeedback, .nextButton').addClass('hidden');
+        $('#submitOrder').prop('disabled', true).removeClass('hidden');
+    });
 }
+
+// Add necessary styles
+$(document.head).append(`
+    <style>
+        .dragdrop-container {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .drag-over {
+            border-color: var(--light-color) !important;
+            background-color: rgba(127, 164, 188, 0.1) !important;
+        }
+        
+        .dragging {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .droppable.empty {
+            background-color: transparent;
+        }
+
+        .draggable {
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: move;
+            background-color: #f4f4f4;
+        }
+
+        #draggables {
+            min-height: 50px;
+        }
+    </style>
+`);
 
 $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");
