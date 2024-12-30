@@ -145,16 +145,15 @@ p {
 }
 
 .draggable p:before {
-    content: "\E83F";
-    font-family: tme-fa-icons!important;
+    content: "\21F3";
     font-style: normal;
     font-weight: 900;
     font-variant: normal;
-    line-height: 1.5;
+    line-height: 1;
     position:absolute;
     left:0;
-    top:0;
-    font-size:1rem;
+    top:-.1rem;
+    font-size:1.75rem;
     color: var(--dark-color);
 }
 
@@ -377,8 +376,14 @@ p.score {
 }
 
 .incorrectFeedback a {
-    color: var(--off-white);
+    color: #1e1b4b;
+    transition-duration: 100ms;
 }
+
+.incorrectFeedback a:hover {
+    color: #7e22ce;
+}
+
 
 .nextButton a {
     -webkit-appearance: button;
@@ -445,7 +450,7 @@ input[type="text"] {
 input[type="text"]:active,
 input[type="text"]:hover,
 input[type="text"]:focus {
-    background: var(--light-color);
+    background: #f8fafc;
     border:1px solid var(--dark-color);
     color: var(--dark-color);
 }

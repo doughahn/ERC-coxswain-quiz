@@ -77,6 +77,9 @@ window.deductPoints = function(pointsToDeduct) {
 // First, ensure Sortable.js is loaded
 $.getScript('https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js');
 
+// Store Sortable instances globally
+let sortableInstances = [];
+
 Macro.add('setupQuestion', {
     handler: function() {
         let droppableCount = parseInt(this.args[0], 10);
@@ -104,6 +107,9 @@ Macro.add('setupQuestion', {
         State.variables.correctOrder = correctOrder;
         $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
         
+        // Clear any existing instances
+        sortableInstances = [];
+        
         // Initialize after a short delay to ensure elements are rendered
         setTimeout(() => {
             if (typeof Sortable !== 'undefined') {
@@ -123,7 +129,7 @@ function initializeSortable() {
             put: true
         },
         animation: 150,
-        forceFallback: true,  // Force fallback for better mobile support
+        forceFallback: true,
         fallbackOnBody: true,
         dragClass: 'dragging',
         onStart: function(evt) {
@@ -136,7 +142,6 @@ function initializeSortable() {
             updateEmptyStates();
             updateSubmitButton();
         },
-        // Handle movement manually to ensure proper node handling
         onMove: function(evt) {
             return evt.related.className.includes('droppable') || 
                    evt.related.className.includes('draggable') ||
@@ -145,21 +150,35 @@ function initializeSortable() {
     };
 
     // Initialize source container
-    new Sortable(document.getElementById('draggables'), {
+    const sourceSortable = new Sortable(document.getElementById('draggables'), {
         ...sortableOptions,
         removeCloneOnHide: true,
         sort: false
     });
+    sortableInstances.push(sourceSortable);
 
     // Initialize drop zones
     document.querySelectorAll('.droppable').forEach(dropzone => {
-        new Sortable(dropzone, {
+        const instance = new Sortable(dropzone, {
             ...sortableOptions,
             sort: false,
             removeCloneOnHide: true,
             filter: '.occupied'
         });
+        sortableInstances.push(instance);
     });
+
+    function disableDragging() {
+        sortableInstances.forEach(instance => {
+            if (instance && typeof instance.option === 'function') {
+                instance.option("disabled", true);
+            }
+        });
+        $('.draggable').css({
+            'cursor': 'default',
+            'user-select': 'text'
+        });
+    }
 
     // Button handlers
     $('#submitOrder').off('click').on('click', function() {
@@ -177,12 +196,13 @@ function initializeSortable() {
             State.variables.score -= 1;
         }
 
+        disableDragging();
         $('.nextButton').removeClass('hidden');
         $(this).addClass('hidden');
+        $('#resetOrder').addClass('hidden');
     });
 
     $('#resetOrder').off('click').on('click', function() {
-        // Safely move elements back
         $('.draggable').each(function() {
             const el = $(this).detach();
             $('#draggables').append(el);
@@ -190,6 +210,17 @@ function initializeSortable() {
         updateEmptyStates();
         $('.correctFeedback, .incorrectFeedback, .nextButton').addClass('hidden');
         $('#submitOrder').prop('disabled', true).removeClass('hidden');
+
+        // Re-enable dragging
+        sortableInstances.forEach(instance => {
+            if (instance && typeof instance.option === 'function') {
+                instance.option("disabled", false);
+            }
+        });
+        $('.draggable').css({
+            'cursor': 'move',
+            'user-select': 'none'
+        });
     });
 }
 
