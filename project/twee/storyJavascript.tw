@@ -1,5 +1,23 @@
 :: StoryJavascript [script]
 
+$(document).ready(function() {
+    const metaTags = [
+        { property: 'og:image', content: 'https://doughahn.github.io/coxswain-quiz/assets/og-image.jpg' },
+        { property: 'og:title', content: 'Bay Area Whaleboat Association Coxswain Quiz' },
+        { property: 'og:description', content: 'Test your knowledge of rowing and coxing with this interactive quiz!' },
+        { property: 'og:type', content: 'website' }
+    ];
+
+    metaTags.forEach(tag => {
+        $('head').append(
+            $('<meta>', {
+                property: tag.property,
+                content: tag.content
+            })
+        );
+    });
+});
+
 Macro.add('questionMacro', {
     handler: function () {
         if (this.args.length < 3) {
