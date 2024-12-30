@@ -183,7 +183,7 @@ $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");
 <<set $selectedTechnique to $techniqueQuestions.shuffle().slice(0,5).map(p => p.title)>>
 
 :: StoryTitle
-ERC Coxwains
+BAWRA Coxwains
 
 :: Start
 
