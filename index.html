@@ -181,17 +181,16 @@ window.deductPoints = function(pointsToDeduct) {
         State.variables.score = 0;
     }
 }
+/* twine-user-script #3: "StoryScript" */
+// Load Sortable.js
+$.getScript('https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js');
 
+// Setup Question Macro
 Macro.add('setupQuestion', {
     handler: function() {
-        // First, load Sortable.js if it hasn't been loaded yet
-        if (typeof Sortable === 'undefined') {
-            $('head').append('<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>');
-        }
-
-        let droppableCount = parseInt(this.args[0], 10);
-        let draggableItems = this.args[1].split(',');
-        let correctOrder = this.args[2].split(',');
+        const droppableCount = parseInt(this.args[0]);
+        const draggableItems = this.args[1].split(',');
+        const correctOrder = this.args[2].split(',');
 
         let droppableHTML = '<div id="droppables" class="sortable-list">';
         for(let i = 1; i <= droppableCount; i++) {
@@ -211,30 +210,30 @@ Macro.add('setupQuestion', {
             <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
         `;
 
+        // Store correct order in state
         State.variables.correctOrder = correctOrder;
-        $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
         
-        // Initialize after a short delay to ensure Sortable.js is loaded
-        setTimeout(initializeDragAndDrop, 100);
+        // Append HTML
+        $(this.output).wiki(droppableHTML + draggableHTML + controlsHTML);
+        
+        // Initialize Sortable after a short delay to ensure elements are rendered
+        setTimeout(() => {
+            if (typeof Sortable !== 'undefined') {
+                initializeSortable();
+            } else {
+                console.error('Sortable not loaded');
+            }
+        }, 100);
     }
 });
 
-function initializeDragAndDrop() {
-    if (typeof Sortable === 'undefined') {
-        console.error('Sortable.js not loaded yet');
-        return;
-    }
-
-    // Initialize both containers as Sortable
-    const droppables = document.getElementById('droppables');
-    const draggables = document.getElementById('draggables');
-
-    // Initialize the source list (draggables)
-    new Sortable(draggables, {
+// Initialize Sortable instances
+function initializeSortable() {
+    // Setup draggables container
+    new Sortable(document.getElementById('draggables'), {
         group: 'shared',
         animation: 150,
         ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
         dragClass: 'sortable-drag',
         onStart: function(evt) {
             $(evt.item).addClass('dragging');
@@ -246,12 +245,11 @@ function initializeDragAndDrop() {
         }
     });
 
-    // Initialize the target list (droppables)
-    new Sortable(droppables, {
+    // Setup droppables container
+    new Sortable(document.getElementById('droppables'), {
         group: 'shared',
         animation: 150,
         ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
         dragClass: 'sortable-drag',
         onStart: function(evt) {
             $(evt.item).addClass('dragging');
@@ -263,19 +261,7 @@ function initializeDragAndDrop() {
         }
     });
 
-    function updateEmptyStates() {
-        $('.droppable').each(function() {
-            $(this).toggleClass('empty', !$(this).children('.draggable').length);
-        });
-    }
-
-    function updateSubmitButton() {
-        const allSlotsFilled = $('.droppable').toArray().every(slot => 
-            $(slot).children('.draggable').length === 1
-        );
-        $('#submitOrder').prop('disabled', !allSlotsFilled);
-    }
-
+    // Add button handlers
     $('#submitOrder').on('click', function() {
         const correctOrder = State.variables.correctOrder;
         const currentOrder = $('.droppable .draggable').map(function() {
@@ -303,7 +289,21 @@ function initializeDragAndDrop() {
     });
 }
 
-// Add necessary styles
+// Helper functions
+function updateEmptyStates() {
+    $('.droppable').each(function() {
+        $(this).toggleClass('empty', !$(this).children('.draggable').length);
+    });
+}
+
+function updateSubmitButton() {
+    const allSlotsFilled = $('.droppable').toArray().every(slot => 
+        $(slot).children('.draggable').length === 1
+    );
+    $('#submitOrder').prop('disabled', !allSlotsFilled);
+}
+
+// Add styles
 $(document.head).append(`
     <style>
         .sortable-list {
@@ -318,17 +318,13 @@ $(document.head).append(`
             opacity: 0.8;
         }
 
-        .sortable-chosen {
-            background-color: rgba(127, 164, 188, 0.1);
-        }
-
-        /* Improve touch targets on mobile */
         .draggable {
             touch-action: none;
             -webkit-touch-callout: none;
             cursor: move;
             cursor: -webkit-grab;
             margin: 5px 0;
+            user-select: none;
         }
 
         .draggable:active {
@@ -336,13 +332,11 @@ $(document.head).append(`
             cursor: grabbing;
         }
 
-        /* Make sure droppable zones are tall enough for touch */
         .droppable {
-            min-height: 44px; /* iOS minimum touch target size */
+            min-height: 44px;
         }
 
         @media (hover: none) {
-            /* Styles for touch devices */
             .draggable {
                 padding: 12px;
             }
@@ -387,55 +381,7 @@ $(document.head).append("<link rel='icon' href='assets/ERC_whale.png'>");</scrip
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryCaption" tags="" position="225,100" size="100,100">/* Score: &lt;&lt;print $score&gt;&gt;/25 */
 
 &lt;h6 class=&quot;score&quot;&gt;Your Score&lt;/h6&gt;
-&lt;p class=&quot;score&quot;&gt;&lt;span class=&quot;fractop&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt;&lt;span class=&quot;fracbar&quot;&gt;&amp;frasl;&lt;/span&gt;&lt;span class=&quot;fracbot&quot;&gt;25&lt;/span&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryInit" tags="" position="350,100" size="100,100">&lt;&lt;script&gt;&gt;
-// Disable autosave and slots for QA
-Config.saves.maxAutoSaves = 0;
-Config.saves.maxSlotSaves = 0;
-
-// Debug mode setup
-(function() {
-    try {
-        const params = new URLSearchParams(window.location.search);
-        const debugPassage = params.get(&#39;start&#39;);
-        console.log(&quot;Debugging script loaded.&quot;);
-
-        if (debugPassage) {
-            console.log(`Debug mode enabled. Target passage: ${debugPassage}`);
-            State.variables.debugMode = true;
-            State.variables.debugPassage = debugPassage;
-
-            if (Story.has(debugPassage)) {
-                console.log(`Redirecting to debug passage: ${debugPassage}`);
-                Engine.play(debugPassage);
-                return;
-            } else {
-                console.warn(`Passage &quot;${debugPassage}&quot; not found.`);
-            }
-        } else {
-            console.log(&quot;Debug mode not enabled. Proceeding with default story flow.&quot;);
-        }
-    } catch (err) {
-        console.error(&quot;Error in debug script:&quot;, err);
-    }
-})();
-&lt;&lt;endscript&gt;&gt;
-
-&lt;&lt;set $score = 25&gt;&gt;
-
-&lt;&lt;set $safetyQuestions = Story.lookup(&quot;tags&quot;, &quot;Safety&quot;)&gt;&gt;
-&lt;&lt;set $selectedSafety to $safetyQuestions.shuffle().slice(0,5).map(p =&gt; p.title)&gt;&gt;
-
-&lt;&lt;set $bawraQuestions = Story.lookup(&quot;tags&quot;, &quot;bawra&quot;)&gt;&gt;
-&lt;&lt;set $selectedBawra to $bawraQuestions.shuffle().slice(0,5).map(p =&gt; p.title)&gt;&gt;
-
-&lt;&lt;set $navigationQuestions = Story.lookup(&quot;tags&quot;, &quot;Navigation&quot;)&gt;&gt;
-&lt;&lt;set $selectedNavigation to $navigationQuestions.shuffle().slice(0,5).map(p =&gt; p.title)&gt;&gt;
-
-&lt;&lt;set $roadRulesQuestions = Story.lookup(&quot;tags&quot;, &quot;RoadRules&quot;)&gt;&gt;
-&lt;&lt;set $selectedRoadRules to $roadRulesQuestions.shuffle().slice(0,5).map(p =&gt; p.title)&gt;&gt;
-
-&lt;&lt;set $techniqueQuestions = Story.lookup(&quot;tags&quot;, &quot;Technique&quot;)&gt;&gt;
-&lt;&lt;set $selectedTechnique to $techniqueQuestions.shuffle().slice(0,5).map(p =&gt; p.title)&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="bawra_Intro" tags="" position="475,100" size="100,100">&lt;h2&gt;BAWRA Quiz&lt;/h2&gt;
+&lt;p class=&quot;score&quot;&gt;&lt;span class=&quot;fractop&quot;&gt;&lt;&lt;print $score&gt;&gt;&lt;/span&gt;&lt;span class=&quot;fracbar&quot;&gt;&amp;frasl;&lt;/span&gt;&lt;span class=&quot;fracbot&quot;&gt;25&lt;/span&gt;&lt;/p&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryInit" tags="" position="350,100" size="100,100">&lt;&lt;set $selectedSafety to []&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="bawra_Intro" tags="" position="475,100" size="100,100">&lt;h2&gt;BAWRA Quiz&lt;/h2&gt;
 
 &lt;p&gt;Rules and best practices specified by by BAWRA. Click the box below to begin.&lt;/p&gt;
 

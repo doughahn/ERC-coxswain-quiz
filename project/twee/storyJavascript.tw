@@ -74,16 +74,19 @@ window.deductPoints = function(pointsToDeduct) {
     }
 }
 
+:: StoryInit
+<<set $selectedSafety to []>>
+
+:: StoryScript [script]
+// Load Sortable.js
+$.getScript('https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js');
+
+// Setup Question Macro
 Macro.add('setupQuestion', {
     handler: function() {
-        // First, load Sortable.js if it hasn't been loaded yet
-        if (typeof Sortable === 'undefined') {
-            $('head').append('<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>');
-        }
-
-        let droppableCount = parseInt(this.args[0], 10);
-        let draggableItems = this.args[1].split(',');
-        let correctOrder = this.args[2].split(',');
+        const droppableCount = parseInt(this.args[0]);
+        const draggableItems = this.args[1].split(',');
+        const correctOrder = this.args[2].split(',');
 
         let droppableHTML = '<div id="droppables" class="sortable-list">';
         for(let i = 1; i <= droppableCount; i++) {
@@ -103,30 +106,30 @@ Macro.add('setupQuestion', {
             <div class="correctFeedback hidden"><h3>Correct order!</h3></div>
         `;
 
+        // Store correct order in state
         State.variables.correctOrder = correctOrder;
-        $(this.output).append(droppableHTML + draggableHTML + controlsHTML);
         
-        // Initialize after a short delay to ensure Sortable.js is loaded
-        setTimeout(initializeDragAndDrop, 100);
+        // Append HTML
+        $(this.output).wiki(droppableHTML + draggableHTML + controlsHTML);
+        
+        // Initialize Sortable after a short delay to ensure elements are rendered
+        setTimeout(() => {
+            if (typeof Sortable !== 'undefined') {
+                initializeSortable();
+            } else {
+                console.error('Sortable not loaded');
+            }
+        }, 100);
     }
 });
 
-function initializeDragAndDrop() {
-    if (typeof Sortable === 'undefined') {
-        console.error('Sortable.js not loaded yet');
-        return;
-    }
-
-    // Initialize both containers as Sortable
-    const droppables = document.getElementById('droppables');
-    const draggables = document.getElementById('draggables');
-
-    // Initialize the source list (draggables)
-    new Sortable(draggables, {
+// Initialize Sortable instances
+function initializeSortable() {
+    // Setup draggables container
+    new Sortable(document.getElementById('draggables'), {
         group: 'shared',
         animation: 150,
         ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
         dragClass: 'sortable-drag',
         onStart: function(evt) {
             $(evt.item).addClass('dragging');
@@ -138,12 +141,11 @@ function initializeDragAndDrop() {
         }
     });
 
-    // Initialize the target list (droppables)
-    new Sortable(droppables, {
+    // Setup droppables container
+    new Sortable(document.getElementById('droppables'), {
         group: 'shared',
         animation: 150,
         ghostClass: 'sortable-ghost',
-        chosenClass: 'sortable-chosen',
         dragClass: 'sortable-drag',
         onStart: function(evt) {
             $(evt.item).addClass('dragging');
@@ -155,19 +157,7 @@ function initializeDragAndDrop() {
         }
     });
 
-    function updateEmptyStates() {
-        $('.droppable').each(function() {
-            $(this).toggleClass('empty', !$(this).children('.draggable').length);
-        });
-    }
-
-    function updateSubmitButton() {
-        const allSlotsFilled = $('.droppable').toArray().every(slot => 
-            $(slot).children('.draggable').length === 1
-        );
-        $('#submitOrder').prop('disabled', !allSlotsFilled);
-    }
-
+    // Add button handlers
     $('#submitOrder').on('click', function() {
         const correctOrder = State.variables.correctOrder;
         const currentOrder = $('.droppable .draggable').map(function() {
@@ -195,7 +185,21 @@ function initializeDragAndDrop() {
     });
 }
 
-// Add necessary styles
+// Helper functions
+function updateEmptyStates() {
+    $('.droppable').each(function() {
+        $(this).toggleClass('empty', !$(this).children('.draggable').length);
+    });
+}
+
+function updateSubmitButton() {
+    const allSlotsFilled = $('.droppable').toArray().every(slot => 
+        $(slot).children('.draggable').length === 1
+    );
+    $('#submitOrder').prop('disabled', !allSlotsFilled);
+}
+
+// Add styles
 $(document.head).append(`
     <style>
         .sortable-list {
@@ -210,17 +214,13 @@ $(document.head).append(`
             opacity: 0.8;
         }
 
-        .sortable-chosen {
-            background-color: rgba(127, 164, 188, 0.1);
-        }
-
-        /* Improve touch targets on mobile */
         .draggable {
             touch-action: none;
             -webkit-touch-callout: none;
             cursor: move;
             cursor: -webkit-grab;
             margin: 5px 0;
+            user-select: none;
         }
 
         .draggable:active {
@@ -228,13 +228,11 @@ $(document.head).append(`
             cursor: grabbing;
         }
 
-        /* Make sure droppable zones are tall enough for touch */
         .droppable {
-            min-height: 44px; /* iOS minimum touch target size */
+            min-height: 44px;
         }
 
         @media (hover: none) {
-            /* Styles for touch devices */
             .draggable {
                 padding: 12px;
             }
