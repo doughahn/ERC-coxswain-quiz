@@ -52,7 +52,6 @@ $(document).ready(function() {
     });
 
     function checkIfAllSlotsFilled() {
-        // Enable "Submit" only if all droppable slots have something
         if ($(".droppable").length === $(".droppable:has(.draggable)").length) {
             $("button#submitOrder").removeAttr("disabled");
         } else {
@@ -60,29 +59,30 @@ $(document).ready(function() {
         }
     }
 
-    $("button#submitOrder").click(function() {
-        // Some success test, e.g.:
-        if (
-        document.getElementById("slot1").firstChild.id === "item1" &&
-        document.getElementById("slot2").firstChild.id === "item3" &&
-        document.getElementById("slot3").firstChild.id === "item2"
-        ) {
-            // Hide incorrect
-            $(".incorrectFeedback").addClass("hidden");
-            
-            // Show correct
-            $("#correctFeedback").removeClass("hidden");
-        } else {
-            // Hide correct
-            $("#correctFeedback").addClass("hidden");
+$("button#submitOrder").click(function() {
+    const correctOrder = State.variables.correctOrder; // get the order from a Twine variable
 
-            // Show incorrect
-            $(".incorrectFeedback").removeClass("hidden");
+    let isCorrect = true;
+    $(".droppable").each(function(index) {
+        if (this.firstChild.id !== correctOrder[index]) {
+            isCorrect = false;
+            return false; // exit the loop early
         }
     });
 
-    // Initial check
-    checkIfAllSlotsFilled();
+    if (isCorrect) {
+        $(".correctFeedback").text("Correct order!").removeClass("hidden");
+        $("button#submitOrder").addClass("hidden");
+    } else {
+        $(".incorrectFeedback").removeClass("hidden");
+        State.variables.score -= 1; 
+        $("button#submitOrder").addClass("hidden");
+    }
+    $(".nextButton").removeClass("hidden");
+});
+
+
+    checkIfAllSlotsFilled(); // Initial check
 
     $("#resetOrder").click(function() {
         resetOrder();
@@ -92,18 +92,17 @@ $(document).ready(function() {
         // Move all draggable items back to their original container
         $(".draggable").appendTo("#draggables");
 
-        // Enable draggables again
+        // Enable the draggables again
         $(".draggable").attr("draggable", true).on("dragstart", function(event) {
             event.originalEvent.dataTransfer.setData("text", event.target.id);
         });
         $(".draggable").removeClass("disabled");
 
-        // Hide feedback and next button
+        // Hide feedback and the next button/div
         $(".feedback").addClass("hidden");
-        $(".incorrectFeedback").addClass("hidden");
         $(".nextButton").addClass("hidden");
 
-        // Disable submit until all slots are filled
+        // Disable the submit button again until all slots are filled
         $("button#submitOrder").attr("disabled", "disabled");
     }
 });
